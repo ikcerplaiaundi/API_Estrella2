@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Conexion DDBB ###
+.main/src/main/resources/application.properties
