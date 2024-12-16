@@ -51,7 +51,7 @@ public class CameraService {
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
             connection.setRequestProperty("Accept", "application/json");
-            connection.setConnectTimeout(10000); // Tiempo de espera para establecer la conexión
+            connection.setConnectTimeout(10000); // Tiempo de espera para establecer la conexion
             connection.setReadTimeout(10000); // Tiempo de espera para leer la respuesta
     
             int responseCode = connection.getResponseCode();
