@@ -30,6 +30,9 @@ public class Incidencia {
     private Date fechaInicio;
 
     @ManyToOne
+    private Region region;
+
+    @ManyToOne
     private Ciudad ciudad;
     @ManyToOne
     private TiposIncidencia tiposIncidencia;

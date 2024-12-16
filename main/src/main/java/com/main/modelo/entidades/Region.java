@@ -23,6 +23,9 @@ public class Region {
 
     @OneToMany(mappedBy = "cameras")
     List<Camera> Cameras = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "incidencias")
+    List<Incidencia> Incidencias = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -62,6 +65,14 @@ public class Region {
 
     public void setCameras(List<Camera> cameras) {
         Cameras = cameras;
+    }
+
+    public List<Incidencia> getIncidencias() {
+        return Incidencias;
+    }
+
+    public void setIncidencias(List<Incidencia> incidencias) {
+        Incidencias = incidencias;
     }
     
     
