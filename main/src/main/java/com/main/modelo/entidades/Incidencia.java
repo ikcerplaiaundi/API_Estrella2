@@ -2,6 +2,7 @@ package com.main.modelo.entidades;
 
 import java.util.Date;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,7 +28,11 @@ public class Incidencia {
     private String nombreIncidencia;
     private String nivelIncidencia;
     private String carretera;
+    @Column(name = "fecha_inicio")
     private Date fechaInicio;
+
+    @ManyToOne
+    private Region region;
 
     @ManyToOne
     private Ciudad ciudad;
