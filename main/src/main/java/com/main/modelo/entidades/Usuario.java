@@ -31,4 +31,11 @@ public class Usuario {
     @ManyToOne
     @JoinColumn(name="id_rol") 
     private Rol rol;
+
+    public Usuario(String nombre, String contraseña, String correo, Rol rol) {
+        this.nombre = nombre;
+        this.contraseña = contraseña;
+        this.correo = correo;
+        this.rol = rol;
+    }
 }
