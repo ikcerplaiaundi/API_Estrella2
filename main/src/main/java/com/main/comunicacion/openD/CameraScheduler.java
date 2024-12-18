@@ -34,10 +34,10 @@ public class CameraScheduler {
 
         // Iteramos a través de todas las páginas
         for (int page = 1; page <= totalPages; page++) {
-            // Recuperamos las cámaras de la página actual
+            // Recuperamos las cámaras de la pagina actual
             cameraDTOList = cameraService.fetchCamerasFromApi(page);
             
-            // Mapeamos y guardamos cada cámara
+            // Mapeamos y guardamos cada camara
             for (CameraDTO dto : cameraDTOList) {
                 Camera camera = cameraMapper.toEntity(dto);
                 savedCameras.add(cameraRepository.save(camera)); // Guardamos en la base de datos
