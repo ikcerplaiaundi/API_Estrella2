@@ -1,5 +1,5 @@
 package com.main.comunicacion.mapeos;
 
-public class map {
+public class TipoIncidencia {
     
 }
