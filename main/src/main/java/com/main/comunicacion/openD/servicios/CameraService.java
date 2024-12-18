@@ -1,6 +1,8 @@
 package com.main.comunicacion.openD.servicios;
 
 import com.main.comunicacion.openD.DTOs.CameraDTO;
+import com.main.comunicacion.openD.servicios.ApiResponse.Response;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.client.RestTemplate;
 import java.util.List;
@@ -12,41 +14,22 @@ public class CameraService {
     @Autowired
     private RestTemplate restTemplate;
 
-    // Método para obtener cámaras de una página específica
-    public List<CameraDTO> fetchCamerasFromApi(int page) {
-        String url = API_URL + page; // Construimos la URL con el número de página
-        List<CameraDTO> cameraDTOList = null;
+    // Metodo para obtener camaras y datos de paginacion en una pagina especifica
+    public Response<CameraDTO> fetchCamerasFromApiResponse(int currentPage) {
+        String url = API_URL + currentPage; // Construimos la URL con el numero de pagina
+        Response<CameraDTO> cameraResponse = null;
 
         try {
-            // Usamos RestTemplate para hacer la solicitud GET
-            ApiResponse.Response<CameraDTO> cameraResponse = restTemplate.getForObject(url, ApiResponse.Response.class);
+            // Usamos RestTemplate para hacer la solicitud GET y mapear directamente a la clase Response
+            cameraResponse = restTemplate.getForObject(url, Response.class);
 
-            // Procesamos la respuesta si no es nula
-            if (cameraResponse != null && cameraResponse.getData() != null) {
-                cameraDTOList = cameraResponse.getData();
-            } else {
-                System.out.println("Error: La respuesta es nula o no contiene cámaras.");
+            // Verificacion basica para detectar errores
+            if (cameraResponse == null || cameraResponse.getData() == null) {
+                System.out.println("Error: La respuesta de la API es nula o no contiene datos.");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return cameraDTOList;
-    }
-
-    // Metodo para obtener el numero total de páginas
-    public int getTotalPages() {
-        String url = API_URL + "1"; // Usamos la primera pagina para obtener información de la paginación
-        int totalPages = 0;
-
-        try {
-            ApiResponse.Response<CameraDTO> cameraResponse = restTemplate.getForObject(url, ApiResponse.Response.class);
-
-            if (cameraResponse != null) {
-                totalPages = cameraResponse.getTotalPages();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return totalPages;
+        return cameraResponse;
     }
 }

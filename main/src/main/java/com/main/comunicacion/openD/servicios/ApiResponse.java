@@ -6,10 +6,10 @@ public abstract class ApiResponse<T> {
 
     // Clase interna estática Response que extiende ApiResponse
     public abstract static class Response<T> extends ApiResponse<T> {
-        // Aquí puedes agregar métodos adicionales si es necesario
+        // Aquí puedes agregar metodos adicionales si es necesario
         private List<T> data; // Datos de la respuesta (cámaras u otros)
         private int totalItems; // Total de elementos en la respuesta
-        private int totalPages; // Total de páginas
+        private int totalPages; // Total de paginas
         private int currentPage; // Pagina actual
 
         // Getters y setters
