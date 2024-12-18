@@ -21,8 +21,8 @@ public class TiposIncidencia {
     private Integer id;
     private String nombre;
 
-    @OneToMany(mappedBy = "incidencia")
-    private List<Incidencia> incidencias = new ArrayList<Incidencia>();
+    //@OneToMany(mappedBy = "incidencia")
+    //private List<Incidencia> incidencias = new ArrayList<Incidencia>();
 
 
 

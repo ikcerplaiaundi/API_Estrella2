@@ -25,7 +25,7 @@ public class Ciudad {
     private String latitud;
     private String longitud;
 
-    @ManyToOne
-    private Provincia provincia;
+    //@ManyToOne
+    //private Provincia provincia;
 
 }

@@ -21,11 +21,11 @@ public class Region {
     @Column(name = "nombre_eu")
     private String nombreEu;
 
-    @OneToMany(mappedBy = "cameras")
-    List<Camera> Cameras = new ArrayList<>();
+    //@OneToMany(mappedBy = "cameras")
+    //List<Camera> Cameras = new ArrayList<>();
     
-    @OneToMany(mappedBy = "incidencias")
-    List<Incidencia> Incidencias = new ArrayList<>();
+    //@OneToMany(mappedBy = "incidencias")
+    //List<Incidencia> Incidencias = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -58,7 +58,7 @@ public class Region {
     public void setNombreEu(String nombreEu) {
         this.nombreEu = nombreEu;
     }
-
+/* 
     public List<Camera> getCameras() {
         return Cameras;
     }
@@ -75,5 +75,5 @@ public class Region {
         Incidencias = incidencias;
     }
     
-    
+     */
 }

@@ -27,8 +27,8 @@ public class Provincia {
     private String latitud;
     private String longitud;
 
-    @OneToMany(mappedBy = "ciudad")
-    private List<Ciudad> ciudades = new ArrayList<Ciudad>();
+    //@OneToMany(mappedBy = "ciudad")
+    //private List<Ciudad> ciudades = new ArrayList<Ciudad>();
 
 
 

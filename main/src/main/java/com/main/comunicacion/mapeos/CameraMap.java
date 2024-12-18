@@ -11,7 +11,7 @@ public class CameraMap {
     public static Camera toEntity(CameraDTO dto) {
         Camera camera = new Camera();
         camera.setCameraId(dto.getCameraId());
-        camera.setRegionId(dto.getSourceId());  // Suponiendo que 'sourceId' es la region
+        //camera.setRegionId(dto.getSourceId());  // Suponiendo que 'sourceId' es la region
         camera.setCameraName(dto.getCameraName());
         camera.setLatitud(dto.getLatitude());
         camera.setLongitud(dto.getLongitude());
@@ -27,7 +27,7 @@ public class CameraMap {
     public static CameraDTO toDTO(Camera camera) {
         CameraDTO dto = new CameraDTO();
         dto.setCameraId(camera.getCameraId());
-        dto.setSourceId(camera.getRegionId());  // Suponiendo que 'regionId' se mapea como 'sourceId'
+        //dto.setSourceId(camera.getRegionId());  // Suponiendo que 'regionId' se mapea como 'sourceId'
         dto.setCameraName(camera.getCameraName());
         dto.setLatitude(camera.getLatitud());
         dto.setLongitude(camera.getLongitud());

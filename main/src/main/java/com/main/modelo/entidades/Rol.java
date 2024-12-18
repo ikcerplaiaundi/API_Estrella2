@@ -24,6 +24,6 @@ public class Rol {
     private long id;
     private String rol;
 
-    @OneToMany(mappedBy = "rol", cascade = CascadeType.ALL)
-    private List<Usuario> usuarios = new ArrayList<>();
+    //@OneToMany(mappedBy = "rol", cascade = CascadeType.ALL)
+    //private List<Usuario> usuarios = new ArrayList<>();
 }

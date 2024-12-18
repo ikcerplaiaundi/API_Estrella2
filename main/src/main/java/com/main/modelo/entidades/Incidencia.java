@@ -29,13 +29,13 @@ public class Incidencia {
     private String carretera;
     private Date fechaInicio;
 
-    @ManyToOne
-    private Region region;
+    //@ManyToOne
+    //private Region region;
 
-    @ManyToOne
-    private Ciudad ciudad;
-    @ManyToOne
-    private TiposIncidencia tiposIncidencia;
+    //@ManyToOne
+    //private Ciudad ciudad;
+    //@ManyToOne
+    //private TiposIncidencia tiposIncidencia;
 
     
 
