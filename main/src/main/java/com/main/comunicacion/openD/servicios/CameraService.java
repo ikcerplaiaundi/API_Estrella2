@@ -42,7 +42,6 @@ public class CameraService {
         return cameraDTOList;
     }
 
-
     // Metodo para obtener el numero total de páginas
     public int getTotalPages() {
         String url = API_URL + "1"; // Usamos la primera pagina para obtener información de la paginación
