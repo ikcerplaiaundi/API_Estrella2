@@ -31,6 +31,7 @@ public class IncidenciaService {
     
 
     public void peticionIncidenciasDeLaAPIMes() {
+        System.out.println("En guardado");
         String baseUrl = "https://api.euskadi.eus/traffic/v1.0/incidences/byMonth/${ano}/${mes}?_pagina=";
         
         List<IncidenciaDTO> incidenciasDTO = new ArrayList<>();
