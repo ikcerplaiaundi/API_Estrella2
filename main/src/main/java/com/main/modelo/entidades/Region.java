@@ -21,11 +21,11 @@ public class Region {
     @Column(name = "nombre_eu")
     private String nombreEu;
 
-    @OneToMany(mappedBy = "cameras")
-    List<Camera> Cameras = new ArrayList<>();
+    // @OneToMany(mappedBy = "cameras")
+    // List<Camera> Cameras = new ArrayList<>();
     
-    @OneToMany(mappedBy = "incidencias")
-    List<Incidencia> Incidencias = new ArrayList<>();
+    // @OneToMany(mappedBy = "incidencias")
+    // List<Incidencia> Incidencias = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -59,21 +59,21 @@ public class Region {
         this.nombreEu = nombreEu;
     }
 
-    public List<Camera> getCameras() {
-        return Cameras;
-    }
+    // public List<Camera> getCameras() {
+    //     return Cameras;
+    // }
 
-    public void setCameras(List<Camera> cameras) {
-        Cameras = cameras;
-    }
+    // public void setCameras(List<Camera> cameras) {
+    //     Cameras = cameras;
+    // }
 
-    public List<Incidencia> getIncidencias() {
-        return Incidencias;
-    }
+    // public List<Incidencia> getIncidencias() {
+    //     return Incidencias;
+    // }
 
-    public void setIncidencias(List<Incidencia> incidencias) {
-        Incidencias = incidencias;
-    }
+    // public void setIncidencias(List<Incidencia> incidencias) {
+    //     Incidencias = incidencias;
+    // }
     
     
 }

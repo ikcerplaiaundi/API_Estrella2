@@ -38,8 +38,8 @@ public class Camera {
     @Column(name = "url_image")
     private String urlImage;
 
-    @ManyToOne
-    private Region region;
+    // @ManyToOne
+    // private Region region;
 
 
     public Long getId() {
@@ -122,12 +122,12 @@ public class Camera {
         this.urlImage = urlImage;
     } 
 
-    public Region getRegion() {
-        return region;
-    }
+    // public Region getRegion() {
+    //     return region;
+    // }
 
-    public void setRegion(Region region) {
-        this.region = region;
-    }
+    // public void setRegion(Region region) {
+    //     this.region = region;
+    // }
     
 }

@@ -1,68 +1,98 @@
 package com.main.comunicacion.openD.servicios;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.support.StandardServletPartUtils;
 
+import com.main.comunicacion.mapeos.IncidenciaMap;
 import com.main.comunicacion.openD.DTOs.IncidenciaDTO;
+import com.main.modelo.entidades.Incidencia;
+import com.main.modelo.repositorios.IncidenciaRepositorio;
 
 public class IncidenciaService {
 
     private String ano = "2023";
     private String mes = "1";
 
-    private static final String URL_MES = "https://api.euskadi.eus/traffic/v1.0/incidences/byMonth/${ano}/${mes}?_pagina=";
-    private static final String URL_ANO = "https://api.euskadi.eus/traffic/v1.0/incidences/byYear/${ano}?_pagina=";
+   private static final String URL_ANO = "https://api.euskadi.eus/traffic/v1.0/incidences/byYear/${ano}?_pagina=";
 
-
+   @Autowired
+   private IncidenciaRepositorio incidenciaRepositorio;
 
 
     @Autowired
     private RestTemplate restTemplate;
 
-
     
-    public List<IncidenciaDTO> peticionIncidenciasDeLaAPIMes(int pagina) {
-        String url = URL_MES + pagina; 
-        List<IncidenciaDTO> listadoIncidencias = null;
 
+    public void peticionIncidenciasDeLaAPIMes() {
+        String baseUrl = "https://api.euskadi.eus/traffic/v1.0/incidences/byMonth/${ano}/${mes}?_pagina=";
+        
+        List<IncidenciaDTO> incidenciasDTO = new ArrayList<>();
 
         try {
             
-            ApiResponse.Response<IncidenciaDTO> respuestaIncidencias = restTemplate.getForObject(url, ApiResponse.Response.class);
+            String urlPrimeraPagina = baseUrl.replace("${pagina}", "1");
+            IncidenciaResponse response = restTemplate.getForObject(urlPrimeraPagina, IncidenciaResponse.class);
+            int paginasTotales = response.getTotalPages();
 
+            
+            for (int pagina = 1; pagina <= paginasTotales; pagina++) {
+                String url = baseUrl.replace("${pagina}", String.valueOf(pagina));
+                IncidenciaResponse responsePagina = restTemplate.getForObject(url, IncidenciaResponse.class);
 
-            // Procesamos la respuesta si no es nula
-            if (respuestaIncidencias != null && respuestaIncidencias.getData() != null) {
-                listadoIncidencias = respuestaIncidencias.getData();
-            } else {
-                System.out.println("Error: La respuesta es nula o no contiene cámaras.");
+                if (responsePagina != null && responsePagina.getincidencias() != null) {
+                    
+                    incidenciasDTO.addAll(responsePagina.getincidencias());
+                }
             }
+            IncidenciaMap incidenciaMap = new IncidenciaMap();
+            for (IncidenciaDTO incidenciaDTO : incidenciasDTO) {
+
+                Incidencia incidencia = new Incidencia();
+
+                incidencia = IncidenciaMap.toEntity(incidenciaDTO);
+
+                incidenciaRepositorio.save(incidencia);
+            }
+            
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return listadoIncidencias;
+    
+        
     }
 
-    public List<IncidenciaDTO> peticionIncidenciasDeLaAPIAno(int pagina) {
-        String url = URL_ANO + pagina; 
-        List<IncidenciaDTO> listadoIncidencias = null;
+    // public List<IncidenciaDTO> peticionIncidenciasDeLaAPIAno(int pagina) {
+    //     String url = URL_ANO + pagina; 
+    //     List<IncidenciaDTO> listadoIncidencias = null;
 
 
-        try {
+    //     try {
             
-            ApiResponse.Response<IncidenciaDTO> respuestaIncidencias = restTemplate.getForObject(url, ApiResponse.Response.class);
+    //         IncidenciaResponse<IncidenciaDTO> respuestaIncidencias = restTemplate.getForObject(url, IncidenciaResponse.class);
 
-            if (respuestaIncidencias != null && respuestaIncidencias.getData() != null) {
-                listadoIncidencias = respuestaIncidencias.getData();
-            } else {
-                System.out.println("Error: La respuesta es nula o no contiene cámaras.");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return listadoIncidencias;
+    //         if (respuestaIncidencias != null && respuestaIncidencias.getincidencias() != null) {
+    //             listadoIncidencias = respuestaIncidencias.getincidencias();
+    //         } else {
+    //             System.out.println("Error: La respuesta es nula o no contiene cámaras.");
+    //         }
+    //     } catch (Exception e) {
+    //         e.printStackTrace();
+    //     }
+    //     return listadoIncidencias;
+    // }
+
+    @EventListener(ContextRefreshedEvent.class)
+    public void cargarDatosAlInicio() {
+        peticionIncidenciasDeLaAPIMes();
+
     }
 
 }

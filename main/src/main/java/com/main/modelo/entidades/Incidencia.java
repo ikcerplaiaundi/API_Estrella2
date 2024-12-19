@@ -32,13 +32,13 @@ public class Incidencia {
     @Column(name = "fecha_inicio")
     private Date fechaInicio;
 
-    @ManyToOne
-    private Region region;
+    // @ManyToOne
+    // private Region region;
 
-    @ManyToOne
-    private Ciudad ciudad;
-    @ManyToOne
-    private TipoIncidencia tiposIncidencia;
+    // @ManyToOne
+    // private Ciudad ciudad;
+    // @ManyToOne
+    // private TipoIncidencia tiposIncidencia;
 
     
 
