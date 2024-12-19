@@ -27,7 +27,7 @@ public class Provincia {
     private String latitud;
     private String longitud;
 
-    @OneToMany(mappedBy = "ciudad")
+    @OneToMany(mappedBy = "provincia")
     private List<Ciudad> ciudades = new ArrayList<Ciudad>();
 
 
