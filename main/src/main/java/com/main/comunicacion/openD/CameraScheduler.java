@@ -15,7 +15,7 @@ public class CameraScheduler {
     @Autowired
     private CameraService cameraService;
 
-    // Ejecutar el método cada 30 minutos
+    // Ejecutar el metodo cada 30 minutos
     @Scheduled(fixedRate = 1800000) // 30 minutos en milisegundos
     public void fetchAndSaveCameras() {
         System.out.println("Ejecutando actualización de cámaras...");

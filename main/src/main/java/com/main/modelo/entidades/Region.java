@@ -21,11 +21,11 @@ public class Region {
     @Column(name = "nombre_eu")
     private String nombreEu;
 
-    //@OneToMany(mappedBy = "cameras")
-    //List<Camera> Cameras = new ArrayList<>();
+    @OneToMany(mappedBy = "camera")
+    List<Camera> Cameras = new ArrayList<>();
     
-    //@OneToMany(mappedBy = "incidencias")
-    //List<Incidencia> Incidencias = new ArrayList<>();
+    @OneToMany(mappedBy = "incidencia")
+    List<Incidencia> Incidencias = new ArrayList<>();
 
     public Long getId() {
         return id;
