@@ -1,11 +1,16 @@
 package com.main.comunicacion.openD.servicios;
 
+import com.main.comunicacion.mapeos.CameraMap;
+import com.main.comunicacion.openD.DTOs.CameraDTO;
+import com.main.modelo.entidades.Camera;
+import com.main.modelo.repositorios.CameraRepository;
+
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.main.comunicacion.openD.DTOs.CameraDTO;
+import java.util.List;
 
 @Service
 public class CameraService {
@@ -15,45 +20,51 @@ public class CameraService {
     @Autowired
     private RestTemplate restTemplate;
 
-    // Método para obtener cámaras y datos de paginación en una página específica
-    public ApiResponse<CameraDTO> fetchCamerasFromApiResponse(int currentPage) {
-        
-        String url = API_URL + currentPage; // Construimos la URL con el número de página
-        System.out.println("\n\nMétodo para obtener cámaras y datos de paginación en una página específica\n"+url+"\n\n" );
-        ApiResponse<CameraDTO> apiResponse = null;
+    @Autowired
+    private CameraRepository cameraRepository;
 
-        try {
-            // Usamos RestTemplate para hacer la solicitud GET y mapear directamente a la clase ApiResponse
-            apiResponse = restTemplate.exchange(
-                url,
-                org.springframework.http.HttpMethod.GET,
-                null,
-                new ParameterizedTypeReference<ApiResponse<CameraDTO>>() {}
-            ).getBody();
+    @Autowired
+    private CameraMap cameraMapper;
 
-            // Imprimir la respuesta completa por consola
-            System.out.println("Respuesta completa de la API: " + apiResponse);
-            // Verificación básica para detectar errores
-
-            if (apiResponse.getTotalItems()== 0){
-                System.out.println("Error total item 0 ");
+    // Método para obtener y guardar todas las cámaras desde la API
+    public void fetchAndSaveAllCameras() {
+        int currentPage = 1;
+        ApiResponse apiResponse;
+        do {
+            apiResponse = fetchCamerasFromApiResponse(currentPage);
+            if (apiResponse == null || apiResponse.getCameras() == null) {
+                break;
             }
-            // Verificar si la respuesta es nula
-            if (apiResponse == null) {
-                System.out.println("Error: La respuesta de la API es nula.");
-            } else {
-                // Verificar si los datos son nulos
-                if (apiResponse.getCameras() == null) {
-                    System.out.println("Error: La respuesta de la API no contiene datos.");
-                } else {
-                    // Imprimir los datos recibidos
-                    System.out.println("Datos de la respuesta: " + apiResponse.getCameras());
-                }
-            } 
+
+            // Mapea y guarda las cámaras obtenidas
+            apiResponse.getCameras().forEach(dto -> {
+                Camera camera = cameraMapper.toEntity(dto);
+                cameraRepository.save(camera); // Guardar camara en la base de datos
+            });
+
+            currentPage = apiResponse.getCurrentPage() + 1; // Ir a la siguiente página
+        } while (currentPage <= apiResponse.getTotalPages());
+    }
+
+    // Método para obtener la respuesta de la API usando getForObject
+    private ApiResponse fetchCamerasFromApiResponse(int currentPage) {
+        String url = API_URL + currentPage;
+        try {
+            // Usamos getForObject para obtener directamente la respuesta
+            return restTemplate.getForObject(url, ApiResponse.class);
         } catch (Exception e) {
             System.out.println("Error durante la solicitud a la API: " + e.getMessage());
             e.printStackTrace();
         }
-        return apiResponse;
+        return null;
+    }
+
+    // Subclase ApiResponse dentro del servicio para mayor encapsulamiento
+    @Data
+    private static class ApiResponse {
+        private int totalItems;
+        private int totalPages;
+        private int currentPage;
+        private List<CameraDTO> cameras;
     }
 }

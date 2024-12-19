@@ -10,6 +10,7 @@ public class AppConfig {
 
     @Bean
     RestTemplate restTemplate() {
+        SSLUtils.disableSslVerification();
         return new RestTemplate();
     }
 }
