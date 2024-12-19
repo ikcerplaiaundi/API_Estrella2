@@ -3,8 +3,12 @@ package com.main.modelo.entidades;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.persistence.*;
-
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,7 +18,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Table(name = "tipos_incidencias")
-public class TiposIncidencia {
+public class TipoIncidencia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 

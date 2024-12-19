@@ -25,9 +25,10 @@ public class Incidencia {
     private Integer id;
     private String latitud;
     private String longitud;
-    private String nombreIncidencia;
+    private String causa;
     private String nivelIncidencia;
     private String carretera;
+    private Integer idRegion;
     @Column(name = "fecha_inicio")
     private Date fechaInicio;
 
@@ -37,7 +38,7 @@ public class Incidencia {
     @ManyToOne
     private Ciudad ciudad;
     @ManyToOne
-    private TiposIncidencia tiposIncidencia;
+    private TipoIncidencia tiposIncidencia;
 
     
 
