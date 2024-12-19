@@ -15,11 +15,11 @@ public class CameraService {
     @Autowired
     private RestTemplate restTemplate;
 
-    // Metodo para obtener cámaras y datos de paginación en una página específica
+    // Método para obtener cámaras y datos de paginación en una página específica
     public ApiResponse<CameraDTO> fetchCamerasFromApiResponse(int currentPage) {
-        System.out.println("\n\nMétodo para obtener cámaras y datos de paginación en una página específica\n\n");
+        
         String url = API_URL + currentPage; // Construimos la URL con el número de página
-
+        System.out.println("\n\nMétodo para obtener cámaras y datos de paginación en una página específica\n"+url+"\n\n" );
         ApiResponse<CameraDTO> apiResponse = null;
 
         try {
@@ -31,11 +31,27 @@ public class CameraService {
                 new ParameterizedTypeReference<ApiResponse<CameraDTO>>() {}
             ).getBody();
 
+            // Imprimir la respuesta completa por consola
+            System.out.println("Respuesta completa de la API: " + apiResponse);
             // Verificación básica para detectar errores
-            if (apiResponse == null || apiResponse.getData() == null) {
-                System.out.println("Error: La respuesta de la API es nula o no contiene datos.");
+
+            if (apiResponse.getTotalItems()== 0){
+                System.out.println("Error total item 0 ");
             }
+            // Verificar si la respuesta es nula
+            if (apiResponse == null) {
+                System.out.println("Error: La respuesta de la API es nula.");
+            } else {
+                // Verificar si los datos son nulos
+                if (apiResponse.getCameras() == null) {
+                    System.out.println("Error: La respuesta de la API no contiene datos.");
+                } else {
+                    // Imprimir los datos recibidos
+                    System.out.println("Datos de la respuesta: " + apiResponse.getCameras());
+                }
+            } 
         } catch (Exception e) {
+            System.out.println("Error durante la solicitud a la API: " + e.getMessage());
             e.printStackTrace();
         }
         return apiResponse;

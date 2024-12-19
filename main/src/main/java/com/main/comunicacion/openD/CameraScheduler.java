@@ -51,13 +51,9 @@ public class CameraScheduler {
         do {
             response = cameraService.fetchCamerasFromApiResponse(currentPage);
 
-            // Verificar si la respuesta es válida
-            if (response == null || response.getData() == null || response.getData().isEmpty()) {
-                System.out.println("Error: No se pudo obtener datos de la API en la página " + currentPage);
-                break;
-            }
+            
 
-            List<CameraDTO> cameraDTOList = response.getData();
+            List<CameraDTO> cameraDTOList = response.getCameras();
 
             for (CameraDTO dto : cameraDTOList) {
                 Camera camera = cameraMapper.toEntity(dto);
