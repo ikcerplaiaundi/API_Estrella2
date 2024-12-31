@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.multipart.support.StandardServletPartUtils;
+
 
 import com.main.comunicacion.mapeos.IncidenciaMap;
 import com.main.comunicacion.openD.DTOs.IncidenciaDTO;
@@ -30,6 +30,7 @@ public class IncidenciaService {
 
     
 
+    
     public void peticionIncidenciasDeLaAPIMes() {
         System.out.println("En guardado");
         String baseUrl = "https://api.euskadi.eus/traffic/v1.0/incidences/byMonth/${ano}/${mes}?_pagina=";
