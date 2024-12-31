@@ -1,4 +1,4 @@
-package main.main.utils;
+package com.main.utils;
 
 import java.security.cert.X509Certificate;
 

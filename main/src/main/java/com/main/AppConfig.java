@@ -1,11 +1,11 @@
-package main.main;
+package com.main;
 
-import org.apache.tomcat.util.net.SSLUtil;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 
-import main.main.utils.SSLUtils;
+import com.main.utils.SSLUtils;
 
 //Contrutor de configuración 
 @Configuration

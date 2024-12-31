@@ -6,14 +6,15 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
 
 import com.main.comunicacion.mapeos.IncidenciaMap;
 import com.main.comunicacion.openD.DTOs.IncidenciaDTO;
 import com.main.modelo.entidades.Incidencia;
 import com.main.modelo.repositorios.IncidenciaRepositorio;
 
+@Service
 public class IncidenciaService {
 
     private String ano = "2023";
