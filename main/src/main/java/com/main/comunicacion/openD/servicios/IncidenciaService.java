@@ -40,30 +40,30 @@ public class IncidenciaService {
             
             String urlPrimeraPagina = baseUrl.replace("${pagina}", "1");
             
-            IncidenciaResponse<IncidenciaDTO> response = restTemplate.getForObject(urlPrimeraPagina, IncidenciaResponse.class);
+            IncidenciaResponse response = restTemplate.getForObject(urlPrimeraPagina, IncidenciaResponse.class);
             int paginasTotales = response.getTotalPages();
-            IncidenciaMap incidenciaMap = new IncidenciaMap();
+            
             
 
-            for (int pagina = 1; pagina <= 10; pagina++) {
+            for (int pagina = 1; pagina <= paginasTotales; pagina++) {
                 String url = baseUrl.replace("${pagina}", String.valueOf(pagina));
                 System.out.println("url "+url);
-                IncidenciaResponse<IncidenciaDTO>  responsePagina = restTemplate.getForObject(url, IncidenciaResponse.class);
+                IncidenciaResponse  responsePagina = restTemplate.getForObject(url, IncidenciaResponse.class);
 
-                System.out.println("response "+responsePagina);
-                // if (responsePagina != null && responsePagina.getIncidences() != null) {
-
+                System.out.println("response "+responsePagina.getIncidences());
+                if (responsePagina != null && responsePagina.getIncidences() != null) {
                     
-                //     for (IncidenciaDTO incidenciaDTO : responsePagina.getIncidences()) {
+                    
+                    for (IncidenciaDTO incidenciaDTO : responsePagina.getIncidences()) {
 
-                //         System.out.println("Hola"+incidenciaDTO.getCityTown());
-                //         Incidencia incidencia = new Incidencia();
+                        
+                        Incidencia incidencia = new Incidencia();
         
-                //         incidencia = IncidenciaMap.toEntity(incidenciaDTO);
+                        incidencia = IncidenciaMap.toEntity(incidenciaDTO);
         
-                //         incidenciaRepositorio.save(incidencia);
-                //     }
-                // }
+                        incidenciaRepositorio.save(incidencia);
+                    }
+                }
             }
             
 

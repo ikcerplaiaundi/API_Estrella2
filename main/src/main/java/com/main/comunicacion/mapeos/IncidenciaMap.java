@@ -11,7 +11,7 @@ public class IncidenciaMap {
 
     
     public static Incidencia toEntity(IncidenciaDTO incidenciaDTO) {
-        System.out.println("Hola");
+        
         Incidencia incidencia = new Incidencia();
         incidencia.setLatitud(incidenciaDTO.getLatitude());
         incidencia.setLongitud(incidenciaDTO.getLongitude());  
