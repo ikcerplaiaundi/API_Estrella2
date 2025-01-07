@@ -16,5 +16,7 @@ public class AppConfig {
         SSLUtils.disableSslVerification();
         return new RestTemplate();
     }
+
+    
 }
 

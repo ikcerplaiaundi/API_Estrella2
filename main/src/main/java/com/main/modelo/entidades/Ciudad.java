@@ -19,13 +19,16 @@ public class Ciudad {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Integer id;
     private String nombre;
     private String latitud;
     private String longitud;
 
+
+
+
     // @ManyToOne
     // private Provincia provincia;
+    //https://nominatim.openstreetmap.org/search?q=Mexico&format=json
 
 }
