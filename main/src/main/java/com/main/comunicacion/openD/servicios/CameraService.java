@@ -64,6 +64,8 @@ public class CameraService {
         } catch (Exception e) {
             System.out.println("Error durante la solicitud a la API: " + e.getMessage());
             e.printStackTrace();
+
+            
         }
         return null;
     }
