@@ -9,6 +9,9 @@ import com.main.modelo.entidades.Rol;
 import com.main.modelo.entidades.Usuario;
 import com.main.modelo.repositorios.RolRepositorio;
 import com.main.modelo.repositorios.UsuarioRepositorio;
+
+import jakarta.annotation.PostConstruct;
+
 import org.springframework.transaction.annotation.Transactional;
 @Component
 public class RolUsuarioScheduler {
@@ -20,6 +23,7 @@ public class RolUsuarioScheduler {
     private UsuarioRepositorio usuarioRepositorio;
     
     @Transactional
+    @PostConstruct
     public void crearRolesUsuarios(){
         System.out.println("entraaaaa-----------------------------------------------------------------------");
         Rol admin = new Rol("administrador");

@@ -1,6 +1,5 @@
 package com.main.modelo.entidades;
 
-
 import jakarta.persistence.*;
 
 @Entity
@@ -13,7 +12,7 @@ public class Camera {
 
     @Column(name = "camera_id")
     private String cameraId;
-    // Estos campos pueden ser null
+
     @Column(name = "id_region")
     private String regionId;
 
@@ -32,16 +31,17 @@ public class Camera {
     @Column(name = "kilometro")
     private String kilometro;
 
-    @Column(name = "direcion")
-    private String direcion;
+    @Column(name = "direccion")
+    private String direccion;
 
     @Column(name = "url_image")
     private String urlImage;
 
-    //@ManyToOne
-    //private Region region;
+    @ManyToOne
+    @JoinColumn(name = "region_id", referencedColumnName = "id")
+    private Region region;
 
-
+    // Getters y Setters
     public Long getId() {
         return id;
     }
@@ -106,12 +106,12 @@ public class Camera {
         this.kilometro = kilometro;
     }
 
-    public String getDirecion() {
-        return direcion;
+    public String getDireccion() {
+        return direccion;
     }
 
-    public void setDirecion(String direcion) {
-        this.direcion = direcion;
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 
     public String getUrlImage() {
@@ -120,8 +120,8 @@ public class Camera {
 
     public void setUrlImage(String urlImage) {
         this.urlImage = urlImage;
-    } 
-/* 
+    }
+
     public Region getRegion() {
         return region;
     }
@@ -129,5 +129,4 @@ public class Camera {
     public void setRegion(Region region) {
         this.region = region;
     }
-    */
 }

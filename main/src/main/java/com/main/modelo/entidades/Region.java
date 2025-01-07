@@ -1,12 +1,13 @@
 package com.main.modelo.entidades;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.*;
+
 @Entity
 @Table(name = "regiones")
 public class Region {
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,12 +22,13 @@ public class Region {
     @Column(name = "nombre_eu")
     private String nombreEu;
 
-    @OneToMany(mappedBy = "camera")
-    List<Camera> Cameras = new ArrayList<>();
-    
-    @OneToMany(mappedBy = "incidencia")
-    List<Incidencia> Incidencias = new ArrayList<>();
+    @OneToMany(mappedBy = "region", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Camera> cameras = new ArrayList<>();
 
+    @OneToMany(mappedBy = "region", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Incidencia> incidencias = new ArrayList<>();
+
+    // Getters y Setters
     public Long getId() {
         return id;
     }
@@ -58,22 +60,20 @@ public class Region {
     public void setNombreEu(String nombreEu) {
         this.nombreEu = nombreEu;
     }
-/* 
+
     public List<Camera> getCameras() {
-        return Cameras;
+        return cameras;
     }
 
     public void setCameras(List<Camera> cameras) {
-        Cameras = cameras;
+        this.cameras = cameras;
     }
 
     public List<Incidencia> getIncidencias() {
-        return Incidencias;
+        return incidencias;
     }
 
     public void setIncidencias(List<Incidencia> incidencias) {
-        Incidencias = incidencias;
+        this.incidencias = incidencias;
     }
-    
-     */
 }

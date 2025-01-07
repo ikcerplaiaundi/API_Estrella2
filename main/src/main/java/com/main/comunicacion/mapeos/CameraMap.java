@@ -17,7 +17,7 @@ public class CameraMap {
         camera.setLongitud(dto.getLongitude());
         camera.setCarretera(dto.getRoad());
         camera.setKilometro(dto.getKilometer());
-        camera.setDirecion(dto.getAddress());
+        camera.setDireccion(dto.getAddress());
         camera.setUrlImage(dto.getUrlImage());
         // Si tiene una relacion con la entidad `Region`
         return camera;
@@ -33,7 +33,7 @@ public class CameraMap {
         dto.setLongitude(camera.getLongitud());
         dto.setRoad(camera.getCarretera());
         dto.setKilometer(camera.getKilometro());
-        dto.setAddress(camera.getDirecion());
+        dto.setAddress(camera.getDireccion());
         dto.setUrlImage(camera.getUrlImage());
         return dto;
     }
