@@ -11,12 +11,12 @@ public class CiudadMap {
 
      public static Ciudad toEntity(CiudadDTO ciudadDTO) {
         
-        Ciudad incidencia = new Ciudad();
-        incidencia.setNombre(ciudadDTO.getName());
-        incidencia.setLatitud(ciudadDTO.getLat());
-        incidencia.setLongitud(ciudadDTO.getLon());
+        Ciudad ciudad = new Ciudad();
+        ciudad.setNombre(ciudadDTO.getName());
+        ciudad.setLatitud(ciudadDTO.getLat());
+        ciudad.setLongitud(ciudadDTO.getLon());
         
-        return incidencia;
+        return ciudad;
     }
 
 }

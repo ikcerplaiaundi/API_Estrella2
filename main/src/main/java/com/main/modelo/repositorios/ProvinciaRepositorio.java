@@ -7,4 +7,5 @@ import com.main.modelo.entidades.Provincia;
 
 public interface ProvinciaRepositorio extends JpaRepository<Provincia, Long> {
     
+    boolean existsByNombre(String nombre);
 }
