@@ -37,8 +37,8 @@ public class Incidencia {
 
     @ManyToOne
     private Ciudad ciudad;
-    // @ManyToOne
-    // private TipoIncidencia tiposIncidencia;
+    @ManyToOne
+    private TipoIncidencia tipoIncidencia;
 
     
 

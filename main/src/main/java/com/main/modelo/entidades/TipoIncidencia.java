@@ -1,5 +1,6 @@
 package com.main.modelo.entidades;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,8 +26,8 @@ public class TipoIncidencia {
     private Integer id;
     private String nombre;
 
-    // @OneToMany(mappedBy = "incidencia")
-    // private List<Incidencia> incidencias = new ArrayList<Incidencia>();
+    @OneToMany(mappedBy = "tipoIncidencia")
+    private List<Incidencia> incidencias = new ArrayList<Incidencia>();
 
 
 

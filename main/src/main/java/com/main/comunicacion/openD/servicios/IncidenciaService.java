@@ -121,7 +121,7 @@ public class IncidenciaService {
                             if (!ciudadRepe) {
                                 ciudadDTO = buscarCiudad(nombreCiudad);
 
-                                Provincia provinciaCiudad = buscarProvinciaPorNombre(provinciaDTO.getName());
+                                Provincia provinciaCiudad = buscarProvinciaPorNombre(nombreProvincia);
 
                                 ciudad = CiudadMap.toEntity(ciudadDTO);
                                 ciudad.setProvincia(provinciaCiudad);
@@ -139,7 +139,7 @@ public class IncidenciaService {
 
                             if (!incidenciaRepe) {
                                 tipoIncidencia.setNombre(nombreIncidencia);
-                                incidenciaRepositorio.save(tipoIncidencia);
+                                tipoIncidenciaRepositorio.save(tipoIncidencia);
                             }
 
                         }
@@ -149,8 +149,13 @@ public class IncidenciaService {
                             System.out.println("nombreCiudad" + nombreCiudad);
                             Ciudad ciudadIncidencia = buscarCiudadPorNombre(ciudadDTO.getName());
 
+                            TipoIncidencia tipoIncidenciaIncidencia = buscarTipoIncidenciaPorNombre(nombreIncidencia);
+
+
                             incidencia = IncidenciaMap.toEntity(incidenciaDTO);
                             incidencia.setCiudad(ciudadIncidencia);
+                            incidencia.setTipoIncidencia(tipoIncidenciaIncidencia);
+
                             incidenciaRepositorio.save(incidencia);
                         }
 
@@ -259,6 +264,13 @@ public class IncidenciaService {
         Ciudad ciudadIncidencia = ciudadRepositorio.findByNombre(nombreCiudad);
 
         return ciudadIncidencia;
+
+    }
+
+    public TipoIncidencia buscarTipoIncidenciaPorNombre(String nombreIncidencia) {
+        TipoIncidencia tipoIncidencia = tipoIncidenciaRepositorio.findByNombre(nombreIncidencia);
+
+        return tipoIncidencia;
 
     }
 
