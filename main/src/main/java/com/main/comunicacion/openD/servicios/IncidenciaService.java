@@ -108,6 +108,7 @@ public class IncidenciaService {
                                 // System.out.println("provinciaNombre "+provincia.getNombre());
                                 provinciaRepositorio.save(provincia);
                             }
+                            
 
                         }
 
@@ -119,7 +120,12 @@ public class IncidenciaService {
                             if (!ciudadRepe) {
                                 CiudadDTO ciudadDTO = buscarCiudad(nombreCiudad);
 
+                                Provincia provinciaCiudad = buscarProvinciaPorNombre(nombreProvincia);
+
+
+
                                 ciudad = CiudadMap.toEntity(ciudadDTO);
+                                ciudad.setProvincia(provinciaCiudad);
                                 // System.out.println("nombreCiudad" + ciudad.toString());
 
                                 ciudadRepositorio.save(ciudad);
@@ -147,11 +153,51 @@ public class IncidenciaService {
                     }
                 }
             }
+            
+    
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+       
+
+    }
+    public ProvinciaDTO buscarProvincia(String nombreProvincia) throws JsonProcessingException {
+        ProvinciaDTO provinciaDTO = null;
+        RestTemplate restTemplate = new RestTemplate();
+        String baseUrl = "https://nominatim.openstreetmap.org/search?q=" + nombreProvincia + "&format=json";
+        // System.out.println("URL de solicitud: " + baseUrl);
+
+        try {
+
+            ResponseEntity<List<ProvinciaDTO>> response = restTemplate.exchange(
+                    baseUrl,
+                    HttpMethod.GET,
+                    null,
+                    new ParameterizedTypeReference<List<ProvinciaDTO>>() {
+            }
+            );
+
+            List<ProvinciaDTO> provincias = response.getBody();
+            if (provincias != null && !provincias.isEmpty()) {
+                provinciaDTO = provincias.get(0);
+                // System.out.println("Primera ciudad encontrada: " + provinciaDTO.getName());
+
+            } else {
+                System.out.println("No se encontraron resultados para la provincia: " + nombreProvincia);
+            }
+        } catch (Exception e) {
+
+        }
+
+        return provinciaDTO;
+    }
+
+    public boolean provinciaExite(String nombreProvincia) {
+        boolean result = provinciaRepositorio.existsByNombre(nombreProvincia);
+
+        return result;
     }
 
     public CiudadDTO buscarCiudad(String nombreCiudad) throws JsonProcessingException {
@@ -194,41 +240,12 @@ public class IncidenciaService {
 
     }
 
-    public ProvinciaDTO buscarProvincia(String nombreProvincia) throws JsonProcessingException {
-        ProvinciaDTO provinciaDTO = null;
-        RestTemplate restTemplate = new RestTemplate();
-        String baseUrl = "https://nominatim.openstreetmap.org/search?q=" + nombreProvincia + "&format=json";
-        // System.out.println("URL de solicitud: " + baseUrl);
+ 
+    public Provincia buscarProvinciaPorNombre(String nombreProvincia){
+        Provincia provinciaCiudad = provinciaRepositorio.findByNombre(nombreProvincia);
 
-        try {
+        return  provinciaCiudad;
 
-            ResponseEntity<List<ProvinciaDTO>> response = restTemplate.exchange(
-                    baseUrl,
-                    HttpMethod.GET,
-                    null,
-                    new ParameterizedTypeReference<List<ProvinciaDTO>>() {
-            }
-            );
-
-            List<ProvinciaDTO> provincias = response.getBody();
-            if (provincias != null && !provincias.isEmpty()) {
-                provinciaDTO = provincias.get(0);
-                // System.out.println("Primera ciudad encontrada: " + provinciaDTO.getName());
-
-            } else {
-                System.out.println("No se encontraron resultados para la provincia: " + nombreProvincia);
-            }
-        } catch (Exception e) {
-
-        }
-
-        return provinciaDTO;
-    }
-
-    public boolean provinciaExite(String nombreProvincia) {
-        boolean result = provinciaRepositorio.existsByNombre(nombreProvincia);
-
-        return result;
     }
 
     public boolean icidenciaExiste(String nombreIncidencia) {

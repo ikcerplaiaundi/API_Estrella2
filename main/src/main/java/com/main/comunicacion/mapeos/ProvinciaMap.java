@@ -13,7 +13,6 @@ public class ProvinciaMap {
         Provincia provincia = new Provincia();
 
         String nombre = provinciaDTO.getName();
-        // System.out.println("nombreDTO "+nombre);
         if (nombre.contains("/")) {
             nombre = nombre.split("/")[1].trim();
         
