@@ -29,6 +29,7 @@ public class Provincia {
 
     @OneToMany(mappedBy = "provincia")
     private List<Ciudad> ciudades = new ArrayList<Ciudad>();
+    //https://nominatim.openstreetmap.org/search?q=Buenos+Aires+Province&format=json
 
 
 
