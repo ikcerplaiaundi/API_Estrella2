@@ -79,6 +79,8 @@ public class IncidenciaService {
                         String nombreCiudad = "";
                         String nombreProvincia = "";
                         String nombreIncidencia = "";
+                        CiudadDTO ciudadDTO = new CiudadDTO();
+                        ProvinciaDTO provinciaDTO = new ProvinciaDTO();
 
                         if (incidenciaDTO.getProvince() != null) {
 
@@ -101,14 +103,13 @@ public class IncidenciaService {
                             boolean provinciaRepe = provinciaExite(nombreProvincia);
 
                             if (!provinciaRepe) {
-                                ProvinciaDTO provinciaDTO = buscarProvincia(nombreProvincia);
+                                provinciaDTO = buscarProvincia(nombreProvincia);
 
                                 provincia = ProvinciaMap.toEntity(provinciaDTO);
 
                                 // System.out.println("provinciaNombre "+provincia.getNombre());
                                 provinciaRepositorio.save(provincia);
                             }
-                            
 
                         }
 
@@ -118,11 +119,9 @@ public class IncidenciaService {
                             boolean ciudadRepe = ciudadExite(nombreCiudad);
 
                             if (!ciudadRepe) {
-                                CiudadDTO ciudadDTO = buscarCiudad(nombreCiudad);
+                                ciudadDTO = buscarCiudad(nombreCiudad);
 
-                                Provincia provinciaCiudad = buscarProvinciaPorNombre(nombreProvincia);
-
-
+                                Provincia provinciaCiudad = buscarProvinciaPorNombre(provinciaDTO.getName());
 
                                 ciudad = CiudadMap.toEntity(ciudadDTO);
                                 ciudad.setProvincia(provinciaCiudad);
@@ -136,33 +135,36 @@ public class IncidenciaService {
                         if (incidenciaDTO.getIncidenceType() != null) {
                             nombreIncidencia = incidenciaDTO.getIncidenceType();
 
-                            boolean incidenciaRepe = icidenciaExiste(nombreIncidencia);
+                            boolean incidenciaRepe = tipoIncidenciaExiste(nombreIncidencia);
 
-                            if(!incidenciaRepe){
+                            if (!incidenciaRepe) {
                                 tipoIncidencia.setNombre(nombreIncidencia);
                                 incidenciaRepositorio.save(tipoIncidencia);
                             }
 
                         }
 
+                        
                         if (incidenciaDTO.getProvince() != null && incidenciaDTO.getCityTown() != null) {
+                            System.out.println("nombreCiudad" + nombreCiudad);
+                            Ciudad ciudadIncidencia = buscarCiudadPorNombre(ciudadDTO.getName());
+
                             incidencia = IncidenciaMap.toEntity(incidenciaDTO);
+                            incidencia.setCiudad(ciudadIncidencia);
                             incidenciaRepositorio.save(incidencia);
                         }
 
                     }
                 }
             }
-            
-    
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-       
-
     }
+
+    //Consultas provincia
     public ProvinciaDTO buscarProvincia(String nombreProvincia) throws JsonProcessingException {
         ProvinciaDTO provinciaDTO = null;
         RestTemplate restTemplate = new RestTemplate();
@@ -200,38 +202,36 @@ public class IncidenciaService {
         return result;
     }
 
+    //Consultas para ciudad
     public CiudadDTO buscarCiudad(String nombreCiudad) throws JsonProcessingException {
-    CiudadDTO ciudadDTO = null;
-    RestTemplate restTemplate = new RestTemplate();
+        CiudadDTO ciudadDTO = null;
+        RestTemplate restTemplate = new RestTemplate();
 
-    
-    
-    String procesadoNombreCiudad = nombreCiudad.split("[, /-]")[0];
-    String baseUrl = "https://nominatim.openstreetmap.org/search?q=" + procesadoNombreCiudad + "&format=json";
-    // System.out.println("URL de solicitud: " + baseUrl);
+        String procesadoNombreCiudad = nombreCiudad.split("[, /-]")[0];
+        String baseUrl = "https://nominatim.openstreetmap.org/search?q=" + procesadoNombreCiudad + "&format=json";
+        // System.out.println("URL de solicitud: " + baseUrl);
 
-    try {
-        ResponseEntity<List<CiudadDTO>> response = restTemplate.exchange(
-                baseUrl,
-                HttpMethod.GET,
-                null,
-                new ParameterizedTypeReference<List<CiudadDTO>>() {
-        });
+        try {
+            ResponseEntity<List<CiudadDTO>> response = restTemplate.exchange(
+                    baseUrl,
+                    HttpMethod.GET,
+                    null,
+                    new ParameterizedTypeReference<List<CiudadDTO>>() {
+            });
 
-        List<CiudadDTO> ciudades = response.getBody();
-        if (ciudades != null && !ciudades.isEmpty()) {
-            ciudadDTO = ciudades.get(0);
-            // System.out.println("Primera ciudad encontrada: " + ciudadDTO.getName());
-        } else {
-            System.out.println("No se encontraron resultados para la ciudad: " + nombreCiudad);
+            List<CiudadDTO> ciudades = response.getBody();
+            if (ciudades != null && !ciudades.isEmpty()) {
+                ciudadDTO = ciudades.get(0);
+                // System.out.println("Primera ciudad encontrada: " + ciudadDTO.getName());
+            } else {
+                System.out.println("No se encontraron resultados para la ciudad: " + nombreCiudad);
+            }
+        } catch (Exception e) {
+            return ciudadDTO;
         }
-    } catch (Exception e) {
+
         return ciudadDTO;
     }
-
-    return ciudadDTO;
-}
-
 
     public boolean ciudadExite(String nombreCiudad) {
         boolean result = ciudadRepositorio.existsByNombre(nombreCiudad);
@@ -240,19 +240,28 @@ public class IncidenciaService {
 
     }
 
- 
-    public Provincia buscarProvinciaPorNombre(String nombreProvincia){
+    public Provincia buscarProvinciaPorNombre(String nombreProvincia) {
         Provincia provinciaCiudad = provinciaRepositorio.findByNombre(nombreProvincia);
 
-        return  provinciaCiudad;
+        return provinciaCiudad;
 
     }
 
-    public boolean icidenciaExiste(String nombreIncidencia) {
+    //Consultas tipo incidencia
+    public boolean tipoIncidenciaExiste(String nombreIncidencia) {
         boolean result = tipoIncidenciaRepositorio.existsByNombre(nombreIncidencia);
 
         return result;
     }
+
+    //Consultas incidencia
+    public Ciudad buscarCiudadPorNombre(String nombreCiudad) {
+        Ciudad ciudadIncidencia = ciudadRepositorio.findByNombre(nombreCiudad);
+
+        return ciudadIncidencia;
+
+    }
+
 
     @EventListener(ContextRefreshedEvent.class)
     public void cargarDatosAlInicio() {

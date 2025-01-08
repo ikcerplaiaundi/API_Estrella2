@@ -35,8 +35,8 @@ public class Incidencia {
     // @ManyToOne
     // private Region region;
 
-    // @ManyToOne
-    // private Ciudad ciudad;
+    @ManyToOne
+    private Ciudad ciudad;
     // @ManyToOne
     // private TipoIncidencia tiposIncidencia;
 
