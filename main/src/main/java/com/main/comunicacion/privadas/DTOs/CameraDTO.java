@@ -1,28 +1,27 @@
 package com.main.comunicacion.privadas.DTOs;
 
 public class CameraDTO {
-    
-    private String cameraId;
+    private Long id;
     private String cameraName;
     private String latitud;
     private String longitud;
     private String urlImage;
 
-    public CameraDTO(String cameraId, String cameraName, String latitud, String longitud, String urlImage) {
-        this.cameraId = cameraId;
+    public CameraDTO(Long id,  String cameraName, String latitud, String longitud, String urlImage) {
+        this.id = id;
         this.cameraName = cameraName;
         this.latitud = latitud;
         this.longitud = longitud;
         this.urlImage = urlImage;
     }
 
-    // Getters and Setters
-    public String getCameraId() {
-        return cameraId;
+
+    public Long getId() {
+        return id;
     }
 
-    public void setCameraId(String cameraId) {
-        this.cameraId = cameraId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getCameraName() {
@@ -56,4 +55,13 @@ public class CameraDTO {
     public void setUrlImage(String urlImage) {
         this.urlImage = urlImage;
     }
+
+    
+
+    // Getters and Setters
+
+    
+    
 }
+
+    

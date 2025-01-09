@@ -1,9 +1,8 @@
 package com.main.comunicacion.openD.DTOs;
 
-
 public class CameraDTO {
-    private String cameraId;
-    private String sourceId;
+    private Long id;
+    private Long sourceId;
     private String cameraName;
     private String latitude;
     private String longitude;
@@ -13,21 +12,22 @@ public class CameraDTO {
     private String urlImage;
 
     // Getters y setters
-    public String getCameraId() {
-        return cameraId;
+    public Long getId() {
+        return id;
     }
 
-    public void setCameraId(String cameraId) {
-        this.cameraId = cameraId;
+    public void setId(Long cameraId) {
+        this.id = cameraId;  // Corregido, se asigna cameraId a id
     }
 
-    public String getSourceId() {
+    public Long getSourceId() {
         return sourceId;
     }
 
-    public void setSourceId(String sourceId) {
-        this.sourceId = sourceId;
+    public void setSourceId(Long sourceId) {
+        this.sourceId = sourceId;  // Corregido, se asigna cameraId a id
     }
+
 
     public String getCameraName() {
         return cameraName;

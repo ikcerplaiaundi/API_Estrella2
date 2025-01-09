@@ -10,11 +10,7 @@ public class Camera {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "camera_id")
-    private String cameraId;
-
-    @Column(name = "id_region")
-    private String regionId;
+    
 
     @Column(name = "camera_name")
     private String cameraName;
@@ -38,7 +34,6 @@ public class Camera {
     private String urlImage;
 
     @ManyToOne
-    @JoinColumn(name = "region_id", referencedColumnName = "id")
     private Region region;
 
     // Getters y Setters
@@ -50,21 +45,7 @@ public class Camera {
         this.id = id;
     }
 
-    public String getCameraId() {
-        return cameraId;
-    }
-
-    public void setCameraId(String cameraId) {
-        this.cameraId = cameraId;
-    }
-
-    public String getRegionId() {
-        return regionId;
-    }
-
-    public void setRegionId(String regionId) {
-        this.regionId = regionId;
-    }
+    
 
     public String getCameraName() {
         return cameraName;

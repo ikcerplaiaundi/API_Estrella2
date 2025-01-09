@@ -25,7 +25,7 @@ public class RolUsuarioScheduler {
     @Transactional
     @PostConstruct
     public void crearRolesUsuarios(){
-        System.out.println("entraaaaa-----------------------------------------------------------------------");
+        System.out.println("");
         Rol admin = new Rol("administrador");
         Rol usuario = new Rol("usuario");
 

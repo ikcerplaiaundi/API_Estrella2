@@ -11,7 +11,7 @@ public class CameraPrivateMapper {
         }
 
         return new CameraDTO(
-            camera.getCameraId(),
+            camera.getId(),
             camera.getCameraName(),
             camera.getLatitud(),
             camera.getLongitud(),

@@ -10,8 +10,7 @@ public class CameraMap {
     // Metodo para mapear CameraDTO a Camera
     public static Camera toEntity(CameraDTO dto) {
         Camera camera = new Camera();
-        camera.setCameraId(dto.getCameraId());
-        //camera.setRegionId(dto.getSourceId());  // Suponiendo que 'sourceId' es la region
+        
         camera.setCameraName(dto.getCameraName());
         camera.setLatitud(dto.getLatitude());
         camera.setLongitud(dto.getLongitude());
@@ -23,18 +22,5 @@ public class CameraMap {
         return camera;
     }
 
-    // Método para mapear Camera a CameraDTO
-    public static CameraDTO toDTO(Camera camera) {
-        CameraDTO dto = new CameraDTO();
-        dto.setCameraId(camera.getCameraId());
-        //dto.setSourceId(camera.getRegionId());  // Suponiendo que 'regionId' se mapea como 'sourceId'
-        dto.setCameraName(camera.getCameraName());
-        dto.setLatitude(camera.getLatitud());
-        dto.setLongitude(camera.getLongitud());
-        dto.setRoad(camera.getCarretera());
-        dto.setKilometer(camera.getKilometro());
-        dto.setAddress(camera.getDireccion());
-        dto.setUrlImage(camera.getUrlImage());
-        return dto;
-    }
+    
 }
