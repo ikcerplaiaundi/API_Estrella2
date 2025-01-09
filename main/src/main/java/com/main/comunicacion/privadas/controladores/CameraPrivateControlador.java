@@ -6,38 +6,32 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.main.comunicacion.privadas.DTOs.CameraDTO;
+import com.main.comunicacion.privadas.DTOs.CameraPrivateDTO;
 import com.main.comunicacion.privadas.servicios.CameraPrivateService;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/cameras")
+@RequestMapping("/privateCameras")
 public class CameraPrivateControlador {
-
-    private final CameraPrivateService cameraService;
-
     @Autowired
-    public CameraPrivateControlador(CameraPrivateService cameraService) {
-        this.cameraService = cameraService;
-    }
+    private CameraPrivateService cameraService;
 
     // Endpoint para obtener cámara por ID
-    @GetMapping("/privateCameras/{id}")
-    public CameraDTO obtenerCamaraPorId(@PathVariable Long id) {
+    @GetMapping("/{id}")
+    public CameraPrivateDTO obtenerCamaraPorId(@PathVariable Long id) {
         return cameraService.obtenerCamaraPorId(id);
     }
 
     // Endpoint para obtener cámaras por región
-    /* 
-    @GetMapping("/privateCameras/region/{regionId}")
-    public List<CameraDTO> obtenerCamarasPorRegion(@PathVariable Long regionId) {
+    @GetMapping("/region/{regionId}")
+    public List<CameraPrivateDTO> obtenerCamarasPorRegion(@PathVariable Long regionId) {
         return cameraService.obtenerCamarasPorRegion(regionId);
     }
-*/
+
     // Endpoint para obtener todas las cámaras
-    @GetMapping("/privateCameras")
-    public List<CameraDTO> obtenerCamaras() {
+    @GetMapping("")
+    public List<CameraPrivateDTO> obtenerCamaras() {
         return cameraService.obtenerCamaras();
     }
 }

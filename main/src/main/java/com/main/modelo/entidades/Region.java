@@ -61,19 +61,19 @@ public class Region {
         this.nombreEu = nombreEu;
     }
 
-    // public List<Camera> getCameras() {
-    //     return cameras;
-    // }
+    public List<Camera> getCameras() {
+        return cameras;
+    }
 
-    // public void setCameras(List<Camera> cameras) {
-    //     this.cameras = cameras;
-    // }
+    public void setCameras(List<Camera> cameras) {
+        this.cameras = cameras;
+    }
 
-    // public List<Incidencia> getIncidencias() {
-    //     return incidencias;
-    // }
+    public List<Incidencia> getIncidencias() {
+        return incidencias;
+    }
 
-    // public void setIncidencias(List<Incidencia> incidencias) {
-    //     this.incidencias = incidencias;
-    // }
+    public void setIncidencias(List<Incidencia> incidencias) {
+        this.incidencias = incidencias;
+    }
 }
