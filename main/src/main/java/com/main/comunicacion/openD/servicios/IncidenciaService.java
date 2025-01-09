@@ -15,16 +15,19 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.main.comunicacion.mapeos.CiudadMap;
 import com.main.comunicacion.mapeos.IncidenciaMap;
 import com.main.comunicacion.mapeos.ProvinciaMap;
+import com.main.comunicacion.openD.DTOs.CameraDTO;
 import com.main.comunicacion.openD.DTOs.CiudadDTO;
 import com.main.comunicacion.openD.DTOs.IncidenciaDTO;
 import com.main.comunicacion.openD.DTOs.ProvinciaDTO;
 import com.main.modelo.entidades.Ciudad;
 import com.main.modelo.entidades.Incidencia;
 import com.main.modelo.entidades.Provincia;
+import com.main.modelo.entidades.Region;
 import com.main.modelo.entidades.TipoIncidencia;
 import com.main.modelo.repositorios.CiudadRepositorio;
 import com.main.modelo.repositorios.IncidenciaRepositorio;
 import com.main.modelo.repositorios.ProvinciaRepositorio;
+import com.main.modelo.repositorios.RegionRepository;
 import com.main.modelo.repositorios.TipoIncidenciaRepositorio;
 
 @Service
@@ -49,7 +52,8 @@ public class IncidenciaService {
 
     @Autowired
     public RestTemplate restTemplate;
-
+    @Autowired
+    public RegionRepository regionRepository;
     public void peticionIncidenciasDeLaAPIMes() {
 
         String baseUrl = "https://api.euskadi.eus/traffic/v1.0/incidences/byMonth/" + ano + "/" + mes
@@ -146,16 +150,15 @@ public class IncidenciaService {
 
                         
                         if (incidenciaDTO.getProvince() != null && incidenciaDTO.getCityTown() != null) {
-                            System.out.println("nombreCiudad" + nombreCiudad);
                             Ciudad ciudadIncidencia = buscarCiudadPorNombre(ciudadDTO.getName());
 
                             TipoIncidencia tipoIncidenciaIncidencia = buscarTipoIncidenciaPorNombre(nombreIncidencia);
-
-
+                            
                             incidencia = IncidenciaMap.toEntity(incidenciaDTO);
                             incidencia.setCiudad(ciudadIncidencia);
                             incidencia.setTipoIncidencia(tipoIncidenciaIncidencia);
-
+                            Region region = getRegionForIncidencia(incidenciaDTO);
+                            incidencia.setRegion(region);
                             incidenciaRepositorio.save(incidencia);
                         }
 
@@ -260,7 +263,7 @@ public class IncidenciaService {
     }
 
     //Consultas incidencia
-    public Ciudad buscarCiudadPorNombre(String nombreCiudad) {
+    public Ciudad buscarCiudadPorNombre(String nombreCiudad) {System.out.println("nombreCiudad : "+nombreCiudad);
         Ciudad ciudadIncidencia = ciudadRepositorio.findByNombre(nombreCiudad);
 
         return ciudadIncidencia;
@@ -274,6 +277,20 @@ public class IncidenciaService {
 
     }
 
+    // Obtener la región asociada a la cámara
+    private Region getRegionForIncidencia(IncidenciaDTO dto) {
+        
+                List<Region> regionList = regionRepository.findByIdRegion(dto.getSourceId());
+
+        if (!regionList.isEmpty()) {
+            return regionList.get(0); // Si la región existe, la retornamos
+            
+        } else {
+            // Manejo si no se encuentra la región
+            System.err.println("Región no encontrada para idRegion: " + dto.getSourceId());
+            return null;
+        }
+    }
 
     @EventListener(ContextRefreshedEvent.class)
     public void cargarDatosAlInicio() {

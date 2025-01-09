@@ -51,6 +51,7 @@ public class RolUsuarioScheduler {
                 usuarioRepositorio.save(usuario);
             }
         });
+
     }
 
     @EventListener(ContextRefreshedEvent.class)
