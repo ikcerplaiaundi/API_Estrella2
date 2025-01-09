@@ -22,11 +22,11 @@ public class Region {
     @Column(name = "nombre_eu")
     private String nombreEu;
 
-    @OneToMany(mappedBy = "region", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Camera> cameras = new ArrayList<>();
+    // @OneToMany(mappedBy = "region", cascade = CascadeType.ALL, orphanRemoval = true)
+    // private List<Camera> cameras = new ArrayList<>();
 
-    @OneToMany(mappedBy = "region", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Incidencia> incidencias = new ArrayList<>();
+    // @OneToMany(mappedBy = "region", cascade = CascadeType.ALL, orphanRemoval = true)
+    // private List<Incidencia> incidencias = new ArrayList<>();
 
     // Getters y Setters
     public Long getId() {
@@ -61,19 +61,19 @@ public class Region {
         this.nombreEu = nombreEu;
     }
 
-    public List<Camera> getCameras() {
-        return cameras;
-    }
+    // public List<Camera> getCameras() {
+    //     return cameras;
+    // }
 
-    public void setCameras(List<Camera> cameras) {
-        this.cameras = cameras;
-    }
+    // public void setCameras(List<Camera> cameras) {
+    //     this.cameras = cameras;
+    // }
 
-    public List<Incidencia> getIncidencias() {
-        return incidencias;
-    }
+    // public List<Incidencia> getIncidencias() {
+    //     return incidencias;
+    // }
 
-    public void setIncidencias(List<Incidencia> incidencias) {
-        this.incidencias = incidencias;
-    }
+    // public void setIncidencias(List<Incidencia> incidencias) {
+    //     this.incidencias = incidencias;
+    // }
 }
