@@ -9,8 +9,7 @@ import org.springframework.stereotype.Component;
 
 import com.main.comunicacion.openD.servicios.CameraService;
 import com.main.comunicacion.openD.servicios.RegionService;
-import com.main.main.SSLUtils;
-
+import com.main.utils.SSLUtils;
 import jakarta.annotation.PostConstruct;
 @Component
 public class Scheduler {

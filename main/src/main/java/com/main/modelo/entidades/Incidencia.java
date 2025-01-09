@@ -28,12 +28,11 @@ public class Incidencia {
     private String causa;
     private String nivelIncidencia;
     private String carretera;
-    private Integer idRegion;
     @Column(name = "fecha_inicio")
     private Date fechaInicio;
 
-    // @ManyToOne
-    // private Region region;
+    @ManyToOne
+    private Region region;
 
     @ManyToOne
     private Ciudad ciudad;
