@@ -3,7 +3,8 @@ package com.main.modelo.entidades;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.persistence.CascadeType;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 
@@ -25,11 +26,15 @@ public class Rol {
     @Column(name = "nombre")
     private String name;
 
-    @OneToMany(mappedBy = "rol") // Cambia "usuarios" por "rol"
-    private List<Usuario> usuarios = new ArrayList<>(); // Inicializa la lista para evitar NullPointerException.
+    @OneToMany(mappedBy = "rol")
+    @JsonManagedReference 
+    private List<Usuario> usuarios = new ArrayList<>();
 
-    public Rol(String rol) {
-        this.name = rol;
+    public Rol() {
+    }
+
+    public Rol(String name) {
+        this.name = name;
     }
 }
 
