@@ -28,7 +28,6 @@ public class Incidencia {
     private String causa;
     private String nivelIncidencia;
     private String carretera;
-    private Integer idRegion;
     @Column(name = "fecha_inicio")
     private Date fechaInicio;
 
