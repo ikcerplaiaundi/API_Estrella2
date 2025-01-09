@@ -1,5 +1,7 @@
 package com.main.comunicacion.openD.Schedulers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
@@ -24,23 +26,32 @@ public class RolUsuarioScheduler {
     
     @Transactional
     @PostConstruct
-    public void crearRolesUsuarios(){
-        System.out.println("");
-        Rol admin = new Rol("administrador");
-        Rol usuario = new Rol("usuario");
+    public void crearRolesUsuarios() {
+        List<String> roles = List.of("administrador", "usuario");
+        roles.forEach(rol -> {
+            if (!rolRepositorio.existsByName(rol)) {
+                rolRepositorio.save(new Rol(rol));
+            }
+        });
+    
+        Rol adminRol = rolRepositorio.findByName("administrador").get();
+        Rol usuarioRol = rolRepositorio.findByName("usuario").get();
+    
+        List<Usuario> usuarios = List.of(
+            new Usuario("mijael", "admin", "admin_mijael@estrella2.com", adminRol),
+            new Usuario("irene", "admin", "admin_irene@estrella2.com", adminRol),
+            new Usuario("dari", "admin", "admin_dari@estrella2.com", adminRol),
+            new Usuario("user1", "user", "user1@estrella2.com", usuarioRol),
+            new Usuario("user2", "user", "user2@estrella2.com", usuarioRol),
+            new Usuario("user3", "user", "user3@estrella2.com", usuarioRol)
+        );
+    
+        usuarios.forEach(usuario -> {
+            if (!usuarioRepositorio.existsByCorreo(usuario.getCorreo())) {
+                usuarioRepositorio.save(usuario);
+            }
+        });
 
-        rolRepositorio.save(admin);
-        rolRepositorio.save(usuario);
-
-        Usuario admin_mijael = new Usuario("mijael", "admin", "admin_mijael@estrella2.com", admin);
-        Usuario admin_irene = new Usuario("irene", "admin", "admin_irene@estrella2.com", admin);
-        Usuario admin_dari = new Usuario("dari", "admin", "admin_dari@estrella2.com", admin);
-        Usuario user = new Usuario("user", "user", "user@estrella2.com", usuario);
-
-        usuarioRepositorio.save(admin_mijael);
-        usuarioRepositorio.save(admin_irene);
-        usuarioRepositorio.save(admin_dari);
-        usuarioRepositorio.save(user);
     }
 
     @EventListener(ContextRefreshedEvent.class)
@@ -49,7 +60,6 @@ public class RolUsuarioScheduler {
             crearRolesUsuarios();
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("erorrrrrr funcion -----------------------------------------------");
         }
     }
 }

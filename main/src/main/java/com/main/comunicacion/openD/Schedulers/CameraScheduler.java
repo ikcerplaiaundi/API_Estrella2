@@ -8,7 +8,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.main.comunicacion.openD.servicios.CameraService;
-import com.main.main.SSLUtils;
+import com.main.utils.SSLUtils;
 
 import jakarta.annotation.PostConstruct;
 @Component
