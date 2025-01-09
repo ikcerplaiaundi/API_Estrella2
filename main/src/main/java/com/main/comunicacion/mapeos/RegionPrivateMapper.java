@@ -1,11 +1,9 @@
 package com.main.comunicacion.mapeos;
 
-import com.main.comunicacion.privadas.DTOs.CameraPrivateDTO;
-import com.main.comunicacion.privadas.DTOs.RegionIncidenciaDTO;
+import java.util.stream.Collectors;
+
 import com.main.comunicacion.privadas.DTOs.RegionPrivateDTO;
 import com.main.modelo.entidades.Region;
-
-import java.util.stream.Collectors;
 
 public class RegionPrivateMapper {
 

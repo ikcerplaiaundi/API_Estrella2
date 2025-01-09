@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 import com.main.comunicacion.openD.DTOs.CameraDTO;
 import com.main.comunicacion.privadas.DTOs.CameraPrivateDTO;
 import com.main.modelo.entidades.Camera;
-import com.main.modelo.entidades.Region;
 
 @Component
 public class CameraMap {

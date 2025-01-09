@@ -15,7 +15,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.main.comunicacion.mapeos.CiudadMap;
 import com.main.comunicacion.mapeos.IncidenciaMap;
 import com.main.comunicacion.mapeos.ProvinciaMap;
-import com.main.comunicacion.openD.DTOs.CameraDTO;
 import com.main.comunicacion.openD.DTOs.CiudadDTO;
 import com.main.comunicacion.openD.DTOs.IncidenciaDTO;
 import com.main.comunicacion.openD.DTOs.ProvinciaDTO;

@@ -1,6 +1,12 @@
 package com.main.comunicacion.openD.servicios;
 
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
 import com.main.comunicacion.mapeos.CameraMap;
 import com.main.comunicacion.openD.DTOs.CameraDTO;
 import com.main.modelo.entidades.Camera;
@@ -9,13 +15,6 @@ import com.main.modelo.repositorios.CameraRepository;
 import com.main.modelo.repositorios.RegionRepository;
 
 import lombok.Data;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
-
-import java.util.List;
-import java.util.Optional;
 
 
 @Service
