@@ -3,7 +3,7 @@ package com.main.comunicacion.privadas.DTOs;
 import java.util.Date;
 
 public class RegionIncidenciaDTO {
-    private Integer id;
+    private long id;
     private String latitud;
     private String longitud;
     private String causa;
@@ -11,7 +11,7 @@ public class RegionIncidenciaDTO {
     private String carretera;
     private Date fechaInicio;
 
-    public RegionIncidenciaDTO(Integer id, String latitud, String longitud, String causa, String nivelIncidencia, String carretera, Date fechaInicio) {
+    public RegionIncidenciaDTO(long id, String latitud, String longitud, String causa, String nivelIncidencia, String carretera, Date fechaInicio) {
         this.id = id;
         this.latitud = latitud;
         this.longitud = longitud;
@@ -21,11 +21,11 @@ public class RegionIncidenciaDTO {
         this.fechaInicio = fechaInicio;
     }
 
-    public Integer getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(long id) {
         this.id = id;
     }
 

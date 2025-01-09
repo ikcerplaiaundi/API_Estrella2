@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 public class IncidenciaPrivateDTO {
 
-    private Integer id;
+    private long id;
     private String latitud;
     private String longitud;
     private String causa;
@@ -18,7 +18,7 @@ public class IncidenciaPrivateDTO {
     @Column(name = "fecha_inicio")
     private Date fechaInicio;
 
-    public IncidenciaPrivateDTO(Integer id, String latitud, String longitud, String causa, String nivelIncidencia,
+    public IncidenciaPrivateDTO(long id, String latitud, String longitud, String causa, String nivelIncidencia,
             String carretera, Date fechaInicio) {
         this.id = id;
         this.latitud = latitud;
