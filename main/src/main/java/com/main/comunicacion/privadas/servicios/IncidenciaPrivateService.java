@@ -1,15 +1,9 @@
 package com.main.comunicacion.privadas.servicios;
 
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
-
-import com.main.modelo.entidades.Camera;
-import com.main.modelo.repositorios.CameraRepository;
-import com.main.comunicacion.privadas.DTOs.CameraDTO;
-import com.main.comunicacion.mapeos.CameraPrivateMapper;
-
 import java.util.List;
 import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Service;
 
 import com.main.comunicacion.mapeos.IncidenciaPrivateMapper;
 import com.main.comunicacion.privadas.DTOs.IncidenciaPrivateDTO;
@@ -25,18 +19,10 @@ public class IncidenciaPrivateService {
         this.incidenciaRepositorio = incidenciaRepositorio;
     }
 
-    public ResponseEntity<?> obtenerIncidencias() {
+    public List<IncidenciaPrivateDTO> obtenerIncidencias() {
         List<Incidencia> incidencias = incidenciaRepositorio.findAll();
-    
-        if (incidencias.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        } else {
-            List<IncidenciaPrivateDTO> incidenciaDTOs = incidencias.stream()
+        return incidencias.stream()
                 .map(IncidenciaPrivateMapper::toIncidenciaDTO)
                 .collect(Collectors.toList());
-    
-            return ResponseEntity.ok(incidenciaDTOs);
-        }
     }
-    
 }
