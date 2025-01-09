@@ -1,10 +1,5 @@
 package com.main.modelo.entidades;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import io.micrometer.common.lang.Nullable;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 
