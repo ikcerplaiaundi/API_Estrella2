@@ -6,12 +6,12 @@ import lombok.Data;
 
 @Data
 public class ProvinciaPrivateDTO {
-    private Integer id;
+    private long id;
     private String nombre;
     private String latitud;
     private String longitud;
     
-    public ProvinciaPrivateDTO(Integer id, String nombre, String latitud, String longitud) {
+    public ProvinciaPrivateDTO(long id, String nombre, String latitud, String longitud) {
         this.id = id;
         this.nombre = nombre;
         this.latitud = latitud;

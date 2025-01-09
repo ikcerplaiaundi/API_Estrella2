@@ -22,7 +22,7 @@ public class Provincia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    private Integer id;
+    private long id;
     private String nombre;
     private String latitud;
     private String longitud;

@@ -13,7 +13,7 @@ public class IncidenciaDTO {
     // @Id
     // @GeneratedValue(strategy = GenerationType.IDENTITY)
    
-    private Long incidenceId;
+    private long incidenceId;
     private Long sourceId;
     private String incidenceType;
     private String autonomousRegion;

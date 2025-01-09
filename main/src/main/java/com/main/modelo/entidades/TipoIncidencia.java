@@ -23,7 +23,7 @@ public class TipoIncidencia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    private Integer id;
+    private long id;
     private String nombre;
 
     @OneToMany(mappedBy = "tipoIncidencia")
