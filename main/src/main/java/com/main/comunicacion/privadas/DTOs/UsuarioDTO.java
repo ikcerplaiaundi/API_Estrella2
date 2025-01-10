@@ -1,4 +1,4 @@
-package com.main.comunicacion.openD.DTOs;
+package com.main.comunicacion.privadas.DTOs;
 
 public class UsuarioDTO {
     private long id;
