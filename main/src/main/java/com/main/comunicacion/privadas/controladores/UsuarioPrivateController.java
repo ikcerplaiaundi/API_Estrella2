@@ -19,7 +19,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
-public class UsuarioController {
+public class UsuarioPrivateController {
 
     @Autowired
     private UsuarioRepositorio usuarioRepositorio;
