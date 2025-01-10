@@ -13,8 +13,8 @@ public class IncidenciaDTO {
     // @Id
     // @GeneratedValue(strategy = GenerationType.IDENTITY)
    
-    private Integer incidenceId;
-    private Integer sourceId;
+    private long incidenceId;
+    private Long sourceId;
     private String incidenceType;
     private String autonomousRegion;
     private String province;
@@ -29,6 +29,15 @@ public class IncidenciaDTO {
     private String direction;
     private String latitude;
     private String longitude;
+    @Override
+    public String toString() {
+        return "IncidenciaDTO [incidenceId=" + incidenceId + ", sourceId=" + sourceId + ", incidenceType="
+                + incidenceType + ", autonomousRegion=" + autonomousRegion + ", province=" + province
+                + ", carRegistration=" + carRegistration + ", cause=" + cause + ", cityTown=" + cityTown
+                + ", startDate=" + startDate + ", incidenceLevel=" + incidenceLevel + ", road=" + road + ", pkStart="
+                + pkStart + ", pkEnd=" + pkEnd + ", direction=" + direction + ", latitude=" + latitude + ", longitude="
+                + longitude + "]";
+    }
 
     
 

@@ -19,7 +19,6 @@ public class IncidenciaMap {
         incidencia.setNivelIncidencia(incidenciaDTO.getIncidenceLevel());
         incidencia.setCarretera(incidenciaDTO.getRoad());
         incidencia.setFechaInicio(incidenciaDTO.getStartDate());
-        incidencia.setIdRegion(incidenciaDTO.getSourceId());
         return incidencia;
     }
 

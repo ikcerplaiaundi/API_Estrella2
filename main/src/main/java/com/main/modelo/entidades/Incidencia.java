@@ -22,18 +22,17 @@ public class Incidencia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    private Integer id;
+    private long id;
     private String latitud;
     private String longitud;
     private String causa;
     private String nivelIncidencia;
     private String carretera;
-    private Integer idRegion;
     @Column(name = "fecha_inicio")
     private Date fechaInicio;
 
-    // @ManyToOne
-    // private Region region;
+    @ManyToOne
+    private Region region;
 
     @ManyToOne
     private Ciudad ciudad;

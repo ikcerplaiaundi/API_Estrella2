@@ -19,12 +19,4 @@ public class CameraScheduler {
         System.out.println("Ejecutando actualización de cámaras...");
         cameraService.fetchAndSaveAllCameras();
     }
-
-    // Ejecutar el método al inicio de la aplicación
-    @PostConstruct
-    public void setUpOfImportData() {
-        System.out.println("Ejecutando actualización inicial de cámaras...");
-        cameraService.fetchAndSaveAllCameras();
-        //resto de peticiones
-    }
 }

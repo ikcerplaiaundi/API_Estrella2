@@ -10,8 +10,8 @@ public class Region {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nombre")
-    private String nombre;
+    @Column(name = "id_region")
+    private Long idRegion;
 
     @Column(name = "nombre_es")
     private String nombreEs;
@@ -19,11 +19,11 @@ public class Region {
     @Column(name = "nombre_eu")
     private String nombreEu;
 
-    // @OneToMany(mappedBy = "region", cascade = CascadeType.ALL, orphanRemoval = true)
-    // private List<Camera> cameras = new ArrayList<>();
+    @OneToMany(mappedBy = "region", cascade = CascadeType.ALL)
+    private List<Camera> cameras = new ArrayList<>();
 
-    // @OneToMany(mappedBy = "region", cascade = CascadeType.ALL, orphanRemoval = true)
-    // private List<Incidencia> incidencias = new ArrayList<>();
+    @OneToMany(mappedBy = "region", cascade = CascadeType.ALL)
+    private List<Incidencia> incidencias = new ArrayList<>();
 
     // Getters y Setters
     public Long getId() {
@@ -34,12 +34,12 @@ public class Region {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public void setIdRegion(Long idRegion) {
+        this.idRegion = idRegion;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public Long getIdRegion() {
+        return idRegion;
     }
 
     public String getNombreEs() {
@@ -58,19 +58,19 @@ public class Region {
         this.nombreEu = nombreEu;
     }
 
-    // public List<Camera> getCameras() {
-    //     return cameras;
-    // }
+    public List<Camera> getCameras() {
+        return cameras;
+    }
 
-    // public void setCameras(List<Camera> cameras) {
-    //     this.cameras = cameras;
-    // }
+    public void setCameras(List<Camera> cameras) {
+        this.cameras = cameras;
+    }
 
-    // public List<Incidencia> getIncidencias() {
-    //     return incidencias;
-    // }
+    public List<Incidencia> getIncidencias() {
+        return incidencias;
+    }
 
-    // public void setIncidencias(List<Incidencia> incidencias) {
-    //     this.incidencias = incidencias;
-    // }
+    public void setIncidencias(List<Incidencia> incidencias) {
+        this.incidencias = incidencias;
+    }
 }

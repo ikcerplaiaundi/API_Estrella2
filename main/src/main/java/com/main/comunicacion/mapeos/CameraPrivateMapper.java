@@ -1,21 +1,22 @@
 package com.main.comunicacion.mapeos;
 
 import com.main.modelo.entidades.Camera;
-import com.main.comunicacion.privadas.DTOs.CameraDTO;
+import com.main.comunicacion.privadas.DTOs.CameraPrivateDTO;
 
 public class CameraPrivateMapper {
 
-    public static CameraDTO toCameraDTO(Camera camera) {
+    public static CameraPrivateDTO toCameraDTO(Camera camera) {
         if (camera == null) {
             return null;
         }
 
-        return new CameraDTO(
-            camera.getCameraId(),
+        return new CameraPrivateDTO(
+            camera.getId(),
             camera.getCameraName(),
             camera.getLatitud(),
             camera.getLongitud(),
-            camera.getUrlImage()
+            camera.getUrlImage(),
+            camera.getRegion().getIdRegion()
         );
     }
 }
