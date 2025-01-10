@@ -44,6 +44,13 @@ public class IncidenciaPrivateService {
             .collect(Collectors.toList());
     }
 
+    // Obtener una incidencia por ID con referencias completas
+    public IncidenciaConReferenciasDTO obtenerIncidenciaConReferenciasPorId(Long id) {
+        Incidencia incidencia = incidenciaRepositorio.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Incidencia no encontrada."));
+        return IncidenciaPrivateMapper.toDTOConReferencias(incidencia);
+    }
+
     // Crear una incidencia
     public String crearIncidencia(IncidenciaActualizarDTO incidenciaDTO) {
         Incidencia incidencia = IncidenciaPrivateMapper.toEntity(incidenciaDTO);

@@ -14,7 +14,7 @@ import com.main.comunicacion.privadas.servicios.IncidenciaPrivateService;
 import jakarta.persistence.EntityNotFoundException;
 
 @RestController
-@RequestMapping("/api/incidencias")
+@RequestMapping("/incidencias")
 public class IncidenciaPrivateControlador {
 
     @Autowired
@@ -28,6 +28,19 @@ public class IncidenciaPrivateControlador {
             return ResponseEntity.noContent().build();
         } else {
             return ResponseEntity.ok(incidencias);
+        }
+    }
+    // Obtener una incidencia específica por ID con referencias completas
+    @GetMapping("/{id}")
+    public ResponseEntity<IncidenciaConReferenciasDTO> obtenerIncidenciaPorId(@PathVariable Long id) {
+        // Llamar al servicio para obtener la incidencia por ID
+        IncidenciaConReferenciasDTO incidencia = incidenciaPrivateService.obtenerIncidenciaConReferenciasPorId(id);
+
+        // Verificar si la incidencia fue encontrada
+        if (incidencia == null) {
+            return ResponseEntity.notFound().build(); // No se encontró la incidencia
+        } else {
+            return ResponseEntity.ok(incidencia); // Retorna la incidencia con referencias
         }
     }
 
@@ -49,7 +62,7 @@ public class IncidenciaPrivateControlador {
     }
 
     // Eliminar una incidencia
-    @DeleteMapping("/{id}")
+    @GetMapping("/delete/{id}")
     public ResponseEntity<String> eliminarIncidencia(@PathVariable Long id) {
         try {
             return ResponseEntity.ok(incidenciaPrivateService.eliminarIncidencia(id));
