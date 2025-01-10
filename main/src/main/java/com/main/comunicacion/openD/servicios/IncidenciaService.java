@@ -65,7 +65,7 @@ public class IncidenciaService {
             IncidenciaResponse response = restTemplate.getForObject(urlPrimeraPagina, IncidenciaResponse.class);
             int paginasTotales = response.getTotalPages();
 
-            for (int pagina = 1; pagina <= 10; pagina++) {
+            for (int pagina = 1; pagina <= paginasTotales; pagina++) {
                 String url = baseUrl.replace("${pagina}", String.valueOf(pagina));
                 // System.out.println("url " + url);
                 IncidenciaResponse responsePagina = restTemplate.getForObject(url, IncidenciaResponse.class);
