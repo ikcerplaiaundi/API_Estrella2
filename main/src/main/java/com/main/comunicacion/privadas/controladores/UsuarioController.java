@@ -27,55 +27,107 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
+    // Obtener la lista de todos los usuarios
     @GetMapping("/api/usuarios")
     public ResponseEntity<List<UsuarioDTO>> obtenerUsuarios() {
+        // Recupera todos los usuarios y los convierte en DTOs
         List<Usuario> usuarios = usuarioRepositorio.findAll();
         List<UsuarioDTO> usuariosDTO = usuarios.stream()
-            .map(usuario -> new UsuarioDTO(
-                usuario.getId(),
-                usuario.getNombre(),
-                usuario.getCorreo(),
-                usuario.getContraseña(),
-                usuario.getRol().getName()
-            ))
-            .collect(Collectors.toList());
-        return ResponseEntity.ok(usuariosDTO);
+                .map(usuario -> new UsuarioDTO(
+                        usuario.getId(),
+                        usuario.getNombre(),
+                        usuario.getCorreo(),
+                        usuario.getContraseña(),
+                        usuario.getRol().getName()))
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(usuariosDTO); // Responde con la lista de usuarios
     }
+    /*
+     * Ejemplo de petición:
+     * GET http://localhost:8080/api/usuarios
+     * Respuesta exitosa:
+     * [
+     * {
+     * "id": 1,
+     * "nombre": "Juan Perez",
+     * "correo": "juan.perez@example.com",
+     * "contraseña": "12345",
+     * "rol": "ADMIN"
+     * },
+     * {
+     * "id": 2,
+     * "nombre": "Maria Lopez",
+     * "correo": "maria.lopez@example.com",
+     * "contraseña": "67890",
+     * "rol": "USER"
+     * }
+     * ]
+     */
 
+    // Actualizar los datos de un usuario
     @PutMapping("/api/usuarios/{id}")
     public ResponseEntity<UsuarioDTO> actualizarUsuario(@PathVariable Long id, @RequestBody UsuarioDTO usuarioDTO) {
+        // Busca el usuario por ID
         Optional<Usuario> usuario_nuevo = usuarioRepositorio.findById(id);
-        
+
         if (usuario_nuevo.isEmpty()) {
-            return ResponseEntity.notFound().build(); 
+            return ResponseEntity.notFound().build(); // Responde con 404 si no se encuentra
         }
 
+        // Actualiza los datos del usuario
         Usuario usuario = usuario_nuevo.get();
         usuario.setNombre(usuarioDTO.getNombre());
         usuario.setCorreo(usuarioDTO.getCorreo());
         usuario.setContraseña(usuarioDTO.getContraseña());
 
-
         Usuario usuario_updated = usuarioRepositorio.save(usuario);
 
+        // Convierte el usuario actualizado a DTO
         UsuarioDTO updatedUsuarioDTO = new UsuarioDTO(
-            usuario_updated.getId(),
-            usuario_updated.getNombre(),
-            usuario_updated.getCorreo(),
-            usuario_updated.getContraseña(),
-            usuario_updated.getRol().getName()
-        );
+                usuario_updated.getId(),
+                usuario_updated.getNombre(),
+                usuario_updated.getCorreo(),
+                usuario_updated.getContraseña(),
+                usuario_updated.getRol().getName());
 
-        return ResponseEntity.ok(updatedUsuarioDTO); 
+        return ResponseEntity.ok(updatedUsuarioDTO); // Responde con el usuario actualizado
     }
+    /*
+     * Ejemplo de petición:
+     * PUT http://localhost:8080/api/usuarios/1
+     * Body (JSON):
+     * {
+     * "nombre": "Juan Actualizado",
+     * "correo": "juan.actualizado@example.com",
+     * "contraseña": "nuevaPassword123",
+     * "rol": "ADMIN"
+     * }
+     * Respuesta exitosa:
+     * {
+     * "id": 1,
+     * "nombre": "Juan Actualizado",
+     * "correo": "juan.actualizado@example.com",
+     * "contraseña": "nuevaPassword123",
+     * "rol": "ADMIN"
+     * }
+     */
 
+    // Eliminar un usuario por su ID
     @DeleteMapping("/api/usuarios/{id}")
     public ResponseEntity<String> eliminarUsuario(@PathVariable Long id) {
         try {
-            usuarioService.eliminarUsuario(id.intValue());
-            return ResponseEntity.ok("Usuario eliminado");
+            usuarioService.eliminarUsuario(id.intValue()); // Llama al servicio para eliminar
+            return ResponseEntity.ok("Usuario eliminado"); // Responde con éxito
         } catch (Exception ex) {
-            return ResponseEntity.status(400).body("Error al eliminar el usuario");
+            return ResponseEntity.status(400).body("Error al eliminar el usuario"); // Responde con error
         }
     }
+    /*
+     * Ejemplo de petición:
+     * DELETE http://localhost:8080/api/usuarios/1
+     * Respuesta exitosa:
+     * "Usuario eliminado"
+     * Respuesta de error:
+     * "Error al eliminar el usuario"
+     */
 }

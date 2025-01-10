@@ -23,26 +23,52 @@ public class IncidenciaPrivateControlador {
     // Obtener todas las incidencias con referencias completas
     @GetMapping
     public ResponseEntity<List<IncidenciaConReferenciasDTO>> obtenerIncidencias() {
+        // Lógica para obtener todas las incidencias con referencias
         List<IncidenciaConReferenciasDTO> incidencias = incidenciaPrivateService.obtenerIncidenciasConReferencias();
         if (incidencias.isEmpty()) {
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.noContent().build(); // Responde con 204 si no hay incidencias
         } else {
-            return ResponseEntity.ok(incidencias);
+            return ResponseEntity.ok(incidencias); // Retorna la lista de incidencias
         }
     }
+    /*
+     * Ejemplo de petición:
+     * GET http://localhost:8080/incidencias
+     * Respuesta exitosa:
+     * [
+     * {
+     * "id": 1,
+     * "descripcion": "Incidencia en el sistema",
+     * "ciudad": "Madrid",
+     * "tipoIncidencia": "Error de software",
+     * "region": "Europa"
+     * }
+     * ]
+     */
+
     // Obtener una incidencia específica por ID con referencias completas
     @GetMapping("/{id}")
     public ResponseEntity<IncidenciaConReferenciasDTO> obtenerIncidenciaPorId(@PathVariable Long id) {
-        // Llamar al servicio para obtener la incidencia por ID
         IncidenciaConReferenciasDTO incidencia = incidenciaPrivateService.obtenerIncidenciaConReferenciasPorId(id);
 
-        // Verificar si la incidencia fue encontrada
         if (incidencia == null) {
             return ResponseEntity.notFound().build(); // No se encontró la incidencia
         } else {
             return ResponseEntity.ok(incidencia); // Retorna la incidencia con referencias
         }
     }
+    /*
+     * Ejemplo de petición:
+     * GET http://localhost:8080/incidencias/1
+     * Respuesta exitosa:
+     * {
+     * "id": 1,
+     * "descripcion": "Incidencia en el sistema",
+     * "ciudad": "Madrid",
+     * "tipoIncidencia": "Error de software",
+     * "region": "Europa"
+     * }
+     */
 
     // Crear una incidencia
     @PostMapping
@@ -50,6 +76,19 @@ public class IncidenciaPrivateControlador {
         String mensaje = incidenciaPrivateService.crearIncidencia(incidenciaDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(mensaje);
     }
+    /*
+     * Ejemplo de petición:
+     * POST http://localhost:8080/incidencias
+     * Body (JSON):
+     * {
+     * "descripcion": "Nueva incidencia",
+     * "idCiudad": 2,
+     * "idTipoIncidencia": 3,
+     * "idRegion": 1
+     * }
+     * Respuesta exitosa:
+     * "Incidencia creada con ID: 5"
+     */
 
     // Actualizar una incidencia
     @PutMapping
@@ -60,6 +99,20 @@ public class IncidenciaPrivateControlador {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
+    /*
+     * Ejemplo de petición:
+     * PUT http://localhost:8080/incidencias
+     * Body (JSON):
+     * {
+     * "id": 1,
+     * "descripcion": "Incidencia actualizada",
+     * "idCiudad": 2,
+     * "idTipoIncidencia": 3,
+     * "idRegion": 1
+     * }
+     * Respuesta exitosa:
+     * "Incidencia actualizada con ID: 1"
+     */
 
     // Eliminar una incidencia
     @GetMapping("/delete/{id}")
@@ -70,4 +123,10 @@ public class IncidenciaPrivateControlador {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
+/*
+ * Ejemplo de petición:
+ * GET http://localhost:8080/incidencias/delete/1
+ * Respuesta exitosa:
+ * "Incidencia eliminada con éxito."
+ */
 }
