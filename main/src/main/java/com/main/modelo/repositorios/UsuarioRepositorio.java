@@ -7,6 +7,8 @@ import com.main.modelo.entidades.Usuario;
 public interface UsuarioRepositorio extends JpaRepository<Usuario, Long> {
     
     Optional<Usuario> findByNombre(String nombre);
+    Optional<Usuario> findById(int id);
     boolean existsByCorreo(String correo);
     boolean existsByNombre(String nombre);
+    
 }
