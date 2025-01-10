@@ -1,5 +1,8 @@
 package com.main.modelo.entidades;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.*;
 
 @Entity
