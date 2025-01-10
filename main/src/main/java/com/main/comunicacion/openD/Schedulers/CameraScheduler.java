@@ -5,6 +5,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.main.comunicacion.openD.servicios.CameraService;
+
+import jakarta.annotation.PostConstruct;
 @Component
 public class CameraScheduler {
 
