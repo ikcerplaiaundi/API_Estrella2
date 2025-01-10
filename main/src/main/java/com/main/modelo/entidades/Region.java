@@ -3,18 +3,7 @@ package com.main.modelo.entidades;
 import java.util.ArrayList;
 import java.util.List;
 
-<<<<<<< HEAD
 import jakarta.persistence.*;
-=======
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
->>>>>>> 4c1916d410bf1546bf98b3bd06f0281f231a35f0
 
 @Entity
 @Table(name = "regiones")
