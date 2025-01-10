@@ -2,10 +2,12 @@ package com.main.comunicacion.privadas.controladores;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,49 +19,36 @@ import com.main.comunicacion.privadas.servicios.IncidenciaPrivateService;
 import com.main.modelo.entidades.Incidencia;
 
 import jakarta.persistence.EntityNotFoundException;
-
 @RestController
-@RequestMapping("api")
+@RequestMapping("/api/incidencias")
 public class IncidenciaPrivateControlador {
-
-    private final IncidenciaPrivateService incidenciaPrivateService;
-
-    public IncidenciaPrivateControlador(IncidenciaPrivateService incidenciaPrivateService) {
-        this.incidenciaPrivateService = incidenciaPrivateService;
-    }
-
-    @GetMapping("/api/incidencias")
+    @Autowired
+    IncidenciaPrivateService incidenciaPrivateService;
+    @GetMapping
     public ResponseEntity<List<IncidenciaPrivateDTO>> obtenerIncidencias() {
-        List<IncidenciaPrivateDTO> incidencias = incidenciaPrivateService.obtenerIncidencias();
-        if (incidencias.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(incidencias);
+                List<IncidenciaPrivateDTO> incidencias = incidenciaPrivateService.obtenerIncidencias();
+        return incidencias.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(incidencias);
     }
 
-    @PostMapping("/crearIncidencia")
-    public ResponseEntity<?> crearIncidencia(@RequestBody IncidenciaPrivateDTO incidenciaDTO) {
-
-        String mensaje= incidenciaPrivateService.crearIncidencia(incidenciaDTO);
-        return ResponseEntity.ok(mensaje);
-
+    @PostMapping
+    public ResponseEntity<String> crearIncidencia(@RequestBody IncidenciaPrivateDTO incidenciaDTO) {
+        String mensaje = incidenciaPrivateService.crearIncidencia(incidenciaDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(mensaje);
     }
 
-    @PutMapping("/actualizarIncidencia")
-    public ResponseEntity<?> actualizarIncidencia(@RequestBody IncidenciaPrivateDTO incidenciaDTO) {
+    @PutMapping
+    public ResponseEntity<String> actualizarIncidencia(@RequestBody IncidenciaPrivateDTO incidenciaDTO) {
         try {
-            String mensaje = incidenciaPrivateService.actualizarIncidencia(incidenciaDTO);
-            return ResponseEntity.ok(mensaje);
+            return ResponseEntity.ok(incidenciaPrivateService.actualizarIncidencia(incidenciaDTO));
         } catch (EntityNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
 
-    @DeleteMapping("/eliminarIncidencia")
-    public ResponseEntity<?> eliminarIncidencia(@RequestBody IncidenciaPrivateDTO incidenciaDTO) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> eliminarIncidencia(@PathVariable Long id) {
         try {
-            String mensaje = incidenciaPrivateService.eliminarIncidencia(incidenciaDTO);
-            return ResponseEntity.ok(mensaje);
+            return ResponseEntity.ok(incidenciaPrivateService.eliminarIncidencia(id));
         } catch (EntityNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }

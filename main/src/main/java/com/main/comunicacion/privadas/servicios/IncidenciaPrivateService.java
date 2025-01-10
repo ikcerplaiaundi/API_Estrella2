@@ -37,103 +37,53 @@ public class IncidenciaPrivateService {
     @Autowired
     private RegionRepository regionRepositorio;
 
-    public IncidenciaPrivateService(IncidenciaRepositorio incidenciaRepositorio) {
-        this.incidenciaRepositorio = incidenciaRepositorio;
-    }
-
     public List<IncidenciaPrivateDTO> obtenerIncidencias() {
-        List<Incidencia> incidencias = incidenciaRepositorio.findAll();
-        return incidencias.stream()
-                .map(IncidenciaPrivateMapper::toIncidenciaDTO)
-                .collect(Collectors.toList());
+        return incidenciaRepositorio.findAll()
+            .stream()
+            .map(IncidenciaPrivateMapper::toDTO)
+            .collect(Collectors.toList());
     }
-
-    public String crearIncidencia(IncidenciaPrivateDTO incidenciaPrivateDTO) {
-
-        Incidencia incidencia = IncidenciaPrivateMapper.toEntity(incidenciaPrivateDTO);
-
-        // Comprueba si la incidencia existe
-        Optional<Ciudad> provinciaExistente = ciudadRepositorio.findById(incidenciaPrivateDTO.getIdCiudad());
-        Optional<TipoIncidencia> tipoIncidenciaExistente = tipoIncidenciaRepositorio.findById(incidenciaPrivateDTO.getIdTipoIncidencia());
-        Optional<Region> regionExistente = regionRepositorio.findById(incidenciaPrivateDTO.getIdRegion());
     
+    public String crearIncidencia(IncidenciaPrivateDTO incidenciaDTO) {
+        Incidencia incidencia = IncidenciaPrivateMapper.toEntity(incidenciaDTO);
 
-        if (provinciaExistente.isPresent() && tipoIncidenciaExistente.isPresent()&& regionExistente.isPresent()) {
-
-            incidencia.setCiudad(provinciaExistente.get());
-            incidencia.setTipoIncidencia(tipoIncidenciaExistente.get());
-            incidencia.setRegion(regionExistente.get());
-
-        }
+        setEntidadesRelacionadas(incidencia, incidenciaDTO);
 
         incidenciaRepositorio.save(incidencia);
 
-        return "Incidencia con ID " + incidencia.getId() + " creada correctamente.";
-    
+        return "Incidencia creada con ID: " + incidencia.getId();
     }
 
-    public String actualizarIncidencia(IncidenciaPrivateDTO incidenciaPrivateDTO) {
+    public String actualizarIncidencia(IncidenciaPrivateDTO incidenciaDTO) {
+        Incidencia incidencia = incidenciaRepositorio.findById(incidenciaDTO.getId())
+                .orElseThrow(() -> new EntityNotFoundException("Incidencia no encontrada."));
 
-        // Comprueba si la incidencia existe
-        Optional<Incidencia> incidenciaExistente = incidenciaRepositorio.findById(incidenciaPrivateDTO.getId());
-        Optional<Ciudad> provinciaExistente = ciudadRepositorio.findById(incidenciaPrivateDTO.getIdCiudad());
-        Optional<TipoIncidencia> tipoIncidenciaExistente = tipoIncidenciaRepositorio.findById(incidenciaPrivateDTO.getIdTipoIncidencia());
-        Optional<Region> regionExistente = regionRepositorio.findById(incidenciaPrivateDTO.getIdRegion());
-    
+        IncidenciaPrivateMapper.updateEntityFromDTO(incidenciaDTO, incidencia);
 
-        // Si existe consegiremp
-        // Consigue la incidencia antigua y sustituye solo lo que le pasamos
-        if (incidenciaExistente.isPresent()) {
+        setEntidadesRelacionadas(incidencia, incidenciaDTO);
 
-            // Conseguir objeto opcional
-            Incidencia incidencia = incidenciaExistente.get();
+        incidenciaRepositorio.save(incidencia);
 
-            incidencia.setLatitud(incidenciaPrivateDTO.getLatitud());
-
-            incidencia.setLongitud(incidenciaPrivateDTO.getLongitud());
-
-            incidencia.setCausa(incidenciaPrivateDTO.getCausa());
-
-            incidencia.setNivelIncidencia(incidenciaPrivateDTO.getNivelIncidencia());
-
-            incidencia.setCarretera(incidenciaPrivateDTO.getCarretera());
-
-            incidencia.setFechaInicio(incidenciaPrivateDTO.getFechaInicio());
-
-         
-    
-            if (provinciaExistente.isPresent() && tipoIncidenciaExistente.isPresent()&& regionExistente.isPresent()) {
-    
-                incidencia.setCiudad(provinciaExistente.get());
-                incidencia.setTipoIncidencia(tipoIncidenciaExistente.get());
-                incidencia.setRegion(regionExistente.get());
-    
-            }
-
-            incidenciaRepositorio.save(incidencia);
-
-            return "Incidencia con ID " + incidencia.getId() + " actualizada correctamente.";
-        } else {
-            throw new EntityNotFoundException("Incidencia con ID " + incidenciaPrivateDTO.getId() + " no encontrada.");
-        }
+        return "Incidencia actualizada con ID: " + incidencia.getId();
     }
 
-    public String eliminarIncidencia(IncidenciaPrivateDTO incidenciaPrivateDTO) {
-
-        // Comprueba si la incidencia existe
-        Optional<Incidencia> incidenciaExistente = incidenciaRepositorio.findById(incidenciaPrivateDTO.getId());
-
-        // Si existe consegiremp
-        // Consigue la incidencia antigua y sustituye solo lo que le pasamos
-        if (incidenciaExistente.isPresent()) {
-
-            // Conseguir objeto opcional
-            Incidencia incidencia = incidenciaExistente.get();
-
-            incidenciaRepositorio.delete(incidencia);
-            return "Incidencia con ID " + incidencia.getId() + " eliminada correctamente.";
-        } else {
-            throw new EntityNotFoundException("Incidencia con ID " + incidenciaPrivateDTO.getId() + " no encontrada.");
-        }
+    public String eliminarIncidencia(Long id) {
+        Incidencia incidencia = incidenciaRepositorio.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Incidencia no encontrada."));
+        incidenciaRepositorio.delete(incidencia);
+        return "Incidencia eliminada con éxito.";
     }
+
+    private void setEntidadesRelacionadas(Incidencia incidencia, IncidenciaPrivateDTO incidenciaDTO) {
+        incidencia.setCiudad(ciudadRepositorio.findById(incidenciaDTO.getIdCiudad())
+                .orElseThrow(() -> new EntityNotFoundException("Ciudad no encontrada.")));
+
+        incidencia.setTipoIncidencia(tipoIncidenciaRepositorio.findById(incidenciaDTO.getIdTipoIncidencia())
+                .orElseThrow(() -> new EntityNotFoundException("Tipo de incidencia no encontrado.")));
+
+        incidencia.setRegion(regionRepositorio.findById(incidenciaDTO.getIdRegion())
+                .orElseThrow(() -> new EntityNotFoundException("Región no encontrada.")));
+    }
+
+    
 }
