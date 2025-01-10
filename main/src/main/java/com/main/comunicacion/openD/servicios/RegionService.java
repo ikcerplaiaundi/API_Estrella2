@@ -26,7 +26,7 @@ public class RegionService {
 
     @Autowired
     private RegionMapper regionMapper;
-
+ 
     // Método para obtener y guardar todas las regiones desde la API
     public void fetchAndSaveAllRegions() {
         List<RegionDTO> regionDTOs = fetchRegionsFromApiResponse();
@@ -59,3 +59,4 @@ public class RegionService {
         return null;
     }
 }
+

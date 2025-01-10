@@ -8,5 +8,6 @@ public interface RolRepositorio extends JpaRepository<Rol, Long> {
     
     boolean existsByName(String name);
     Optional<Rol> findByName(String name);
+    Optional<Rol> findById(int id);
 
 }

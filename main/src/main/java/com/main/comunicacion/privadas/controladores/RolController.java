@@ -1,4 +1,4 @@
-package com.main.comunicacion.openD.controladores;
+package com.main.comunicacion.privadas.controladores;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
