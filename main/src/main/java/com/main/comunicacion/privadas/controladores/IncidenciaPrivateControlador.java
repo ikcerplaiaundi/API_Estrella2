@@ -38,10 +38,10 @@ public class IncidenciaPrivateControlador {
     }
 
     @PostMapping("/crearIncidencia")
-    public ResponseEntity<Incidencia> crearIncidencia(@RequestBody IncidenciaPrivateDTO incidenciaDTO) {
+    public ResponseEntity<?> crearIncidencia(@RequestBody IncidenciaPrivateDTO incidenciaDTO) {
 
-        Incidencia incidenciaCreada = incidenciaPrivateService.crearIncidencia(incidenciaDTO);
-        return ResponseEntity.ok(incidenciaCreada);
+        String mensaje= incidenciaPrivateService.crearIncidencia(incidenciaDTO);
+        return ResponseEntity.ok(mensaje);
 
     }
 
