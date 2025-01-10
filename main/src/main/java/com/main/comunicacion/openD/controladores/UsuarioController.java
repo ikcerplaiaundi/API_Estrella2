@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.main.comunicacion.openD.DTOs.UsuarioDTO;
+import com.main.comunicacion.privadas.DTOs.UsuarioDTO;
 import com.main.modelo.entidades.Usuario;
 import com.main.modelo.repositorios.UsuarioRepositorio;
 
