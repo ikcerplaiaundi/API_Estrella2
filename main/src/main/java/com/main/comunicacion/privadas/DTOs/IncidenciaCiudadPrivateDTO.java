@@ -3,11 +3,11 @@ package com.main.comunicacion.privadas.DTOs;
 import lombok.Data;
 
 @Data
-public class TipoIncidenciaPrivateDTO {
+public class IncidenciaCiudadPrivateDTO {
     private long id;
     private String nombre;
 
-    public TipoIncidenciaPrivateDTO(long id, String nombre) {
+    public IncidenciaCiudadPrivateDTO(long id, String nombre) {
         this.id = id;
         this.nombre = nombre;
     }

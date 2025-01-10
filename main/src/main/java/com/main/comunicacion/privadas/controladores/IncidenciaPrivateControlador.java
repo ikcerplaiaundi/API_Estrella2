@@ -5,39 +5,42 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import com.main.comunicacion.privadas.DTOs.IncidenciaPrivateDTO;
+import com.main.comunicacion.privadas.DTOs.IncidenciaActualizarDTO;
+import com.main.comunicacion.privadas.DTOs.IncidenciaConReferenciasDTO;
 import com.main.comunicacion.privadas.servicios.IncidenciaPrivateService;
-import com.main.modelo.entidades.Incidencia;
 
 import jakarta.persistence.EntityNotFoundException;
+
 @RestController
 @RequestMapping("/api/incidencias")
 public class IncidenciaPrivateControlador {
+
     @Autowired
     IncidenciaPrivateService incidenciaPrivateService;
+
+    // Obtener todas las incidencias con referencias completas
     @GetMapping
-    public ResponseEntity<List<IncidenciaPrivateDTO>> obtenerIncidencias() {
-                List<IncidenciaPrivateDTO> incidencias = incidenciaPrivateService.obtenerIncidencias();
-        return incidencias.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(incidencias);
+    public ResponseEntity<List<IncidenciaConReferenciasDTO>> obtenerIncidencias() {
+        List<IncidenciaConReferenciasDTO> incidencias = incidenciaPrivateService.obtenerIncidenciasConReferencias();
+        if (incidencias.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(incidencias);
+        }
     }
 
+    // Crear una incidencia
     @PostMapping
-    public ResponseEntity<String> crearIncidencia(@RequestBody IncidenciaPrivateDTO incidenciaDTO) {
+    public ResponseEntity<String> crearIncidencia(@RequestBody IncidenciaActualizarDTO incidenciaDTO) {
         String mensaje = incidenciaPrivateService.crearIncidencia(incidenciaDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(mensaje);
     }
 
+    // Actualizar una incidencia
     @PutMapping
-    public ResponseEntity<String> actualizarIncidencia(@RequestBody IncidenciaPrivateDTO incidenciaDTO) {
+    public ResponseEntity<String> actualizarIncidencia(@RequestBody IncidenciaActualizarDTO incidenciaDTO) {
         try {
             return ResponseEntity.ok(incidenciaPrivateService.actualizarIncidencia(incidenciaDTO));
         } catch (EntityNotFoundException e) {
@@ -45,6 +48,7 @@ public class IncidenciaPrivateControlador {
         }
     }
 
+    // Eliminar una incidencia
     @DeleteMapping("/{id}")
     public ResponseEntity<String> eliminarIncidencia(@PathVariable Long id) {
         try {
