@@ -22,7 +22,7 @@ public class Incidencia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    private Integer id;
+    private long id;
     private String latitud;
     private String longitud;
     private String causa;
