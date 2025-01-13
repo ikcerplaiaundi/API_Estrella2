@@ -19,7 +19,7 @@ import com.main.modelo.entidades.Incidencia;
 import jakarta.persistence.EntityNotFoundException;
 
 @RestController
-@RequestMapping("api")
+@RequestMapping("")
 public class IncidenciaPrivateControlador {
 
     private final IncidenciaPrivateService incidenciaPrivateService;

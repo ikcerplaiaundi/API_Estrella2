@@ -13,10 +13,8 @@ import com.main.modelo.entidades.Ciudad;
 import com.main.modelo.entidades.Incidencia;
 import com.main.modelo.entidades.Region;
 import com.main.modelo.entidades.TipoIncidencia;
-
 import com.main.modelo.repositorios.CiudadRepositorio;
 import com.main.modelo.repositorios.IncidenciaRepositorio;
-
 import com.main.modelo.repositorios.RegionRepository;
 import com.main.modelo.repositorios.TipoIncidenciaRepositorio;
 
