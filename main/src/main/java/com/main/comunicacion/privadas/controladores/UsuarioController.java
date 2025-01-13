@@ -18,6 +18,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+
 @RestController
 public class UsuarioController {
 
@@ -27,10 +31,13 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
-    // Obtener la lista de todos los usuarios
+    @Operation(summary = "Obtener todos los usuarios", description = "Obtiene una lista de todos los usuarios registrados en el sistema.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Usuarios obtenidos correctamente"),
+        @ApiResponse(responseCode = "404", description = "No se encontraron usuarios")
+    })
     @GetMapping("/api/usuarios")
     public ResponseEntity<List<UsuarioDTO>> obtenerUsuarios() {
-        // Recupera todos los usuarios y los convierte en DTOs
         List<Usuario> usuarios = usuarioRepositorio.findAll();
         List<UsuarioDTO> usuariosDTO = usuarios.stream()
                 .map(usuario -> new UsuarioDTO(
@@ -40,41 +47,22 @@ public class UsuarioController {
                         usuario.getContraseña(),
                         usuario.getRol().getName()))
                 .collect(Collectors.toList());
-        return ResponseEntity.ok(usuariosDTO); // Responde con la lista de usuarios
+        return ResponseEntity.ok(usuariosDTO);
     }
-    /*
-     * Ejemplo de petición:
-     * GET http://localhost:8080/api/usuarios
-     * Respuesta exitosa:
-     * [
-     * {
-     * "id": 1,
-     * "nombre": "Juan Perez",
-     * "correo": "juan.perez@example.com",
-     * "contraseña": "12345",
-     * "rol": "ADMIN"
-     * },
-     * {
-     * "id": 2,
-     * "nombre": "Maria Lopez",
-     * "correo": "maria.lopez@example.com",
-     * "contraseña": "67890",
-     * "rol": "USER"
-     * }
-     * ]
-     */
 
-    // Actualizar los datos de un usuario
+    @Operation(summary = "Actualizar un usuario", description = "Actualiza los datos de un usuario por su ID.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Usuario actualizado correctamente"),
+        @ApiResponse(responseCode = "404", description = "Usuario no encontrado")
+    })
     @PutMapping("/api/usuarios/{id}")
     public ResponseEntity<UsuarioDTO> actualizarUsuario(@PathVariable Long id, @RequestBody UsuarioDTO usuarioDTO) {
-        // Busca el usuario por ID
         Optional<Usuario> usuario_nuevo = usuarioRepositorio.findById(id);
 
         if (usuario_nuevo.isEmpty()) {
-            return ResponseEntity.notFound().build(); // Responde con 404 si no se encuentra
+            return ResponseEntity.notFound().build();
         }
 
-        // Actualiza los datos del usuario
         Usuario usuario = usuario_nuevo.get();
         usuario.setNombre(usuarioDTO.getNombre());
         usuario.setCorreo(usuarioDTO.getCorreo());
@@ -82,7 +70,6 @@ public class UsuarioController {
 
         Usuario usuario_updated = usuarioRepositorio.save(usuario);
 
-        // Convierte el usuario actualizado a DTO
         UsuarioDTO updatedUsuarioDTO = new UsuarioDTO(
                 usuario_updated.getId(),
                 usuario_updated.getNombre(),
@@ -90,44 +77,21 @@ public class UsuarioController {
                 usuario_updated.getContraseña(),
                 usuario_updated.getRol().getName());
 
-        return ResponseEntity.ok(updatedUsuarioDTO); // Responde con el usuario actualizado
+        return ResponseEntity.ok(updatedUsuarioDTO);
     }
-    /*
-     * Ejemplo de petición:
-     * PUT http://localhost:8080/api/usuarios/1
-     * Body (JSON):
-     * {
-     * "nombre": "Juan Actualizado",
-     * "correo": "juan.actualizado@example.com",
-     * "contraseña": "nuevaPassword123",
-     * "rol": "ADMIN"
-     * }
-     * Respuesta exitosa:
-     * {
-     * "id": 1,
-     * "nombre": "Juan Actualizado",
-     * "correo": "juan.actualizado@example.com",
-     * "contraseña": "nuevaPassword123",
-     * "rol": "ADMIN"
-     * }
-     */
 
-    // Eliminar un usuario por su ID
+    @Operation(summary = "Eliminar un usuario", description = "Elimina un usuario del sistema por su ID.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Usuario eliminado correctamente"),
+        @ApiResponse(responseCode = "400", description = "Error al eliminar el usuario")
+    })
     @DeleteMapping("/api/usuarios/{id}")
     public ResponseEntity<String> eliminarUsuario(@PathVariable Long id) {
         try {
-            usuarioService.eliminarUsuario(id.intValue()); // Llama al servicio para eliminar
-            return ResponseEntity.ok("Usuario eliminado"); // Responde con éxito
+            usuarioService.eliminarUsuario(id.intValue());
+            return ResponseEntity.ok("Usuario eliminado");
         } catch (Exception ex) {
-            return ResponseEntity.status(400).body("Error al eliminar el usuario"); // Responde con error
+            return ResponseEntity.status(400).body("Error al eliminar el usuario");
         }
     }
-    /*
-     * Ejemplo de petición:
-     * DELETE http://localhost:8080/api/usuarios/1
-     * Respuesta exitosa:
-     * "Usuario eliminado"
-     * Respuesta de error:
-     * "Error al eliminar el usuario"
-     */
 }

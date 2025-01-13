@@ -7,15 +7,32 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import lombok.Data;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+
 @RestController
-@RequestMapping(path="")
+@RequestMapping(path = "")
 public class LoginController {
 
     @Autowired
     private LoginServicio loginServicio;
 
+    /**
+     * Endpoint para realizar el login de un usuario
+     * 
+     * @param loginRequest Contiene el nombre de usuario y la contraseña
+     * @return Respuesta con el rol del usuario si la autenticación es exitosa, o un mensaje de error
+     */
+    @Operation(summary = "Realizar login", description = "Autentica al usuario con su nombre y contraseña y devuelve el rol del usuario.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Login exitoso"),
+        @ApiResponse(responseCode = "400", description = "El nombre de usuario y la contraseña son requeridos"),
+        @ApiResponse(responseCode = "401", description = "Usuario o contraseña incorrectos"),
+        @ApiResponse(responseCode = "500", description = "Error en el servidor")
+    })
     @PostMapping
-    @RequestMapping(path="/api/login")
+    @RequestMapping(path = "/api/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
         try {
             if (loginRequest.getNombre() == null || loginRequest.getContraseña() == null) {
