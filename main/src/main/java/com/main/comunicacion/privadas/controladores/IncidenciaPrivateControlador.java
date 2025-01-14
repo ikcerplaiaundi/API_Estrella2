@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.main.comunicacion.privadas.DTOs.IncidenciaPrivateDTO;
+import com.main.comunicacion.privadas.DTOs.IncidenciaPrivateDTOCRUD;
 import com.main.comunicacion.privadas.servicios.IncidenciaPrivateService;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -73,17 +74,18 @@ public class IncidenciaPrivateControlador {
     }
 
     @PostMapping("/crearIncidencia")
-    public ResponseEntity<?> crearIncidencia(@RequestBody IncidenciaPrivateDTO incidenciaDTO) {
+    public ResponseEntity<?> crearIncidencia(@RequestBody  IncidenciaPrivateDTOCRUD incidenciaPrivateDTOCRUD) {
 
-        String mensaje = incidenciaPrivateService.crearIncidencia(incidenciaDTO);
+        
+        String mensaje = incidenciaPrivateService.crearIncidencia(incidenciaPrivateDTOCRUD);
         return ResponseEntity.ok(mensaje);
 
     }
 
     @PutMapping("/actualizarIncidencia")
-    public ResponseEntity<?> actualizarIncidencia(@RequestBody IncidenciaPrivateDTO incidenciaDTO) {
+    public ResponseEntity<?> actualizarIncidencia(@RequestBody IncidenciaPrivateDTOCRUD incidenciaPrivateDTOCRUD) {
         try {
-            String mensaje = incidenciaPrivateService.actualizarIncidencia(incidenciaDTO);
+            String mensaje = incidenciaPrivateService.actualizarIncidencia(incidenciaPrivateDTOCRUD);
             return ResponseEntity.ok(mensaje);
         } catch (EntityNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
