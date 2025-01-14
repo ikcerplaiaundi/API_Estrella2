@@ -18,7 +18,8 @@ public class ProvinciaPrivateMapper {
                 provincia.getId(),
                 provincia.getNombre(),
                 provincia.getLatitud(),
-                provincia.getLongitud()
+                provincia.getLongitud(),
+                provincia.getCiudades()
         );
     }
 }

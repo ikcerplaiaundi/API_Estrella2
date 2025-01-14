@@ -1,6 +1,10 @@
 package com.main.comunicacion.privadas.DTOs;
 
 
+import java.util.List;
+
+import com.main.modelo.entidades.Ciudad;
+
 import lombok.Data;
 
 //DTO de provincia de la api interna
@@ -10,12 +14,14 @@ public class ProvinciaPrivateDTO {
     private String nombre;
     private String latitud;
     private String longitud;
+    private List<Ciudad> ciudad;
     
-    public ProvinciaPrivateDTO(long id, String nombre, String latitud, String longitud) {
+    public ProvinciaPrivateDTO(long id, String nombre, String latitud, String longitud, List<Ciudad> ciudad) {
         this.id = id;
         this.nombre = nombre;
         this.latitud = latitud;
         this.longitud = longitud;
+        this.ciudad = ciudad;
     }
 
     public ProvinciaPrivateDTO() {
