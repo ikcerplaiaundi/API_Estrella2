@@ -1,16 +1,17 @@
 package com.main.comunicacion.privadas.servicios;
 
-import com.main.modelo.entidades.Region;
-import com.main.modelo.repositorios.RegionRepository;
-import com.main.comunicacion.privadas.DTOs.RegionPrivateDTO;
-import com.main.comunicacion.mapeos.RegionPrivateMapper;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import com.main.comunicacion.mapeos.RegionPrivateMapper;
+import com.main.comunicacion.privadas.DTOs.RegionPrivateDTO;
+import com.main.modelo.entidades.Region;
+import com.main.modelo.repositorios.RegionRepository;
 
+//Servicios que ofrecen todas las solicitudes de region a la api interna
 @Service
 public class RegionPrivateService {
     @Autowired

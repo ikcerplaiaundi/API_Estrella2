@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.main.comunicacion.privadas.DTOs.CameraPrivateDTO;
 import com.main.comunicacion.privadas.servicios.CameraPrivateService;
 
+//Gestion de peticiones de la api interna de camaras
 @RestController
 @RequestMapping("/privateCameras")
 public class CameraPrivateControlador {

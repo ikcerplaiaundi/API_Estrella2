@@ -1,9 +1,11 @@
 package com.main.comunicacion.mapeos;
 
-import com.main.comunicacion.openD.DTOs.RegionDTO;
-import com.main.modelo.entidades.Region;
 import org.springframework.stereotype.Component;
 
+import com.main.comunicacion.openD.DTOs.RegionDTO;
+import com.main.modelo.entidades.Region;
+
+//Mapeos de Region de solicitudes externas OPEN DATA
 @Component
 public class RegionMapper {
 

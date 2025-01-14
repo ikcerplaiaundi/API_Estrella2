@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication(scanBasePackages = "com.main") // Escanea todo el paquete base
 @EntityScan(basePackages = "com.main.modelo.entidades") // Cambia al paquete donde están tus entidades
 @EnableJpaRepositories(basePackages = "com.main.modelo.repositorios") // Cambia al paquete donde están los repositorios
-
+//Main pincipal de que arrancará la aplicacion
 public class MainApplication {
 
 	public static void main(String[] args) {

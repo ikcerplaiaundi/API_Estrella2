@@ -1,5 +1,6 @@
 package com.main.comunicacion.openD.DTOs;
 
+//DTO de camara usado para mapeo opendata
 public class CameraDTO {
     private Long id;
     private Long sourceId;

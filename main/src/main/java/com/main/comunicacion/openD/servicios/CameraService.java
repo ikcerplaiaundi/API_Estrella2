@@ -17,6 +17,7 @@ import com.main.modelo.repositorios.RegionRepository;
 import lombok.Data;
 
 
+//Gestionará las peticiones a la cámara de open data
 @Service
 public class CameraService {
 

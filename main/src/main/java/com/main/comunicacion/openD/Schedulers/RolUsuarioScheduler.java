@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.main.modelo.entidades.Rol;
 import com.main.modelo.entidades.Usuario;
@@ -13,8 +14,7 @@ import com.main.modelo.repositorios.RolRepositorio;
 import com.main.modelo.repositorios.UsuarioRepositorio;
 
 import jakarta.annotation.PostConstruct;
-
-import org.springframework.transaction.annotation.Transactional;
+//Petinciones sincronizadas con RolUsuario
 @Component
 public class RolUsuarioScheduler {
 

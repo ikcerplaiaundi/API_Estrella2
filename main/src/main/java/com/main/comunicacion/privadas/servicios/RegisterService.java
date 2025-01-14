@@ -1,7 +1,5 @@
 package com.main.comunicacion.privadas.servicios;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +9,7 @@ import com.main.modelo.repositorios.RolRepositorio;
 import com.main.modelo.repositorios.UsuarioRepositorio;
 
 
+//Servicios que ofrecen todas las solicitudes de registro a la api interna
 @Service
 public class RegisterService {
 

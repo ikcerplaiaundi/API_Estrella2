@@ -14,6 +14,7 @@ import com.main.modelo.repositorios.ProvinciaRepositorio;
 import com.main.modelo.repositorios.RegionRepository;
 import com.main.modelo.repositorios.TipoIncidenciaRepositorio;
 
+//Mapeos de incidencia de solicitudes internas API
 @Component
 public class IncidenciaPrivateMapper {
 

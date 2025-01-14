@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import com.main.comunicacion.privadas.DTOs.CiudadPrivateDTO;
 import com.main.modelo.entidades.Ciudad;
 
-
+//Mapeos de ciudad de solicitudes internas API
 @Component
 public class CiudadPrivateMapper {
 

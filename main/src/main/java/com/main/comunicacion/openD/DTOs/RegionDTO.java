@@ -1,5 +1,6 @@
 package com.main.comunicacion.openD.DTOs;
 
+//DTO de region usado para mapeo opendata
 public class RegionDTO {
 
     private Long id;

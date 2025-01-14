@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import com.main.comunicacion.openD.DTOs.ProvinciaDTO;
 import com.main.modelo.entidades.Provincia;
 
+//Mapeos de provincia de solicitudes externas OPEN DATA
 @Component
 public class ProvinciaMap {
 

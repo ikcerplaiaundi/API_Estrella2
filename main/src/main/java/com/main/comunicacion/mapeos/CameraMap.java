@@ -7,9 +7,10 @@ import com.main.comunicacion.privadas.DTOs.CameraPrivateDTO;
 import com.main.modelo.entidades.Camera;
 
 @Component
+//Mapeos de camara de solicitudes externas OPEN DATA
 public class CameraMap {
 
-    // Método para mapear CameraDTO a Camera (ya existente)
+    // Método para mapear CameraDTO (Solicitud externa) a Camera (ya existente)
     public static Camera toEntity(CameraDTO dto) {
         Camera camera = new Camera();
         

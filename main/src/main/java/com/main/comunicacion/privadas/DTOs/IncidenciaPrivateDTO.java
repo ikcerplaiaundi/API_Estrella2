@@ -10,7 +10,7 @@ import com.main.modelo.entidades.TipoIncidencia;
 
 import jakarta.persistence.Column;
 import lombok.Data;
-
+//DTO de incidencia de la api interna
 @Data
 public class IncidenciaPrivateDTO {
 

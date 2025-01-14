@@ -13,6 +13,7 @@ import com.main.comunicacion.openD.DTOs.RegionDTO;
 import com.main.modelo.entidades.Region;
 import com.main.modelo.repositorios.RegionRepository;
 
+//Gestionará las peticiones a las regiones de open data
 @Service
 public class RegionService {
 

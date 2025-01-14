@@ -10,6 +10,7 @@ import com.main.comunicacion.privadas.DTOs.CiudadPrivateDTO;
 import com.main.modelo.entidades.Ciudad;
 import com.main.modelo.repositorios.CiudadRepositorio;
 
+//Servicios que ofrecen todas las solicitudes de ciudad a la api interna
 @Service
 public class CiudadPrivateService {
 

@@ -16,6 +16,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+//Entida tipos_incidencias
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
