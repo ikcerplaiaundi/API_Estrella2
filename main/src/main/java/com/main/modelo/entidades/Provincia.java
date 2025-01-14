@@ -15,6 +15,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+//Entida provincia
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

@@ -6,7 +6,8 @@ import org.springframework.stereotype.Component;
 
 import com.main.comunicacion.openD.servicios.CameraService;
 
-import jakarta.annotation.PostConstruct;
+
+//Petinciones sincronizadas con camara
 @Component
 public class CameraScheduler {
 

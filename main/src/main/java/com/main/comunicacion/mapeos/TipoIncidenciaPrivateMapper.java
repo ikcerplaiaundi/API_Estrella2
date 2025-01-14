@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import com.main.comunicacion.privadas.DTOs.TipoIncidenciaPrivateDTO;
 import com.main.modelo.entidades.TipoIncidencia;
 
+//Mapeos de TipoIncidencia de solicitudes internas API
 @Component
 public class TipoIncidenciaPrivateMapper {
 

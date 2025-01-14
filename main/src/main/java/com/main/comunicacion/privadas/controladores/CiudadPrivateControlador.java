@@ -11,7 +11,7 @@ import com.main.comunicacion.privadas.DTOs.CiudadPrivateDTO;
 import com.main.comunicacion.privadas.servicios.CiudadPrivateService;
 
 
-
+//Gestion de peticiones de la api interna de ciudades
 @RestController
 @RequestMapping("")
 public class CiudadPrivateControlador {

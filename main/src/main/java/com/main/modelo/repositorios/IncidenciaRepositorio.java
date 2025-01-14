@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 
 import com.main.modelo.entidades.Incidencia;
 
+//Repositorio principal de icidencias
 public interface IncidenciaRepositorio extends JpaRepository<Incidencia, Long> {
 
     List<Incidencia> findByCiudad_Id(Long idCiudad);

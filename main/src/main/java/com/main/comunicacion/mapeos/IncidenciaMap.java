@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import com.main.comunicacion.openD.DTOs.IncidenciaDTO;
 import com.main.modelo.entidades.Incidencia;
 
+//Mapeos de incidencia de solicitudes externas OPEN DATA
 @Component
 public class IncidenciaMap {
     

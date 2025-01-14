@@ -1,12 +1,18 @@
 package com.main.comunicacion.privadas.controladores;
 
-import com.main.comunicacion.privadas.servicios.LoginServicio;
-import com.main.modelo.entidades.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.main.comunicacion.privadas.servicios.LoginServicio;
+import com.main.modelo.entidades.Usuario;
+
 import lombok.Data;
 
+//Gestion de peticiones de la api interna de login
 @RestController
 @RequestMapping(path="")
 public class LoginController {

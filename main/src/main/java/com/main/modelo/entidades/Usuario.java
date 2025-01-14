@@ -11,6 +11,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
+//Entida usuario
 @Entity
 @Data
 @Table(name = "usuarios")

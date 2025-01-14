@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.main.modelo.entidades.Provincia;
 
+//Repositorio principal de provincias
 public interface ProvinciaRepositorio extends JpaRepository<Provincia, Long> {
     
     boolean existsByNombre(String nombre);

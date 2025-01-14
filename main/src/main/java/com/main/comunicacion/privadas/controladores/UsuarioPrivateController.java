@@ -1,23 +1,24 @@
 package com.main.comunicacion.privadas.controladores;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.main.comunicacion.privadas.DTOs.UsuarioDTO;
 import com.main.comunicacion.privadas.servicios.UsuarioService;
 import com.main.modelo.entidades.Usuario;
 import com.main.modelo.repositorios.UsuarioRepositorio;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
+////Gestion de peticiones de la api interna de usuario
 @RestController
 public class UsuarioPrivateController {
 

@@ -11,7 +11,7 @@ import com.main.comunicacion.privadas.DTOs.TipoIncidenciaPrivateDTO;
 import com.main.comunicacion.privadas.servicios.TipoIncidenciaPrivateService;
 
 
-
+//Gestion de peticiones de la api interna de tipos de incidencia
 @RestController
 @RequestMapping("")
 public class TipoIncidenciaPrivateControlador {

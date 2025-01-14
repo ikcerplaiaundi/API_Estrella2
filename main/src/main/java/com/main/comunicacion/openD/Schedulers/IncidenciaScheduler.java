@@ -1,7 +1,7 @@
 package com.main.comunicacion.openD.Schedulers;
 
 
-
+//Petinciones sincronizadas con incidencias
 public class IncidenciaScheduler {
 
     // @Autowired

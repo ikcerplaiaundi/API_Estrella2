@@ -3,7 +3,7 @@ package com.main.comunicacion.privadas.DTOs;
 
 import lombok.Data;
 
-
+//DTO de provincia de la api interna
 @Data
 public class ProvinciaPrivateDTO {
     private long id;

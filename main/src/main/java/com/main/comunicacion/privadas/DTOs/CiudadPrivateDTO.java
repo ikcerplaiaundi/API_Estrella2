@@ -3,7 +3,7 @@ package com.main.comunicacion.privadas.DTOs;
 
 import lombok.Data;
 
-
+//DTO de ciudad de la api interna
 @Data
 public class CiudadPrivateDTO {
     private long id;

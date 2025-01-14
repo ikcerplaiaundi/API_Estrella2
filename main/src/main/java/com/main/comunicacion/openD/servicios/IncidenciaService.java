@@ -30,6 +30,7 @@ import com.main.modelo.repositorios.RegionRepository;
 import com.main.modelo.repositorios.TipoIncidenciaRepositorio;
 
 @Service
+//Gestionará las peticiones a las incidencias de open data
 public class IncidenciaService {
 
     public String ano = "2023";

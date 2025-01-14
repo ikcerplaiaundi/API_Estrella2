@@ -20,6 +20,7 @@ import com.main.modelo.repositorios.TipoIncidenciaRepositorio;
 
 import jakarta.persistence.EntityNotFoundException;
 
+//Servicios que ofrecen todas las solicitudes de Incidencia a la api interna
 @Service
 public class IncidenciaPrivateService {
 
