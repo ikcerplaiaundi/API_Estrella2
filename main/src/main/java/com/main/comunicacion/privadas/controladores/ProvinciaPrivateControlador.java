@@ -4,9 +4,12 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.main.comunicacion.privadas.DTOs.IncidenciaPrivateDTO;
 import com.main.comunicacion.privadas.DTOs.ProvinciaPrivateDTO;
 import com.main.comunicacion.privadas.servicios.ProvinciaPrivateService;
 
@@ -26,6 +29,15 @@ public class ProvinciaPrivateControlador {
     @GetMapping("/api/provincias")
     public ResponseEntity<List<ProvinciaPrivateDTO>> obtenerProvincias() {
         List<ProvinciaPrivateDTO> provincias = provinciaPrivateService.obtenerProvincias();
+        if (provincias.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(provincias);
+    }
+
+    @PostMapping("/filtrosProvincias/provincia")
+    public ResponseEntity<?> filtroIncidenciaCiudad(@RequestParam Long id) {
+        List<ProvinciaPrivateDTO> provincias = provinciaPrivateService.obtenerProvincia(id);
         if (provincias.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
