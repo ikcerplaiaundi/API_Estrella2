@@ -93,9 +93,9 @@ public class IncidenciaPrivateControlador {
     }
 
     @DeleteMapping("/eliminarIncidencia")
-    public ResponseEntity<?> eliminarIncidencia(@RequestBody IncidenciaPrivateDTO incidenciaDTO) {
+    public ResponseEntity<?> eliminarIncidencia(@RequestBody IncidenciaPrivateDTOCRUD incidenciaPrivateDTOCRUD) {
         try {
-            String mensaje = incidenciaPrivateService.eliminarIncidencia(incidenciaDTO);
+            String mensaje = incidenciaPrivateService.eliminarIncidencia(incidenciaPrivateDTOCRUD);
             return ResponseEntity.ok(mensaje);
         } catch (EntityNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
