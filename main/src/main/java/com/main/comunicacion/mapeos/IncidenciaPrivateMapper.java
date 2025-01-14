@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import com.main.comunicacion.privadas.DTOs.IncidenciaPrivateDTO;
 import com.main.modelo.entidades.Ciudad;
 import com.main.modelo.entidades.Incidencia;
+import com.main.modelo.entidades.Provincia;
 import com.main.modelo.entidades.Region;
 import com.main.modelo.entidades.TipoIncidencia;
 import com.main.modelo.repositorios.CiudadRepositorio;
@@ -37,37 +38,29 @@ public class IncidenciaPrivateMapper {
             return null;
         }
 
-        // Obtener el nombre de la ciudad usando el ID de la ciudad
-        String nombreCiudad = "";
-        String nombreProvincia = "";
+        // Obtener la ciudad y provincia de forma segura
+        Ciudad ciudad = null;
+        Provincia provincia = null;
         if (incidencia.getCiudad() != null) {
-            Ciudad ciudad = ciudadRepositorio.findById(incidencia.getCiudad().getId()).orElse(null);
+            ciudad = ciudadRepositorio.findById(incidencia.getCiudad().getId()).orElse(null);
             if (ciudad != null) {
-                nombreCiudad = ciudad.getNombre();
-                nombreProvincia = ciudad.getProvincia().getNombre();
+                provincia = ciudad.getProvincia();
             }
         }
 
-        // Obtener el nombre de la región usando el ID de la región
-        String nombreRegion = "";
+        // Obtener la región de forma segura
+        Region region = null;
         if (incidencia.getRegion() != null) {
-            Region region = regionRepositorio.findById(incidencia.getRegion().getIdRegion()).orElse(null);
-            if (region != null) {
-                nombreRegion = region.getNombreEs();
-            }
+            region = regionRepositorio.findById(incidencia.getRegion().getIdRegion()).orElse(null);
         }
 
-        // Obtener el nombre del tipo de incidencia usando el ID del tipo de incidencia
-        String nombreTipoIncidencia = "";
+        // Obtener el tipo de incidencia de forma segura
+        TipoIncidencia tipoIncidencia = null;
         if (incidencia.getTipoIncidencia() != null) {
-            TipoIncidencia tipoIncidencia = tipoIncidenciaRepositorio.findById(incidencia.getTipoIncidencia().getId())
-                    .orElse(null);
-            if (tipoIncidencia != null) {
-                nombreTipoIncidencia = tipoIncidencia.getNombre();
-            }
+            tipoIncidencia = tipoIncidenciaRepositorio.findById(incidencia.getTipoIncidencia().getId()).orElse(null);
         }
 
-        // Crear el DTO con los datos obtenidos
+        // Crear el DTO con datos seguros
         return new IncidenciaPrivateDTO(
                 incidencia.getId(),
                 incidencia.getLatitud(),
@@ -76,12 +69,12 @@ public class IncidenciaPrivateMapper {
                 incidencia.getNivelIncidencia(),
                 incidencia.getCarretera(),
                 incidencia.getFechaInicio(),
-                nombreCiudad,
-                nombreProvincia,
-                nombreRegion,
-                nombreTipoIncidencia);
+                ciudad,
+                provincia,
+                region,
+                tipoIncidencia
+        );
     }
-
     // Método estático (si es necesario)
     public static Incidencia toEntity(IncidenciaPrivateDTO incidenciaDTO) {
         Incidencia incidencia = new Incidencia();

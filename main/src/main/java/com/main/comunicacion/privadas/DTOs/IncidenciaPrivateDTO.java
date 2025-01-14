@@ -3,6 +3,10 @@ package com.main.comunicacion.privadas.DTOs;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.main.modelo.entidades.Ciudad;
+import com.main.modelo.entidades.Provincia;
+import com.main.modelo.entidades.Region;
+import com.main.modelo.entidades.TipoIncidencia;
 
 import jakarta.persistence.Column;
 import lombok.Data;
@@ -27,10 +31,10 @@ public class IncidenciaPrivateDTO {
     @JsonIgnore
     private long idTipoIncidencia;
 
-    private String nombreCiudad;
-    private String nombreProvincia;
-    private String nombreRegion;
-    private String nombreTipoIncidencia;
+    private Ciudad ciudad;
+    private Provincia provincia;
+    private Region region;
+    private TipoIncidencia tipoIncidencia;
 
     public IncidenciaPrivateDTO(long id, String latitud, String longitud, String causa, String nivelIncidencia,
             String carretera, Date fechaInicio) {
@@ -68,7 +72,7 @@ public class IncidenciaPrivateDTO {
     }
 
     public IncidenciaPrivateDTO(long id, String latitud, String longitud, String causa, String nivelIncidencia,
-            String carretera, Date fechaInicio, String nombreCiudad,String nombreProvincia ,String nombreRegion, String nombreTipoIncidencia) {
+            String carretera, Date fechaInicio, Ciudad ciudad,Provincia provincia ,Region region, TipoIncidencia tipoIncidencia) {
         this.id = id;
         this.latitud = latitud;
         this.longitud = longitud;
@@ -76,10 +80,10 @@ public class IncidenciaPrivateDTO {
         this.nivelIncidencia = nivelIncidencia;
         this.carretera = carretera;
         this.fechaInicio = fechaInicio;
-        this.nombreCiudad = nombreCiudad;
-        this.nombreProvincia = nombreProvincia;
-        this.nombreRegion = nombreRegion;
-        this.nombreTipoIncidencia = nombreTipoIncidencia;
+        this.ciudad = ciudad;
+        this.provincia = provincia;
+        this.region = region;
+        this.tipoIncidencia = tipoIncidencia;
     }
 
 

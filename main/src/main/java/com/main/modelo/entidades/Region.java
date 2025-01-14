@@ -2,6 +2,9 @@ package com.main.modelo.entidades;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -22,9 +25,11 @@ public class Region {
     private String nombreEu;
 
     @OneToMany(mappedBy = "region", cascade = CascadeType.ALL)
+    @JsonBackReference
     private List<Camera> cameras = new ArrayList<>();
 
     @OneToMany(mappedBy = "region", cascade = CascadeType.ALL)
+    @JsonBackReference
     private List<Incidencia> incidencias = new ArrayList<>();
 
     // Getters y Setters

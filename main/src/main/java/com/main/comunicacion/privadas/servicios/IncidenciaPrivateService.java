@@ -35,13 +35,16 @@ public class IncidenciaPrivateService {
     @Autowired
     private RegionRepository regionRepositorio;
 
-    public IncidenciaPrivateService(IncidenciaRepositorio incidenciaRepositorio) {
-        this.incidenciaRepositorio = incidenciaRepositorio;
-    }
-
+    
     public List<IncidenciaPrivateDTO> obtenerIncidencias() {
         List<Incidencia> incidencias = incidenciaRepositorio.findAll();
         return incidencias.stream()
+                .map(IncidenciaPrivateMapper::toIncidenciaDTO)
+                .collect(Collectors.toList());
+    }
+
+    public List<IncidenciaPrivateDTO> obtenerIncidenciasCiudad(Long idCiudad) {
+        return incidenciaRepositorio.findByCiudad_Id(idCiudad).stream()
                 .map(IncidenciaPrivateMapper::toIncidenciaDTO)
                 .collect(Collectors.toList());
     }
