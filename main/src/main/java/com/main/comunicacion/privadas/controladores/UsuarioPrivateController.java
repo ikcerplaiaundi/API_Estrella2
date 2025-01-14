@@ -28,7 +28,7 @@ public class UsuarioPrivateController {
     @Autowired
     private UsuarioService usuarioService;
 
-    @GetMapping("/api/usuarios")
+    @GetMapping("/usuarios")
     public ResponseEntity<List<UsuarioDTO>> obtenerUsuarios() {
         List<Usuario> usuarios = usuarioRepositorio.findAll();
         List<UsuarioDTO> usuariosDTO = usuarios.stream()
@@ -43,7 +43,7 @@ public class UsuarioPrivateController {
         return ResponseEntity.ok(usuariosDTO);
     }
 
-    @PutMapping("/api/usuarios/{id}")
+    @PutMapping("/usuarios/{id}")
     public ResponseEntity<UsuarioDTO> actualizarUsuario(@PathVariable Long id, @RequestBody UsuarioDTO usuarioDTO) {
         Optional<Usuario> usuario_nuevo = usuarioRepositorio.findById(id);
         
@@ -70,7 +70,7 @@ public class UsuarioPrivateController {
         return ResponseEntity.ok(updatedUsuarioDTO); 
     }
 
-    @DeleteMapping("/api/usuarios/{id}")
+    @DeleteMapping("/usuarios/{id}")
     public ResponseEntity<String> eliminarUsuario(@PathVariable Long id) {
         try {
             usuarioService.eliminarUsuario(id.intValue());
