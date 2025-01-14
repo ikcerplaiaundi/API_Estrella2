@@ -13,10 +13,8 @@ import com.main.modelo.entidades.Ciudad;
 import com.main.modelo.entidades.Incidencia;
 import com.main.modelo.entidades.Region;
 import com.main.modelo.entidades.TipoIncidencia;
-
 import com.main.modelo.repositorios.CiudadRepositorio;
 import com.main.modelo.repositorios.IncidenciaRepositorio;
-
 import com.main.modelo.repositorios.RegionRepository;
 import com.main.modelo.repositorios.TipoIncidenciaRepositorio;
 
@@ -37,10 +35,7 @@ public class IncidenciaPrivateService {
     @Autowired
     private RegionRepository regionRepositorio;
 
-    public IncidenciaPrivateService(IncidenciaRepositorio incidenciaRepositorio) {
-        this.incidenciaRepositorio = incidenciaRepositorio;
-    }
-
+    
     public List<IncidenciaPrivateDTO> obtenerIncidencias() {
         List<Incidencia> incidencias = incidenciaRepositorio.findAll();
         return incidencias.stream()
@@ -48,6 +43,29 @@ public class IncidenciaPrivateService {
                 .collect(Collectors.toList());
     }
 
+    public List<IncidenciaPrivateDTO> obtenerIncidenciasCiudad(Long idCiudad) {
+        return incidenciaRepositorio.findByCiudad_Id(idCiudad).stream()
+                .map(IncidenciaPrivateMapper::toIncidenciaDTO)
+                .collect(Collectors.toList());
+    }
+
+    public List<IncidenciaPrivateDTO> obtenerIncidenciasProvincia(Long idProvincia) {
+        return incidenciaRepositorio.findByProvinciaId(idProvincia).stream()
+                .map(IncidenciaPrivateMapper::toIncidenciaDTO)
+                .collect(Collectors.toList());
+    }
+
+    public List<IncidenciaPrivateDTO> obtenerIncidenciasRegion(Long idRegion) {
+        return incidenciaRepositorio.findByRegion_Id(idRegion).stream()
+                .map(IncidenciaPrivateMapper::toIncidenciaDTO)
+                .collect(Collectors.toList());
+    }
+
+    public List<IncidenciaPrivateDTO> obtenerIncidenciasTipoIncidencia(Long idIncidencia) {
+        return incidenciaRepositorio.findByTipoIncidencia_Id(idIncidencia).stream()
+                .map(IncidenciaPrivateMapper::toIncidenciaDTO)
+                .collect(Collectors.toList());
+    }
     public String crearIncidencia(IncidenciaPrivateDTO incidenciaPrivateDTO) {
 
         Incidencia incidencia = IncidenciaPrivateMapper.toEntity(incidenciaPrivateDTO);

@@ -3,6 +3,8 @@ package com.main.modelo.entidades;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -31,9 +33,11 @@ public class Ciudad {
 
 
     @ManyToOne
+    @JsonBackReference
     private Provincia provincia;
 
     @OneToMany(mappedBy = "ciudad")
+    @JsonBackReference
     private List<Incidencia> incidencias = new ArrayList<Incidencia>();
     //https://nominatim.openstreetmap.org/search?q=Mexico&format=json
 

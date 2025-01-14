@@ -4,6 +4,8 @@ package com.main.modelo.entidades;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,6 +29,7 @@ public class TipoIncidencia {
     private String nombre;
 
     @OneToMany(mappedBy = "tipoIncidencia")
+    @JsonBackReference
     private List<Incidencia> incidencias = new ArrayList<Incidencia>();
 
 
