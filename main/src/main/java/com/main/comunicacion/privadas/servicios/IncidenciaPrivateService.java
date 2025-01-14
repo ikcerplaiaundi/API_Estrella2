@@ -138,7 +138,7 @@ public class IncidenciaPrivateService {
         }
     }
 
-    public String eliminarIncidencia(IncidenciaPrivateDTO incidenciaPrivateDTO) {
+    public String eliminarIncidencia(IncidenciaPrivateDTOCRUD incidenciaPrivateDTO) {
 
         // Comprueba si la incidencia existe
         Optional<Incidencia> incidenciaExistente = incidenciaRepositorio.findById(incidenciaPrivateDTO.getId());
