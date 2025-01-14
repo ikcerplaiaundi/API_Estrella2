@@ -38,7 +38,7 @@ public class IncidenciaPrivateControlador {
         return ResponseEntity.ok(incidencias);
     }
 
-    @PostMapping("/filtrosIncidencias")
+    @PostMapping("/filtrosIncidencias/ciudad")
     public ResponseEntity<?> filtroIncidenciaCiudad(@RequestParam Long idCiudad) {
         List<IncidenciaPrivateDTO> incidencias = incidenciaPrivateService.obtenerIncidenciasCiudad(idCiudad);
         if (incidencias.isEmpty()) {
@@ -47,9 +47,31 @@ public class IncidenciaPrivateControlador {
         return ResponseEntity.ok(incidencias);
     }
 
-    // @PostMapping("/filtrosIncidencias/{provincia}")
+    @PostMapping("/filtrosIncidencias/provincia")
+    public ResponseEntity<?> filtroIncidenciaProvincia(@RequestParam Long idProvincia) {
+        List<IncidenciaPrivateDTO> incidencias = incidenciaPrivateService.obtenerIncidenciasCiudad(idProvincia);
+        if (incidencias.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(incidencias);
+    }
 
-    // @PostMapping("/filtrosIncidencias/{region}")
+    @PostMapping("/filtrosIncidencias/region")
+    public ResponseEntity<?> filtroIncidenciaRegion(@RequestParam Long idRegion) {
+        List<IncidenciaPrivateDTO> incidencias = incidenciaPrivateService.obtenerIncidenciasRegion(idRegion);
+        if (incidencias.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(incidencias);
+    }
+    @PostMapping("/filtrosIncidencias/tipoIncidencia")
+    public ResponseEntity<?> filtroIncidenciaTipoIncidencia(@RequestParam Long idTipoIncidencia) {
+        List<IncidenciaPrivateDTO> incidencias = incidenciaPrivateService.obtenerIncidenciasTipoIncidencia(idTipoIncidencia);
+        if (incidencias.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(incidencias);
+    }
 
     @PostMapping("/crearIncidencia")
     public ResponseEntity<?> crearIncidencia(@RequestBody IncidenciaPrivateDTO incidenciaDTO) {

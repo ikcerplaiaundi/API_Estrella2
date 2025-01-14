@@ -49,6 +49,23 @@ public class IncidenciaPrivateService {
                 .collect(Collectors.toList());
     }
 
+    public List<IncidenciaPrivateDTO> obtenerIncidenciasProvincia(Long idProvincia) {
+        return incidenciaRepositorio.findByProvinciaId(idProvincia).stream()
+                .map(IncidenciaPrivateMapper::toIncidenciaDTO)
+                .collect(Collectors.toList());
+    }
+
+    public List<IncidenciaPrivateDTO> obtenerIncidenciasRegion(Long idRegion) {
+        return incidenciaRepositorio.findByRegion_Id(idRegion).stream()
+                .map(IncidenciaPrivateMapper::toIncidenciaDTO)
+                .collect(Collectors.toList());
+    }
+
+    public List<IncidenciaPrivateDTO> obtenerIncidenciasTipoIncidencia(Long idIncidencia) {
+        return incidenciaRepositorio.findByTipoIncidencia_Id(idIncidencia).stream()
+                .map(IncidenciaPrivateMapper::toIncidenciaDTO)
+                .collect(Collectors.toList());
+    }
     public String crearIncidencia(IncidenciaPrivateDTO incidenciaPrivateDTO) {
 
         Incidencia incidencia = IncidenciaPrivateMapper.toEntity(incidenciaPrivateDTO);
