@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.main.comunicacion.privadas.DTOs.IncidenciaPrivateDTO;
+import com.main.comunicacion.privadas.DTOs.IncidenciaPrivateDTOCRUD;
 import com.main.modelo.entidades.Ciudad;
 import com.main.modelo.entidades.Incidencia;
 import com.main.modelo.entidades.Provincia;
@@ -78,6 +79,17 @@ public class IncidenciaPrivateMapper {
     }
     // Método estático (si es necesario)
     public static Incidencia toEntity(IncidenciaPrivateDTO incidenciaDTO) {
+        Incidencia incidencia = new Incidencia();
+        incidencia.setLatitud(incidenciaDTO.getLatitud());
+        incidencia.setLongitud(incidenciaDTO.getLongitud());
+        incidencia.setCausa(incidenciaDTO.getCausa());
+        incidencia.setNivelIncidencia(incidenciaDTO.getNivelIncidencia());
+        incidencia.setCarretera(incidenciaDTO.getCarretera());
+        incidencia.setFechaInicio(incidenciaDTO.getFechaInicio());
+        return incidencia;
+    }
+
+    public static Incidencia toEntityCRUD(IncidenciaPrivateDTOCRUD incidenciaDTO) {
         Incidencia incidencia = new Incidencia();
         incidencia.setLatitud(incidenciaDTO.getLatitud());
         incidencia.setLongitud(incidenciaDTO.getLongitud());
