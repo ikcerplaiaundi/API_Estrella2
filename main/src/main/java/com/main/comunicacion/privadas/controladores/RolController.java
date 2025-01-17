@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.main.modelo.entidades.Rol;
 import com.main.modelo.repositorios.RolRepositorio;
 @RestController
-@RequestMapping("/api/roles")
+@RequestMapping("/roles")
 public class RolController {
 
     @Autowired

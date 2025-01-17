@@ -23,7 +23,7 @@ public class CiudadPrivateControlador {
         this.ciudadPrivateService = ciudadPrivateService;
     }
 
-    @GetMapping("/api/ciudades")
+    @GetMapping("/ciudades")
     public ResponseEntity<List<CiudadPrivateDTO>> obtenerCiudades() {
         List<CiudadPrivateDTO> ciudades = ciudadPrivateService.obtenerCiudades();
         if (ciudades.isEmpty()) {

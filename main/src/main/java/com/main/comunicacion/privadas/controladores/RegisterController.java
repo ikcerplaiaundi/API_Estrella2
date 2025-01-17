@@ -11,7 +11,7 @@ import com.main.modelo.entidades.Usuario;
 
 //Gestion de peticiones de la api interna de registro
 @RestController
-@RequestMapping(path = "/api/registro")
+@RequestMapping(path = "/registro")
 public class RegisterController {
 
     @Autowired

@@ -21,7 +21,7 @@ public class LoginController {
     private LoginServicio loginServicio;
 
     @PostMapping
-    @RequestMapping(path="/api/login")
+    @RequestMapping(path="/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
         try {
             if (loginRequest.getNombre() == null || loginRequest.getContraseña() == null) {

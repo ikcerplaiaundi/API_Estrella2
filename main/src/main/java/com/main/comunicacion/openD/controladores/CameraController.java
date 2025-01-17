@@ -14,7 +14,7 @@ import com.main.modelo.repositorios.CameraRepository;
 
 //Enpintoins de camaras con opendata
 @RestController
-@RequestMapping("/api/cameras")
+@RequestMapping("/cameras")
 public class CameraController {
 
     @Autowired
