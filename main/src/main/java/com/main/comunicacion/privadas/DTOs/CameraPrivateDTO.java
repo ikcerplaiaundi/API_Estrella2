@@ -1,6 +1,9 @@
 package com.main.comunicacion.privadas.DTOs;
 
-//DTO de camara de la api interna
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+// DTO de cámara de la API interna
+@JsonInclude(JsonInclude.Include.NON_NULL) // Excluir campos nulos de la serialización
 public class CameraPrivateDTO {
     private Long id;
     private String cameraName;
@@ -8,8 +11,10 @@ public class CameraPrivateDTO {
     private String longitud;
     private String urlImage;
     private Long idRegion;
+    private RegionPrivateDTO region;
 
-    public CameraPrivateDTO(Long id,  String cameraName, String latitud, String longitud, String urlImage, Long idRegion) {
+    // Constructor completo con idRegion
+    public CameraPrivateDTO(Long id, String cameraName, String latitud, String longitud, String urlImage, Long idRegion) {
         this.id = id;
         this.cameraName = cameraName;
         this.latitud = latitud;
@@ -18,7 +23,17 @@ public class CameraPrivateDTO {
         this.idRegion = idRegion;
     }
 
+    // Constructor completo con regionPrivateDTO
+    public CameraPrivateDTO(Long id, String cameraName, String latitud, String longitud, String urlImage, RegionPrivateDTO region) {
+        this.id = id;
+        this.cameraName = cameraName;
+        this.latitud = latitud;
+        this.longitud = longitud;
+        this.urlImage = urlImage;
+        this.region = region;
+    }
 
+    // Getters y setters
     public Long getId() {
         return id;
     }
@@ -67,10 +82,11 @@ public class CameraPrivateDTO {
         this.idRegion = idRegion;
     }
 
-    // Getters and Setters
+    public RegionPrivateDTO getRegion() {
+        return region;
+    }
 
-    
-    
+    public void setRegion(RegionPrivateDTO region) {
+        this.region = region;
+    }
 }
-
-    
