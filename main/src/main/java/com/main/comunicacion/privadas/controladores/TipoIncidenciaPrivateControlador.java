@@ -23,7 +23,7 @@ public class TipoIncidenciaPrivateControlador {
         this.tipoIncidenciaPrivateService = tipoIncidenciaPrivateService;
     }
 
-    @GetMapping("/api/tiposIncidencias")
+    @GetMapping("/tiposIncidencias")
     public ResponseEntity<List<TipoIncidenciaPrivateDTO>> obtenerProvincias() {
         List<TipoIncidenciaPrivateDTO> tiposIncidencia = tipoIncidenciaPrivateService.obtenerTiposIncidencias();
         if (tiposIncidencia.isEmpty()) {

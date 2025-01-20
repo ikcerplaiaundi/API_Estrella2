@@ -13,12 +13,20 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.main.comunicacion.privadas.DTOs.RolPrivateDTO;
 import com.main.comunicacion.privadas.DTOs.UsuarioDTO;
 import com.main.comunicacion.privadas.servicios.UsuarioService;
 import com.main.modelo.entidades.Usuario;
 import com.main.modelo.repositorios.UsuarioRepositorio;
 
-////Gestion de peticiones de la api interna de usuario
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+
 @RestController
 public class UsuarioPrivateController {
 
@@ -37,7 +45,7 @@ public class UsuarioPrivateController {
                 usuario.getNombre(),
                 usuario.getCorreo(),
                 usuario.getContraseña(),
-                usuario.getRol().getName()
+                new RolPrivateDTO(usuario.getRol().getId(), usuario.getRol().getName())
             ))
             .collect(Collectors.toList());
         return ResponseEntity.ok(usuariosDTO);
@@ -64,8 +72,8 @@ public class UsuarioPrivateController {
             usuario_updated.getNombre(),
             usuario_updated.getCorreo(),
             usuario_updated.getContraseña(),
-            usuario_updated.getRol().getName()
-        );
+            new RolPrivateDTO(usuario_updated.getRol().getId(),usuario_updated.getRol().getName())
+            );
 
         return ResponseEntity.ok(updatedUsuarioDTO); 
     }
