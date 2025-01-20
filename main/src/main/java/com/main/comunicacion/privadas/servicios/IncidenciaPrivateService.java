@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.main.comunicacion.mapeos.IncidenciaPrivateMapper;
 import com.main.comunicacion.privadas.DTOs.IncidenciaPrivateDTO;
+import com.main.comunicacion.privadas.DTOs.IncidenciaPrivateDTOCRUD;
 import com.main.modelo.entidades.Ciudad;
 import com.main.modelo.entidades.Incidencia;
 import com.main.modelo.entidades.Region;
@@ -20,6 +21,7 @@ import com.main.modelo.repositorios.TipoIncidenciaRepositorio;
 
 import jakarta.persistence.EntityNotFoundException;
 
+//Servicios que ofrecen todas las solicitudes de Incidencia a la api interna
 @Service
 public class IncidenciaPrivateService {
 
@@ -66,9 +68,9 @@ public class IncidenciaPrivateService {
                 .map(IncidenciaPrivateMapper::toIncidenciaDTO)
                 .collect(Collectors.toList());
     }
-    public String crearIncidencia(IncidenciaPrivateDTO incidenciaPrivateDTO) {
+    public String crearIncidencia(IncidenciaPrivateDTOCRUD incidenciaPrivateDTO) {
 
-        Incidencia incidencia = IncidenciaPrivateMapper.toEntity(incidenciaPrivateDTO);
+        Incidencia incidencia = IncidenciaPrivateMapper.toEntityCRUD(incidenciaPrivateDTO);
 
         // Comprueba si la incidencia existe
         Optional<Ciudad> provinciaExistente = ciudadRepositorio.findById(incidenciaPrivateDTO.getIdCiudad());
@@ -90,7 +92,7 @@ public class IncidenciaPrivateService {
     
     }
 
-    public String actualizarIncidencia(IncidenciaPrivateDTO incidenciaPrivateDTO) {
+    public String actualizarIncidencia(IncidenciaPrivateDTOCRUD incidenciaPrivateDTO) {
 
         // Comprueba si la incidencia existe
         Optional<Incidencia> incidenciaExistente = incidenciaRepositorio.findById(incidenciaPrivateDTO.getId());
@@ -136,7 +138,7 @@ public class IncidenciaPrivateService {
         }
     }
 
-    public String eliminarIncidencia(IncidenciaPrivateDTO incidenciaPrivateDTO) {
+    public String eliminarIncidencia(IncidenciaPrivateDTOCRUD incidenciaPrivateDTO) {
 
         // Comprueba si la incidencia existe
         Optional<Incidencia> incidenciaExistente = incidenciaRepositorio.findById(incidenciaPrivateDTO.getId());

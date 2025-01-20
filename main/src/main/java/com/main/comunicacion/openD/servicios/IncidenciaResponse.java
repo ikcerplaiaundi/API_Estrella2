@@ -6,6 +6,7 @@ import com.main.comunicacion.openD.DTOs.IncidenciaDTO;
 
 import lombok.Data;
 
+//Gestionará el cuerpo data y meta de incidencias en open data
 @Data
 public class IncidenciaResponse {
 

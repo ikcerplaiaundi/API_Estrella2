@@ -1,5 +1,7 @@
 package com.main.comunicacion.privadas.DTOs;
 
+
+//DTO de uduario de la api interna
 public class UsuarioDTO {
     private long id;
     private String nombre;

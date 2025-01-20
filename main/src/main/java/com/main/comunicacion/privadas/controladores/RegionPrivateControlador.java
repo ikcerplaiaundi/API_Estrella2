@@ -1,7 +1,6 @@
 package com.main.comunicacion.privadas.controladores;
 
-import com.main.comunicacion.privadas.DTOs.RegionPrivateDTO;
-import com.main.comunicacion.privadas.servicios.RegionPrivateService;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,8 +8,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import com.main.comunicacion.privadas.DTOs.RegionPrivateDTO;
+import com.main.comunicacion.privadas.servicios.RegionPrivateService;
 
+//Gestion de peticiones de la api interna de regiones
 @RestController
 @RequestMapping("/privateRegions")
 public class RegionPrivateControlador {

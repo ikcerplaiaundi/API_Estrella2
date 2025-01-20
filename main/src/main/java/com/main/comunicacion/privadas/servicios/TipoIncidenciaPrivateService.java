@@ -5,12 +5,12 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
-
 import com.main.comunicacion.mapeos.TipoIncidenciaPrivateMapper;
 import com.main.comunicacion.privadas.DTOs.TipoIncidenciaPrivateDTO;
 import com.main.modelo.entidades.TipoIncidencia;
 import com.main.modelo.repositorios.TipoIncidenciaRepositorio;
 
+//Servicios que ofrecen todas las solicitudes de tipoIncidencia a la api interna
 @Service
 public class TipoIncidenciaPrivateService {
 

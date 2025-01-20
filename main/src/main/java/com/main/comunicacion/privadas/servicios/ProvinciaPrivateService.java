@@ -12,6 +12,7 @@ import com.main.comunicacion.privadas.DTOs.ProvinciaPrivateDTO;
 import com.main.modelo.entidades.Provincia;
 import com.main.modelo.repositorios.ProvinciaRepositorio;
 
+//Servicios que ofrecen todas las solicitudes de provincia a la api interna
 @Service
 public class ProvinciaPrivateService {
 

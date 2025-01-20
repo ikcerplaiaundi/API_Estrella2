@@ -1,7 +1,6 @@
 package com.main.comunicacion.openD.Schedulers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.main.comunicacion.openD.servicios.CameraService;
@@ -10,6 +9,7 @@ import com.main.comunicacion.openD.servicios.RegionService;
 
 import jakarta.annotation.PostConstruct;
 
+//Llamamos a todos las peticiones que ser cargarán al iniciar la aplicación
 @Component
 public class Scheduler {
 

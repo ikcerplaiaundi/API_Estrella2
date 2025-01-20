@@ -1,5 +1,4 @@
-package com.main.modelo.entidades;
-
+package com.main.comunicacion.openD.DTOs;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,22 +15,21 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-//Entida tipos_incidencias
+//Entida provincia
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Entity
-@Table(name = "tipos_incidencias")
-public class TipoIncidencia {
+public class ProvinciaPrivateDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private long id;
     private String nombre;
+    private String latitud;
+    private String longitud;
 
-    @OneToMany(mappedBy = "tipoIncidencia")
+    @OneToMany(mappedBy = "provincia")
     @JsonBackReference
-    private List<Incidencia> incidencias = new ArrayList<Incidencia>();
+    private List<CiudadPrivateDTO> ciudades = new ArrayList<CiudadPrivateDTO>();
+    //https://nominatim.openstreetmap.org/search?q=Buenos+Aires+Province&format=json
 
 
 

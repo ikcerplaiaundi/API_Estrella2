@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import com.main.comunicacion.privadas.DTOs.RegionPrivateDTO;
 import com.main.modelo.entidades.Region;
 
+//Mapeos de Region de solicitudes internas API
 public class RegionPrivateMapper {
 
     // Método para mapear Region a RegionPrivateDTO
@@ -16,9 +17,6 @@ public class RegionPrivateMapper {
                 region.getNombreEu(),
                 region.getCameras().stream()
                         .map(CameraMap::toDTO) 
-                        .collect(Collectors.toList()),
-                region.getIncidencias().stream()
-                        .map(RegionIncidenciaMapper::toRegionIncidenciaDTO)
                         .collect(Collectors.toList())
         );
     }

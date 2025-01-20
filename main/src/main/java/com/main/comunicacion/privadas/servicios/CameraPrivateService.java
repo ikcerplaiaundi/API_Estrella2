@@ -1,19 +1,19 @@
 package com.main.comunicacion.privadas.servicios;
 
-import com.main.modelo.entidades.Camera;
-import com.main.modelo.entidades.Region;
-import com.main.modelo.repositorios.CameraRepository;
-import com.main.modelo.repositorios.RegionRepository;
-import com.main.comunicacion.privadas.DTOs.CameraPrivateDTO;
-import com.main.comunicacion.mapeos.CameraPrivateMapper;
-
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import com.main.comunicacion.mapeos.CameraPrivateMapper;
+import com.main.comunicacion.privadas.DTOs.CameraPrivateDTO;
+import com.main.modelo.entidades.Camera;
+import com.main.modelo.entidades.Region;
+import com.main.modelo.repositorios.CameraRepository;
+import com.main.modelo.repositorios.RegionRepository;
 
+//Servicios que ofrecen todas las solicitudes de camara a la api interna
 @Service
 public class CameraPrivateService {
     @Autowired

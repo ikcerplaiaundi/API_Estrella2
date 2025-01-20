@@ -11,7 +11,7 @@ import com.main.comunicacion.privadas.DTOs.CiudadPrivateDTO;
 import com.main.comunicacion.privadas.servicios.CiudadPrivateService;
 
 
-
+//Gestion de peticiones de la api interna de ciudades
 @RestController
 @RequestMapping("")
 public class CiudadPrivateControlador {
@@ -23,7 +23,7 @@ public class CiudadPrivateControlador {
         this.ciudadPrivateService = ciudadPrivateService;
     }
 
-    @GetMapping("/api/ciudades")
+    @GetMapping("/ciudades")
     public ResponseEntity<List<CiudadPrivateDTO>> obtenerCiudades() {
         List<CiudadPrivateDTO> ciudades = ciudadPrivateService.obtenerCiudades();
         if (ciudades.isEmpty()) {

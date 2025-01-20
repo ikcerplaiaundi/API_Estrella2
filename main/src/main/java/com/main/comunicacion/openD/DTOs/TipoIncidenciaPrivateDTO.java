@@ -1,10 +1,11 @@
-package com.main.modelo.entidades;
+package com.main.comunicacion.openD.DTOs;
 
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.main.modelo.entidades.Incidencia;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,13 +17,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-//Entida tipos_incidencias
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Entity
-@Table(name = "tipos_incidencias")
-public class TipoIncidencia {
+
+public class TipoIncidenciaPrivateDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 

@@ -6,7 +6,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,12 +14,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.main.comunicacion.privadas.DTOs.IncidenciaPrivateDTO;
+import com.main.comunicacion.privadas.DTOs.IncidenciaPrivateDTOCRUD;
 import com.main.comunicacion.privadas.servicios.IncidenciaPrivateService;
 
 import jakarta.persistence.EntityNotFoundException;
-
+//Gestion de peticiones de la api interna de incidencias
 @RestController
-@RequestMapping("/api")
+@RequestMapping("")
 public class IncidenciaPrivateControlador {
 
     private final IncidenciaPrivateService incidenciaPrivateService;
@@ -74,17 +74,18 @@ public class IncidenciaPrivateControlador {
     }
 
     @PostMapping("/crearIncidencia")
-    public ResponseEntity<?> crearIncidencia(@RequestBody IncidenciaPrivateDTO incidenciaDTO) {
+    public ResponseEntity<?> crearIncidencia(@RequestBody  IncidenciaPrivateDTOCRUD incidenciaPrivateDTOCRUD) {
 
-        String mensaje = incidenciaPrivateService.crearIncidencia(incidenciaDTO);
+        
+        String mensaje = incidenciaPrivateService.crearIncidencia(incidenciaPrivateDTOCRUD);
         return ResponseEntity.ok(mensaje);
 
     }
 
     @PutMapping("/actualizarIncidencia")
-    public ResponseEntity<?> actualizarIncidencia(@RequestBody IncidenciaPrivateDTO incidenciaDTO) {
+    public ResponseEntity<?> actualizarIncidencia(@RequestBody IncidenciaPrivateDTOCRUD incidenciaPrivateDTOCRUD) {
         try {
-            String mensaje = incidenciaPrivateService.actualizarIncidencia(incidenciaDTO);
+            String mensaje = incidenciaPrivateService.actualizarIncidencia(incidenciaPrivateDTOCRUD);
             return ResponseEntity.ok(mensaje);
         } catch (EntityNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
@@ -92,9 +93,9 @@ public class IncidenciaPrivateControlador {
     }
 
     @DeleteMapping("/eliminarIncidencia")
-    public ResponseEntity<?> eliminarIncidencia(@RequestBody IncidenciaPrivateDTO incidenciaDTO) {
+    public ResponseEntity<?> eliminarIncidencia(@RequestBody IncidenciaPrivateDTOCRUD incidenciaPrivateDTOCRUD) {
         try {
-            String mensaje = incidenciaPrivateService.eliminarIncidencia(incidenciaDTO);
+            String mensaje = incidenciaPrivateService.eliminarIncidencia(incidenciaPrivateDTOCRUD);
             return ResponseEntity.ok(mensaje);
         } catch (EntityNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());

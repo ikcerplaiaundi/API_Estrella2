@@ -1,4 +1,4 @@
-package com.main.comunicacion.privadas.DTOs;
+package com.main.comunicacion.openD.DTOs;
 
 import java.util.Date;
 
@@ -31,10 +31,10 @@ public class IncidenciaPrivateDTO {
     @JsonIgnore
     private long idTipoIncidencia;
 
-    private Ciudad ciudad;
-    private Provincia provincia;
-    private Region region;
-    private TipoIncidencia tipoIncidencia;
+    private CiudadPrivateDTO ciudad;
+    private ProvinciaPrivateDTO provincia;
+    private RegionPrivateDTO region;
+    private TipoIncidenciaPrivateDTO tipoIncidencia;
 
     public IncidenciaPrivateDTO(long id, String latitud, String longitud, String causa, String nivelIncidencia,
             String carretera, Date fechaInicio) {
@@ -72,7 +72,7 @@ public class IncidenciaPrivateDTO {
     }
 
     public IncidenciaPrivateDTO(long id, String latitud, String longitud, String causa, String nivelIncidencia,
-            String carretera, Date fechaInicio, Ciudad ciudad,Provincia provincia ,Region region, TipoIncidencia tipoIncidencia) {
+            String carretera, Date fechaInicio, CiudadPrivateDTO ciudad,ProvinciaPrivateDTO provincia ,RegionPrivateDTO region, TipoIncidenciaPrivateDTO tipoIncidencia) {
         this.id = id;
         this.latitud = latitud;
         this.longitud = longitud;

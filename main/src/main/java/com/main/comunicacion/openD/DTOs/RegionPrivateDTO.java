@@ -1,9 +1,11 @@
-package com.main.modelo.entidades;
+package com.main.comunicacion.openD.DTOs;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.main.modelo.entidades.Camera;
+import com.main.modelo.entidades.Incidencia;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -14,10 +16,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
-//Entida region
-@Entity
-@Table(name = "regiones")
-public class Region {
+
+public class RegionPrivateDTO {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

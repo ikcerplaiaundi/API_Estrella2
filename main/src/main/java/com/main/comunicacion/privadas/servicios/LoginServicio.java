@@ -1,14 +1,15 @@
 package com.main.comunicacion.privadas.servicios;
 
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.main.modelo.entidades.Usuario;
 import com.main.modelo.repositorios.UsuarioRepositorio;
 
-import java.util.Optional;
-
+//Servicios que ofrecen todas las solicitudes de login a la api interna
 @Service
 public class LoginServicio {
 

@@ -1,12 +1,15 @@
 package com.main.comunicacion.privadas.controladores;
-import com.main.comunicacion.privadas.servicios.LoginServicio;
-import com.main.comunicacion.privadas.servicios.RegisterService;
-import com.main.modelo.entidades.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import lombok.Data;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import com.main.comunicacion.privadas.servicios.RegisterService;
+import com.main.modelo.entidades.Usuario;
+
+//Gestion de peticiones de la api interna de registro
 @RestController
 @RequestMapping(path = "/registro")
 public class RegisterController {

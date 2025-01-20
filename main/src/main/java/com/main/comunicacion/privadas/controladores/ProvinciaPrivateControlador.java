@@ -14,7 +14,7 @@ import com.main.comunicacion.privadas.DTOs.ProvinciaPrivateDTO;
 import com.main.comunicacion.privadas.servicios.ProvinciaPrivateService;
 
 
-
+//Gestion de peticiones de la api interna de provincias
 @RestController
 @RequestMapping("")
 public class ProvinciaPrivateControlador {
@@ -26,7 +26,7 @@ public class ProvinciaPrivateControlador {
         this.provinciaPrivateService = provinciaPrivateService;
     }
 
-    @GetMapping("/api/provincias")
+    @GetMapping("/provincias")
     public ResponseEntity<List<ProvinciaPrivateDTO>> obtenerProvincias() {
         List<ProvinciaPrivateDTO> provincias = provinciaPrivateService.obtenerProvincias();
         if (provincias.isEmpty()) {

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import com.main.comunicacion.privadas.DTOs.ProvinciaPrivateDTO;
 import com.main.modelo.entidades.Provincia;
 
+//Mapeos de Provincia de solicitudes internas API
 @Component
 public class ProvinciaPrivateMapper {
 

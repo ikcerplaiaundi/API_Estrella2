@@ -11,7 +11,7 @@ import com.main.comunicacion.privadas.DTOs.TipoIncidenciaPrivateDTO;
 import com.main.comunicacion.privadas.servicios.TipoIncidenciaPrivateService;
 
 
-
+//Gestion de peticiones de la api interna de tipos de incidencia
 @RestController
 @RequestMapping("")
 public class TipoIncidenciaPrivateControlador {
@@ -23,7 +23,7 @@ public class TipoIncidenciaPrivateControlador {
         this.tipoIncidenciaPrivateService = tipoIncidenciaPrivateService;
     }
 
-    @GetMapping("/api/tiposIncidencias")
+    @GetMapping("/tiposIncidencias")
     public ResponseEntity<List<TipoIncidenciaPrivateDTO>> obtenerProvincias() {
         List<TipoIncidenciaPrivateDTO> tiposIncidencia = tipoIncidenciaPrivateService.obtenerTiposIncidencias();
         if (tiposIncidencia.isEmpty()) {

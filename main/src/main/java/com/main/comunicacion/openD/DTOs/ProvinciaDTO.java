@@ -8,7 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
+//DTO de provincia usado para mapeo opendata
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
