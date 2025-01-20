@@ -24,5 +24,6 @@ public class CameraController {
     public ResponseEntity<List<Camera>> getAllCameras() {
         List<Camera> cameras = cameraRepository.findAll();
         return ResponseEntity.ok(cameras);
+        
     }
 }
