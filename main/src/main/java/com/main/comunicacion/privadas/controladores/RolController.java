@@ -11,7 +11,7 @@ import com.main.modelo.repositorios.RolRepositorio;
 
 import java.util.List;
 @RestController
-@RequestMapping("/api/roles")
+@RequestMapping("/roles")
 public class RolController {
 
     @Autowired
