@@ -35,7 +35,7 @@ public class CameraService {
 
     @Autowired
     private RegionRepository regionRepository;
-
+    
     // Método para obtener y guardar todas las cámaras desde la API
     public void fetchAndSaveAllCameras() {
         int currentPage = 1;

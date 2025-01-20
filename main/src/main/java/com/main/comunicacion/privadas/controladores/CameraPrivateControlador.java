@@ -36,3 +36,4 @@ public class CameraPrivateControlador {
         return cameraService.obtenerCamaras();
     }
 }
+

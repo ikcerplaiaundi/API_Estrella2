@@ -2,7 +2,7 @@ package com.main.comunicacion.mapeos;
 
 import java.util.stream.Collectors;
 
-import com.main.comunicacion.privadas.DTOs.RegionPrivateDTO;
+import com.main.comunicacion.openD.DTOs.RegionPrivateDTO;
 import com.main.modelo.entidades.Region;
 
 //Mapeos de Region de solicitudes internas API
