@@ -4,9 +4,8 @@ public class RolPrivateDTO {
     long id;
     String nombre;
     
-    public RolPrivateDTO(long id, String nombre) {
+    public RolPrivateDTO(long id) {
         this.id = id;
-        this.nombre = nombre;
     }
 
     public long getId() {
@@ -17,15 +16,4 @@ public class RolPrivateDTO {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    
-
-    
 }
