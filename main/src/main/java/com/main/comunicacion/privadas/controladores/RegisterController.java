@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import lombok.Data;
 
 @RestController
-@RequestMapping(path = "/api/registro")
+@RequestMapping(path = "/registro")
 public class RegisterController {
 
     @Autowired

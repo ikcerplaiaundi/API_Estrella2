@@ -2,11 +2,11 @@ package com.main.comunicacion.privadas.DTOs;
 
 public class RolPrivateDTO {
     long id;
-    String rol;
+    String nombre;
     
-    public RolPrivateDTO(long id, String rol) {
+    public RolPrivateDTO(long id, String nombre) {
         this.id = id;
-        this.rol = rol;
+        this.nombre = nombre;
     }
 
     public long getId() {
@@ -17,13 +17,15 @@ public class RolPrivateDTO {
         this.id = id;
     }
 
-    public String getRol() {
-        return rol;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setRol(String rol) {
-        this.rol = rol;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
+
+    
 
     
 }
