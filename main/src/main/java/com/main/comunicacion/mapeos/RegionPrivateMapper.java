@@ -20,4 +20,13 @@ public class RegionPrivateMapper {
                         .collect(Collectors.toList())
         );
     }
+
+    public static RegionPrivateDTO toRegionOnlyDTO(Region region) {
+        return new RegionPrivateDTO(
+                region.getId(),
+                region.getIdRegion(),
+                region.getNombreEs(),
+                region.getNombreEu()
+        );
+    }
 }

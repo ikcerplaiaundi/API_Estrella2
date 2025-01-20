@@ -31,4 +31,11 @@ public class RegionPrivateService {
                 .map(RegionPrivateMapper::toRegionDTO)
                 .collect(Collectors.toList());
     }
+
+    public List<RegionPrivateDTO> obtenerSoloRegiones() {
+        List<Region> regiones = regionRepositorio.findAll(); 
+        return regiones.stream()
+                .map(RegionPrivateMapper::toRegionOnlyDTO) 
+                .collect(Collectors.toList()); 
+    }
 }

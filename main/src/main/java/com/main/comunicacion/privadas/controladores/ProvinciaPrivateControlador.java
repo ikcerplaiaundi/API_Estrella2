@@ -26,7 +26,7 @@ public class ProvinciaPrivateControlador {
         this.provinciaPrivateService = provinciaPrivateService;
     }
 
-    @GetMapping("/api/provincias")
+    @GetMapping("/provincias")
     public ResponseEntity<List<ProvinciaPrivateDTO>> obtenerProvincias() {
         List<ProvinciaPrivateDTO> provincias = provinciaPrivateService.obtenerProvincias();
         if (provincias.isEmpty()) {

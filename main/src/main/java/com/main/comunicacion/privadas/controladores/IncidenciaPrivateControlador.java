@@ -20,7 +20,7 @@ import com.main.comunicacion.privadas.servicios.IncidenciaPrivateService;
 import jakarta.persistence.EntityNotFoundException;
 //Gestion de peticiones de la api interna de incidencias
 @RestController
-@RequestMapping("/api")
+@RequestMapping("")
 public class IncidenciaPrivateControlador {
 
     private final IncidenciaPrivateService incidenciaPrivateService;
