@@ -1,6 +1,5 @@
 package com.main.comunicacion.privadas.DTOs;
 
-//DTO de camara de la api interna
 public class CameraPrivateDTO {
     private Long id;
     private String cameraName;
