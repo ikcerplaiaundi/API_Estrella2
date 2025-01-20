@@ -40,7 +40,7 @@ public class UsuarioPrivateController {
                 usuario.getNombre(),
                 usuario.getCorreo(),
                 usuario.getContraseña(),
-                new RolPrivateDTO(usuario.getRol().getId())
+                new RolPrivateDTO(usuario.getRol().getId(), usuario.getRol().getName())
             ))
             .collect(Collectors.toList());
         return ResponseEntity.ok(usuariosDTO);
@@ -67,7 +67,7 @@ public class UsuarioPrivateController {
             usuario_updated.getNombre(),
             usuario_updated.getCorreo(),
             usuario_updated.getContraseña(),
-            new RolPrivateDTO(usuario_updated.getRol().getId())
+            new RolPrivateDTO(usuario_updated.getRol().getId(),usuario_updated.getRol().getName())
             );
 
         return ResponseEntity.ok(updatedUsuarioDTO); 
