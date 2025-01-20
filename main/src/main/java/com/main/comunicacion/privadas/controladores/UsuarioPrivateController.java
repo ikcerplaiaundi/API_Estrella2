@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import com.main.comunicacion.privadas.DTOs.RolPrivateDTO;
 import com.main.comunicacion.privadas.DTOs.UsuarioDTO;
 import com.main.comunicacion.privadas.servicios.UsuarioService;
 import com.main.modelo.entidades.Usuario;
@@ -39,7 +40,7 @@ public class UsuarioPrivateController {
                 usuario.getNombre(),
                 usuario.getCorreo(),
                 usuario.getContraseña(),
-                usuario.getRol().getName()
+                new RolPrivateDTO(usuario.getRol().getId(),usuario.getRol().getName())
             ))
             .collect(Collectors.toList());
         return ResponseEntity.ok(usuariosDTO);
@@ -66,8 +67,8 @@ public class UsuarioPrivateController {
             usuario_updated.getNombre(),
             usuario_updated.getCorreo(),
             usuario_updated.getContraseña(),
-            usuario_updated.getRol().getName()
-        );
+            new RolPrivateDTO(usuario_updated.getRol().getId(),usuario_updated.getRol().getName())
+            );
 
         return ResponseEntity.ok(updatedUsuarioDTO); 
     }

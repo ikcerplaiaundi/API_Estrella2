@@ -5,9 +5,9 @@ public class UsuarioDTO {
     private String nombre;
     private String correo;
     private String contraseña;
-    private String rol;
+    private RolPrivateDTO rol;
 
-    public UsuarioDTO(long id, String nombre, String correo,String contraseña, String rol) {
+    public UsuarioDTO(long id, String nombre, String correo,String contraseña, RolPrivateDTO rol) {
         this.id = id;
         this.nombre = nombre;
         this.correo = correo;
@@ -27,7 +27,7 @@ public class UsuarioDTO {
         return correo;
     }
 
-    public String getRol() {
+    public RolPrivateDTO getRol() {
         return rol;
     }
     
@@ -47,7 +47,7 @@ public class UsuarioDTO {
         this.correo = correo;
     }
 
-    public void setRol(String rol) {
+    public void setRol(RolPrivateDTO rol) {
         this.rol = rol;
     }
 
