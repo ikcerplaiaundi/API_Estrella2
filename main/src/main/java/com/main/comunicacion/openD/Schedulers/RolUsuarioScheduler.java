@@ -54,12 +54,5 @@ public class RolUsuarioScheduler {
 
     }
 
-    @EventListener(ContextRefreshedEvent.class)
-    public void onApplicationEvent(ContextRefreshedEvent event) {
-        try {
-            crearRolesUsuarios();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+    
 }

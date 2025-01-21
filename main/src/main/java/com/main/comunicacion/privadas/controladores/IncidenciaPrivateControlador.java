@@ -49,7 +49,7 @@ public class IncidenciaPrivateControlador {
 
     @PostMapping("/filtrosIncidencias/provincia")
     public ResponseEntity<?> filtroIncidenciaProvincia(@RequestParam Long idProvincia) {
-        List<IncidenciaPrivateDTO> incidencias = incidenciaPrivateService.obtenerIncidenciasCiudad(idProvincia);
+        List<IncidenciaPrivateDTO> incidencias = incidenciaPrivateService.obtenerIncidenciasProvincia(idProvincia);
         if (incidencias.isEmpty()) {
             return ResponseEntity.notFound().build();
         }

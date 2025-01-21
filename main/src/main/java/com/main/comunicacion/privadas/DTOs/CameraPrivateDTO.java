@@ -1,5 +1,6 @@
 package com.main.comunicacion.privadas.DTOs;
 
+import com.main.comunicacion.openD.DTOs.RegionPrivateDTO;
 
 import lombok.Data;
 
@@ -13,13 +14,13 @@ public class CameraPrivateDTO {
     private String urlImage;
     private RegionPrivateDTO region;
 
-    public CameraPrivateDTO(Long id, String cameraName, String latitud, String longitud, String urlImage, RegionPrivateDTO regionDTO) {
+    public CameraPrivateDTO(Long id, String cameraName, String latitud, String longitud, String urlImage, RegionPrivateDTO region) {
         this.id = id;
         this.cameraName = cameraName;
         this.latitud = latitud;
         this.longitud = longitud;
         this.urlImage = urlImage;
-        this.region = regionDTO;
+        this.region = region;
     }
     
 }

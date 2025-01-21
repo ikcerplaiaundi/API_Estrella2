@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,23 +41,52 @@ public class UsuarioPrivateController {
     public ResponseEntity<List<UsuarioDTO>> obtenerUsuarios() {
         List<Usuario> usuarios = usuarioRepositorio.findAll();
         List<UsuarioDTO> usuariosDTO = usuarios.stream()
-            .map(usuario -> new UsuarioDTO(
+                .map(usuario -> new UsuarioDTO(
+                        usuario.getId(),
+                        usuario.getNombre(),
+                        usuario.getCorreo(),
+                        usuario.getContraseña(),
+                        new RolPrivateDTO(usuario.getRol().getId(), usuario.getRol().getName())))
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(usuariosDTO);
+    }
+
+    @GetMapping("/usuarios/{id}")
+    public ResponseEntity<?> obtenerUsuario(@PathVariable Long id) {
+        
+        Optional<Usuario> usuarioOpt = usuarioRepositorio.findById(id);
+    
+       
+        if (usuarioOpt.isPresent()) {
+            Usuario usuario = usuarioOpt.get();
+    
+            
+            UsuarioDTO usuarioDTO = new UsuarioDTO(
                 usuario.getId(),
                 usuario.getNombre(),
                 usuario.getCorreo(),
-                usuario.getContraseña(),
-                new RolPrivateDTO(usuario.getRol().getId(), usuario.getRol().getName())
-            ))
-            .collect(Collectors.toList());
-        return ResponseEntity.ok(usuariosDTO);
+                usuario.getContraseña(), 
+                new RolPrivateDTO(
+                    usuario.getRol().getId(), 
+                    usuario.getRol().getName()
+                )
+            );
+    
+           
+            return ResponseEntity.ok(usuarioDTO);
+        }
+    
+        // Devolver error 404 si el usuario no existe
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuario no encontrado");
     }
+    
 
     @PutMapping("/usuarios/{id}")
     public ResponseEntity<UsuarioDTO> actualizarUsuario(@PathVariable Long id, @RequestBody UsuarioDTO usuarioDTO) {
         Optional<Usuario> usuario_nuevo = usuarioRepositorio.findById(id);
-        
+
         if (usuario_nuevo.isEmpty()) {
-            return ResponseEntity.notFound().build(); 
+            return ResponseEntity.notFound().build();
         }
 
         Usuario usuario = usuario_nuevo.get();
@@ -64,18 +94,16 @@ public class UsuarioPrivateController {
         usuario.setCorreo(usuarioDTO.getCorreo());
         usuario.setContraseña(usuarioDTO.getContraseña());
 
-
         Usuario usuario_updated = usuarioRepositorio.save(usuario);
 
         UsuarioDTO updatedUsuarioDTO = new UsuarioDTO(
-            usuario_updated.getId(),
-            usuario_updated.getNombre(),
-            usuario_updated.getCorreo(),
-            usuario_updated.getContraseña(),
-            new RolPrivateDTO(usuario_updated.getRol().getId(),usuario_updated.getRol().getName())
-            );
+                usuario_updated.getId(),
+                usuario_updated.getNombre(),
+                usuario_updated.getCorreo(),
+                usuario_updated.getContraseña(),
+                new RolPrivateDTO(usuario_updated.getRol().getId(), usuario_updated.getRol().getName()));
 
-        return ResponseEntity.ok(updatedUsuarioDTO); 
+        return ResponseEntity.ok(updatedUsuarioDTO);
     }
 
     @DeleteMapping("/usuarios/{id}")
