@@ -1,5 +1,6 @@
 package com.main.comunicacion.privadas.DTOs;
 
+import com.main.modelo.entidades.Rol;
 
 //DTO de uduario de la api interna
 public class UsuarioDTO {
