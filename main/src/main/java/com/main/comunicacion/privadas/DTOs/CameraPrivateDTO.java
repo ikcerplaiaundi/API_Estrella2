@@ -1,12 +1,10 @@
 package com.main.comunicacion.privadas.DTOs;
 
-<<<<<<< HEAD
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 // DTO de cámara de la API interna
 @JsonInclude(JsonInclude.Include.NON_NULL) // Excluir campos nulos de la serialización
-=======
->>>>>>> c627341365f133735d5415b72357f43efaf20d45
 public class CameraPrivateDTO {
     private Long id;
     private String cameraName;
