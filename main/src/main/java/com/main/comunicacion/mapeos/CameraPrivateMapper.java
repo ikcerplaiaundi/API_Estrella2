@@ -1,22 +1,14 @@
 package com.main.comunicacion.mapeos;
 
-<<<<<<< HEAD
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.main.comunicacion.openD.DTOs.RegionDTO;
-=======
-
->>>>>>> 2318d9e924808aa2a9416078620111c65f67acfb
 import com.main.comunicacion.privadas.DTOs.CameraPrivateDTO;
 import com.main.comunicacion.privadas.DTOs.RegionPrivateDTO;
 import com.main.modelo.entidades.Camera;
 import com.main.modelo.entidades.Region;
-<<<<<<< HEAD
 import com.main.modelo.repositorios.RegionRepository;
-=======
-
->>>>>>> 2318d9e924808aa2a9416078620111c65f67acfb
 
 //Mapeos de camara de solicitudes internas API
 @Component
