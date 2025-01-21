@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.main.comunicacion.openD.DTOs.RegionDTO;
-import com.main.comunicacion.openD.DTOs.RegionPrivateDTO;
 import com.main.comunicacion.privadas.DTOs.CameraPrivateDTO;
+import com.main.comunicacion.privadas.DTOs.RegionPrivateDTO;
 import com.main.modelo.entidades.Camera;
 import com.main.modelo.entidades.Region;
 import com.main.modelo.repositorios.RegionRepository;
@@ -26,12 +26,10 @@ public class CameraPrivateMapper {
         if (camera.getRegion() != null) {
             Region region = regionRepository.findById(camera.getRegion().getId()).orElse(null);
             if (region != null) {
-                regionDTO = new RegionPrivateDTO(
-                    region.getId(),
-                    region.getIdRegion(),
-                    region.getNombreEs(),
-                    region.getNombreEu()
-                );
+                regionDTO = new RegionPrivateDTO(region.getId(),
+                region.getIdRegion(),
+                region.getNombreEs(),
+                region.getNombreEu());
             }
         }
 
@@ -45,4 +43,3 @@ public class CameraPrivateMapper {
         );
     }
 }
-

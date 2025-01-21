@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.main.comunicacion.privadas.DTOs.CameraPrivateDTO;
 import com.main.modelo.entidades.Camera;
 import com.main.modelo.entidades.Incidencia;
 
@@ -39,6 +40,11 @@ public class RegionPrivateDTO {
     @OneToMany(mappedBy = "region", cascade = CascadeType.ALL)
     @JsonBackReference
     private List<Incidencia> incidencias = new ArrayList<>();
+
+    public RegionPrivateDTO(Long id2, Long idRegion2, String nombreEs2, String nombreEu2,
+            List<CameraPrivateDTO> collect) {
+        //TODO Auto-generated constructor stub
+    }
 
     // Getters y Setters
     public Long getId() {

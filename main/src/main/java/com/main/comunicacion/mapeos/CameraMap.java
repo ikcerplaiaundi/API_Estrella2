@@ -25,7 +25,7 @@ public class CameraMap {
     }
 
     // Método para mapear Camera a CameraPrivateDTO
-    public CameraPrivateDTO toDTO(Camera camera) {
+    public static CameraPrivateDTO toDTO(Camera camera) {
         return new CameraPrivateDTO(
             camera.getId(),
             camera.getCameraName(),

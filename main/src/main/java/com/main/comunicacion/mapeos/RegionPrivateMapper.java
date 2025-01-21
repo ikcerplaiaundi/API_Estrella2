@@ -10,13 +10,14 @@ public class RegionPrivateMapper {
 
     // Método para mapear Region a RegionPrivateDTO
     public static RegionPrivateDTO toRegionDTO(Region region) {
+        CameraMap cameraMap = new CameraMap(); // Create an instance of CameraMap
         return new RegionPrivateDTO(
                 region.getId(),
                 region.getIdRegion(),
                 region.getNombreEs(),
                 region.getNombreEu(),
                 region.getCameras().stream()
-                        .map(CameraMap::toDTO) 
+                        .map(camera -> cameraMap.toDTO(camera))  // Use the instance to call toDTO
                         .collect(Collectors.toList())
         );
     }

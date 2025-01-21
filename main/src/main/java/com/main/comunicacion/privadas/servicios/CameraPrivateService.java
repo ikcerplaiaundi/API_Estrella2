@@ -17,9 +17,11 @@ import com.main.modelo.repositorios.RegionRepository;
 @Service
 public class CameraPrivateService {
     @Autowired
-    private  CameraRepository cameraRepositorio;
+    private CameraRepository cameraRepositorio;
     @Autowired
-    private  RegionRepository regionRepositorio;
+    private RegionRepository regionRepositorio;
+    @Autowired
+    private CameraPrivateMapper cameraPrivateMapper;
 
     
 
@@ -27,7 +29,7 @@ public class CameraPrivateService {
     public CameraPrivateDTO obtenerCamaraPorId(Long id) {
         Camera camera = cameraRepositorio.findById(id)
                 .orElseThrow(() -> new RuntimeException("Cámara no encontrada"));
-        return CameraPrivateMapper.toCameraDTO(camera);
+        return cameraPrivateMapper.toCameraDTO(camera);  
     }
 
     // Obtener cámaras por región
@@ -35,15 +37,15 @@ public class CameraPrivateService {
         List<Region> regiones = regionRepositorio.findByIdRegion(regionId);
         List<Camera> cameras = cameraRepositorio.findByRegion(regiones.get(0));
         return cameras.stream()
-                .map(CameraPrivateMapper::toCameraDTO)
+                .map(cameraPrivateMapper::toCameraDTO)  
                 .collect(Collectors.toList());
-    } 
+    }
 
     // Obtener todas las cámaras
     public List<CameraPrivateDTO> obtenerCamaras() {
         List<Camera> cameras = cameraRepositorio.findAll();
         return cameras.stream()
-                .map(CameraPrivateMapper::toCameraDTO)
+                .map(cameraPrivateMapper::toCameraDTO)  
                 .collect(Collectors.toList());
     }
 

@@ -20,13 +20,13 @@ public class RegionPrivateControlador {
 
     // Endpoint para obtener región por ID
     @GetMapping("/{id}")
-    public RegionPrivateDTO obtenerRegionPorId(@PathVariable Long id) {
+    public com.main.comunicacion.openD.DTOs.RegionPrivateDTO obtenerRegionPorId(@PathVariable Long id) {
         return regionService.obtenerRegionPorId(id);
     }
 
     // Endpoint para obtener todas las regiones
     @GetMapping
-    public List<RegionPrivateDTO> obtenerRegiones() {
+    public List<com.main.comunicacion.openD.DTOs.RegionPrivateDTO> obtenerRegiones() {
         return regionService.obtenerRegiones();
     }
 }

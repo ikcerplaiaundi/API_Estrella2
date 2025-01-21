@@ -18,11 +18,11 @@ public class RegionPrivateDTO {
         this.nombreEu = nombreEu;
     }
 
-    public RegionPrivateDTO(Long id, Long idRegion, String nombreEs, String nombreEu, List<CameraPrivateDTO> cameras) {
+    /*public RegionPrivateDTO(Long id, Long idRegion, String nombreEs, String nombreEu, List<CameraPrivateDTO> cameras) {
         this.id = id;
         this.idRegion = idRegion;
         this.nombreEs = nombreEs;
         this.nombreEu = nombreEu;
         this.cameras = cameras;
-    }
+    }*/
 }

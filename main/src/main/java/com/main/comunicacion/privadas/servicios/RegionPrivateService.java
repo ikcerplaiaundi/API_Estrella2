@@ -18,14 +18,14 @@ public class RegionPrivateService {
     private RegionRepository regionRepositorio;
 
     // Obtener región por ID
-    public RegionPrivateDTO obtenerRegionPorId(Long id) {
+    public com.main.comunicacion.openD.DTOs.RegionPrivateDTO obtenerRegionPorId(Long id) {
         Region region = regionRepositorio.findById(id)
                 .orElseThrow(() -> new RuntimeException("Región no encontrada"));
         return RegionPrivateMapper.toRegionDTO(region);
     }
 
     // Obtener todas las regiones
-    public List<RegionPrivateDTO> obtenerRegiones() {
+    public List<com.main.comunicacion.openD.DTOs.RegionPrivateDTO> obtenerRegiones() {
         List<Region> regiones = regionRepositorio.findAll();
         return regiones.stream()
                 .map(RegionPrivateMapper::toRegionDTO)
