@@ -83,8 +83,9 @@ public class CameraService {
                     // Buscar la región asociada
                     Region regionAsociada = getRegionForCamera(dto);
                     camera.setRegion(regionAsociada); // Establecer la relación de la cámara con la región
-
-                    cameraRepository.save(camera); // Guardar la cámara en la base de datos
+                    
+                    cameraRepository.save(camera);
+                    
                 } catch (Exception e) {
                     System.err.println("Error al procesar la cámara con ID: " + dto.getId() + ". " + e.getMessage());
                     e.printStackTrace();

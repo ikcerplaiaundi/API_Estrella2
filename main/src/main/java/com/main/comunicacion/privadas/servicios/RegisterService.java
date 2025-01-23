@@ -41,6 +41,30 @@ public class RegisterService {
         nuevoUsuario.setRol(adminRol); 
         return usuarioRepository.save(nuevoUsuario);
     }
+
+    public Usuario registrarUsuarioAndroid(String nombre, String email, String contraseña) {
+
+        if (usuarioRepository.existsByCorreo(email)) {
+            throw new RuntimeException("El correo ya está registrado");
+        }
+
+        if (usuarioRepository.existsByNombre(nombre)) {
+            throw new RuntimeException("Ya existe el nombre de usuario");
+        }
+
+        Rol usuarioRol = rolRepositorio.findByName("usuario")
+                .orElseGet(() -> {
+                    Rol nuevoRol = new Rol("usuario");
+                    return rolRepositorio.save(nuevoRol);
+                });
+
+        Usuario nuevoUsuario = new Usuario();
+        nuevoUsuario.setNombre(nombre);
+        nuevoUsuario.setCorreo(email);
+        nuevoUsuario.setContraseña(contraseña); 
+        nuevoUsuario.setRol(usuarioRol); 
+        return usuarioRepository.save(nuevoUsuario);
+    }
 }
 
 

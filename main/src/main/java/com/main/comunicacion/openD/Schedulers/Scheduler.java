@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import com.main.comunicacion.openD.servicios.CameraService;
 import com.main.comunicacion.openD.servicios.IncidenciaService;
 import com.main.comunicacion.openD.servicios.RegionService;
+import com.main.modelo.repositorios.CameraRepository;
 
 import jakarta.annotation.PostConstruct;
 
@@ -25,6 +26,8 @@ public class Scheduler {
     @Autowired
     private IncidenciaService incidenciaService;
 
+    @Autowired
+    private CameraRepository cameraRepository;
     // Ejecutar el método al inicio de la aplicación
     @PostConstruct
     public void setUpOfImportData() {
@@ -36,6 +39,9 @@ public class Scheduler {
         regionService.fetchAndSaveAllRegions();
         // Sincronizar datos de camaras
         cameraService.fetchAndSaveAllCameras();
+        
+        cameraRepository.deleteById((long) 750);
+        cameraRepository.deleteById((long) 261);
 
         // Sincronizar datos de incidencia
         incidenciaService.peticionIncidenciasDeLaAPIMes();
