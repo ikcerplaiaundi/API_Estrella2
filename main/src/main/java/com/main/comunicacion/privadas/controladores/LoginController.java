@@ -23,12 +23,16 @@ public class LoginController {
     @PostMapping(path="/login")
 
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
+        System.out.println("login"+loginRequest);
         try {
             if (loginRequest.getNombre() == null || loginRequest.getContraseña() == null) {
                 return ResponseEntity.status(400).body("El nombre de usuario y la contraseña son requeridos.");
             }
 
             System.out.println("Solicitud recibida: " + loginRequest);
+            System.out.println("Nombre: " + loginRequest.getNombre());
+            System.out.println("Nombre: " + loginRequest.getContraseña());
+
             Usuario usuario = loginServicio.login(loginRequest.getNombre(), loginRequest.getContraseña());
 
             if (usuario != null) {

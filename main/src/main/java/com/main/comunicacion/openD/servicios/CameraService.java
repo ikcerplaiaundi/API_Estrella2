@@ -1,8 +1,10 @@
 package com.main.comunicacion.openD.servicios;
 
-
 import java.util.List;
 
+import org.locationtech.proj4j.CRSFactory;
+import org.locationtech.proj4j.CoordinateReferenceSystem;
+import org.locationtech.proj4j.ProjCoordinate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -16,11 +18,9 @@ import com.main.modelo.repositorios.RegionRepository;
 
 import lombok.Data;
 
-
 //Gestionará las peticiones a la cámara de open data
 @Service
 public class CameraService {
-
 
     private static final String API_URL = "https://api.euskadi.eus/traffic/v1.0/cameras?_page=";
 
@@ -40,6 +40,10 @@ public class CameraService {
     public void fetchAndSaveAllCameras() {
         int currentPage = 1;
         ApiResponse apiResponse;
+        CRSFactory crsFactory = new CRSFactory();
+        CoordinateReferenceSystem utmCRS = crsFactory.createFromName("EPSG:25830"); // UTM Zone 30N (ajusta según tu //
+                                                                                    // caso)
+        CoordinateReferenceSystem wgs84CRS = crsFactory.createFromName("EPSG:4326"); // WGS84 (GPS)
 
         do {
             apiResponse = fetchCamerasFromApiResponse(currentPage);
@@ -53,6 +57,29 @@ public class CameraService {
                 try {
                     Camera camera = cameraMapper.toEntity(dto);
 
+                    if (camera.getLatitud() != null && camera.getLongitud() != null) {
+                        try {
+                            double lat = Double.parseDouble(camera.getLatitud());
+                            double lon = Double.parseDouble(camera.getLongitud());
+
+                            // Si las coordenadas están fuera del rango esperado para GPS, se asume que son
+                            // UTM
+                            if (lat > 90 || lon > 180) {
+                                ProjCoordinate utmCoord = new ProjCoordinate(lon, lat); // UTM usa (x, y)
+                                ProjCoordinate gpsCoord = new ProjCoordinate();
+
+                                // Transformar UTM a WGS84
+                                new org.locationtech.proj4j.BasicCoordinateTransform(utmCRS, wgs84CRS)
+                                        .transform(utmCoord, gpsCoord);
+
+                                // Asignar las coordenadas GPS a la cámara
+                                camera.setLatitud(String.valueOf(gpsCoord.y)); // Latitud
+                                camera.setLongitud(String.valueOf(gpsCoord.x)); // Longitud
+                            }
+                        } catch (NumberFormatException e) {
+                            System.err.println("Coordenadas inválidas para la cámara con ID: " + dto.getId());
+                        }
+                    }
                     // Buscar la región asociada
                     Region regionAsociada = getRegionForCamera(dto);
                     camera.setRegion(regionAsociada); // Establecer la relación de la cámara con la región
@@ -74,7 +101,7 @@ public class CameraService {
 
         if (!regionList.isEmpty()) {
             return regionList.get(0); // Si la región existe, la retornamos
-            
+
         } else {
             // Manejo si no se encuentra la región
             System.err.println("Región no encontrada para idRegion: " + dto.getSourceId());
@@ -96,7 +123,6 @@ public class CameraService {
 
         return null;
     }
-
 
     // Subclase ApiResponse dentro del servicio para mayor encapsulamiento
     @Data
