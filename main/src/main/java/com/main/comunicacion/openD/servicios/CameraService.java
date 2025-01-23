@@ -41,8 +41,7 @@ public class CameraService {
         int currentPage = 1;
         ApiResponse apiResponse;
         CRSFactory crsFactory = new CRSFactory();
-        CoordinateReferenceSystem utmCRS = crsFactory.createFromName("EPSG:25830"); // UTM Zone 30N (ajusta según tu //
-                                                                                    // caso)
+        CoordinateReferenceSystem utmCRS = crsFactory.createFromName("EPSG:25830"); // UTM Zone 30N
         CoordinateReferenceSystem wgs84CRS = crsFactory.createFromName("EPSG:4326"); // WGS84 (GPS)
 
         do {
@@ -52,7 +51,7 @@ public class CameraService {
                 break;
             }
 
-            // Mapea y guarda las cámaras obtenidas
+            // Mapea y guarda las camaras obtenidas
             apiResponse.getCameras().forEach(dto -> {
                 try {
                     Camera camera = cameraMapper.toEntity(dto);
@@ -62,7 +61,7 @@ public class CameraService {
                             double lat = Double.parseDouble(camera.getLatitud());
                             double lon = Double.parseDouble(camera.getLongitud());
 
-                            // Si las coordenadas están fuera del rango esperado para GPS, se asume que son
+                            // Si las coordenadas estan fuera del rango esperado para GPS, se asume que son
                             // UTM
                             if (lat > 90 || lon > 180) {
                                 ProjCoordinate utmCoord = new ProjCoordinate(lon, lat); // UTM usa (x, y)
@@ -72,7 +71,7 @@ public class CameraService {
                                 new org.locationtech.proj4j.BasicCoordinateTransform(utmCRS, wgs84CRS)
                                         .transform(utmCoord, gpsCoord);
 
-                                // Asignar las coordenadas GPS a la cámara
+                                // Asignar las coordenadas GPS a la camara
                                 camera.setLatitud(String.valueOf(gpsCoord.y)); // Latitud
                                 camera.setLongitud(String.valueOf(gpsCoord.x)); // Longitud
                             }
@@ -82,16 +81,16 @@ public class CameraService {
                     }
                     // Buscar la región asociada
                     Region regionAsociada = getRegionForCamera(dto);
-                    camera.setRegion(regionAsociada); // Establecer la relación de la cámara con la región
+                    camera.setRegion(regionAsociada); // Establecer la relación de la camara con la región
 
-                    cameraRepository.save(camera); // Guardar la cámara en la base de datos
+                    cameraRepository.save(camera); // Guardar la camara en la base de datos
                 } catch (Exception e) {
                     System.err.println("Error al procesar la cámara con ID: " + dto.getId() + ". " + e.getMessage());
                     e.printStackTrace();
                 }
             });
 
-            currentPage = apiResponse.getCurrentPage() + 1; // Ir a la siguiente página
+            currentPage = apiResponse.getCurrentPage() + 1; // Ir a la siguiente pagina
         } while (currentPage <= apiResponse.getTotalPages());
     }
 
@@ -100,7 +99,7 @@ public class CameraService {
         List<Region> regionList = regionRepository.findByIdRegion(dto.getSourceId());
 
         if (!regionList.isEmpty()) {
-            return regionList.get(0); // Si la región existe, la retornamos
+            return regionList.get(0); // Si la region existe, la retornamos
 
         } else {
             // Manejo si no se encuentra la región
