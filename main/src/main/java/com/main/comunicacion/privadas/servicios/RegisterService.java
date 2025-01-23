@@ -24,7 +24,7 @@ public class RegisterService {
         validarUsuarioUnico(nombre, email);
         Rol adminRol = obtenerOCrearRol("administrador");
         
-        Usuario nuevoUsuario = crearNuevoUsuario(nombre, email, contraseña, adminRol);
+        Usuario nuevoUsuario = crearNuevoUsuario(nombre, email, hashearContraseña(contraseña), adminRol);
         return usuarioRepository.save(nuevoUsuario);
     }
 
