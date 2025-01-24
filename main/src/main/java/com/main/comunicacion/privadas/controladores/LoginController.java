@@ -12,26 +12,20 @@ import com.main.modelo.entidades.Usuario;
 
 import lombok.Data;
 
-//Gestion de peticiones de la api interna de login
 @RestController
-@RequestMapping(path="")
+@RequestMapping
 public class LoginController {
 
     @Autowired
     private LoginServicio loginServicio;
 
-    @PostMapping(path="/login")
-
+    @PostMapping(path = "/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
-        System.out.println("login"+loginRequest);
+        System.out.println("login" + loginRequest);
         try {
             if (loginRequest.getNombre() == null || loginRequest.getContraseña() == null) {
-                return ResponseEntity.status(400).body("El nombre de usuario y la contraseña son requeridos.");
+                return ResponseEntity.badRequest().body("El nombre de usuario y la contraseña son requeridos.");
             }
-
-            System.out.println("Solicitud recibida: " + loginRequest);
-            System.out.println("Nombre: " + loginRequest.getNombre());
-            System.out.println("Nombre: " + loginRequest.getContraseña());
 
             Usuario usuario = loginServicio.login(loginRequest.getNombre(), loginRequest.getContraseña());
 
@@ -55,7 +49,7 @@ class LoginRequest {
 
     @Override
     public String toString() {
-        return "LoginRequest{nombre='" + nombre + "', contraseña='" + contraseña + "'}";
+        return "LoginRequest{nombre='" + nombre + "', contraseña='******'}"; // Ocultamos la contraseña
     }
 }
 
