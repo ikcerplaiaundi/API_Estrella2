@@ -74,7 +74,7 @@ public class UsuarioPrivateController {
             usuario_updated.getContraseña(),
             new RolPrivateDTO(usuario_updated.getRol().getId(),usuario_updated.getRol().getName())
             );
-
+            System.out.println("Usuario actualizado: " + updatedUsuarioDTO.toString());
         return ResponseEntity.ok(updatedUsuarioDTO); 
     }
 
