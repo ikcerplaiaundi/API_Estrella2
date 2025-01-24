@@ -20,14 +20,12 @@ public class LoginServicio {
 
     public Usuario login(String nombre, String contraseña) {
         Optional<Usuario> usuario = usuarioRepositorio.findByNombre(nombre);
-        if (usuario.isPresent() && usuario.get().getContraseña().equals(hashearContraseña(contraseña))) {
+        if (usuario.isPresent() && usuario.get().getContraseña().equals(contraseña)) {
             return usuario.get();
         }
         return null;
     }
 
-    private String hashearContraseña(String contraseña) {
-        return DigestUtils.md5DigestAsHex(contraseña.getBytes(StandardCharsets.UTF_8));
-    }
+    
 }
 

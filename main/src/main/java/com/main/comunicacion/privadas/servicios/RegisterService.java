@@ -24,7 +24,7 @@ public class RegisterService {
         validarUsuarioUnico(nombre, email);
         Rol adminRol = obtenerOCrearRol("administrador");
         
-        Usuario nuevoUsuario = crearNuevoUsuario(nombre, email, hashearContraseña(contraseña), adminRol);
+        Usuario nuevoUsuario = crearNuevoUsuario(nombre, email, contraseña, adminRol);
         return usuarioRepository.save(nuevoUsuario);
     }
 
@@ -32,7 +32,7 @@ public class RegisterService {
         validarUsuarioUnico(nombre, email);
         Rol usuarioRol = obtenerOCrearRol("usuario");
         
-        Usuario nuevoUsuario = crearNuevoUsuario(nombre, email, hashearContraseña(contraseña), usuarioRol);
+        Usuario nuevoUsuario = crearNuevoUsuario(nombre, email, contraseña, usuarioRol);
         return usuarioRepository.save(nuevoUsuario);
     }
 
@@ -59,7 +59,5 @@ public class RegisterService {
         return nuevoUsuario;
     }
 
-    private String hashearContraseña(String contraseña) {
-        return DigestUtils.md5DigestAsHex(contraseña.getBytes(StandardCharsets.UTF_8));
-    }
+    
 }
