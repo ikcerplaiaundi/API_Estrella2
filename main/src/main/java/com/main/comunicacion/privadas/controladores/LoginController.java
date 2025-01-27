@@ -1,5 +1,8 @@
 package com.main.comunicacion.privadas.controladores;
 
+import java.nio.charset.StandardCharsets;
+
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -73,4 +76,7 @@ class LoginResponse {
     public void setRol(String rol) {
         this.rol = rol;
     }
+
+    
 }
+
