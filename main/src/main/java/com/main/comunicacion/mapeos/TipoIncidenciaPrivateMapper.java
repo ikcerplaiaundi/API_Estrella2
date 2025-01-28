@@ -10,6 +10,7 @@ import com.main.modelo.entidades.TipoIncidencia;
 @Component
 public class TipoIncidenciaPrivateMapper {
 
+    //Mapea de incidencia a incidencia DTO
     public static TipoIncidenciaPrivateDTO toTipoIncidenciaDTO(TipoIncidencia tipoIncidencia) {
         if (tipoIncidencia == null) {
             return null;

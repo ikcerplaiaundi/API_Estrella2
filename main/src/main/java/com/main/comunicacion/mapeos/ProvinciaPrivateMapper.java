@@ -9,6 +9,7 @@ import com.main.modelo.entidades.Provincia;
 @Component
 public class ProvinciaPrivateMapper {
 
+    //Mapea de provincia a provinciaPrivateDTO
     public static ProvinciaPrivateDTO toProvinciaDTO(Provincia provincia) {
         if (provincia == null) {
             return null;

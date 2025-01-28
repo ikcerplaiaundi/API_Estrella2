@@ -29,6 +29,7 @@ public class IncidenciaPrivateControlador {
         this.incidenciaPrivateService = incidenciaPrivateService;
     }
 
+    //Ruta con la cual obtenemos todas la incidencias
     @GetMapping("/incidencias")
     public ResponseEntity<List<IncidenciaPrivateDTO>> obtenerIncidencias() {
         List<IncidenciaPrivateDTO> incidencias = incidenciaPrivateService.obtenerIncidencias();
@@ -38,6 +39,7 @@ public class IncidenciaPrivateControlador {
         return ResponseEntity.ok(incidencias);
     }
 
+    //Ruta con la cual obtenemos todas la incidencias de una ciudad
     @PostMapping("/filtrosIncidencias/ciudad")
     public ResponseEntity<?> filtroIncidenciaCiudad(@RequestParam Long idCiudad) {
         List<IncidenciaPrivateDTO> incidencias = incidenciaPrivateService.obtenerIncidenciasCiudad(idCiudad);
@@ -47,6 +49,7 @@ public class IncidenciaPrivateControlador {
         return ResponseEntity.ok(incidencias);
     }
 
+    //Ruta con la cual obtenemos todas las incidencias de una provincia
     @PostMapping("/filtrosIncidencias/provincia")
     public ResponseEntity<?> filtroIncidenciaProvincia(@RequestParam Long idProvincia) {
         List<IncidenciaPrivateDTO> incidencias = incidenciaPrivateService.obtenerIncidenciasProvincia(idProvincia);
@@ -56,6 +59,7 @@ public class IncidenciaPrivateControlador {
         return ResponseEntity.ok(incidencias);
     }
 
+    //Ruta con la cual obtenermos todas las incidencias de una ragion
     @PostMapping("/filtrosIncidencias/region")
     public ResponseEntity<?> filtroIncidenciaRegion(@RequestParam Long idRegion) {
         List<IncidenciaPrivateDTO> incidencias = incidenciaPrivateService.obtenerIncidenciasRegion(idRegion);
@@ -64,6 +68,7 @@ public class IncidenciaPrivateControlador {
         }
         return ResponseEntity.ok(incidencias);
     }
+    //Ruta con la cual obtenermos todas la incidencias de un tipo de incidencia
     @PostMapping("/filtrosIncidencias/tipoIncidencia")
     public ResponseEntity<?> filtroIncidenciaTipoIncidencia(@RequestParam Long idTipoIncidencia) {
         List<IncidenciaPrivateDTO> incidencias = incidenciaPrivateService.obtenerIncidenciasTipoIncidencia(idTipoIncidencia);
@@ -73,6 +78,7 @@ public class IncidenciaPrivateControlador {
         return ResponseEntity.ok(incidencias);
     }
 
+    //Ruta con la cual creamos un incidencia
     @PostMapping("/crearIncidencia")
     public ResponseEntity<?> crearIncidencia(@RequestBody  IncidenciaPrivateDTOCRUD incidenciaPrivateDTOCRUD) {
 
@@ -81,7 +87,7 @@ public class IncidenciaPrivateControlador {
         return ResponseEntity.ok(mensaje);
 
     }
-
+   //Ruta con la cual actualizamos una incidencia
     @PutMapping("/actualizarIncidencia")
     public ResponseEntity<?> actualizarIncidencia(@RequestBody IncidenciaPrivateDTOCRUD incidenciaPrivateDTOCRUD) {
         try {
@@ -92,6 +98,7 @@ public class IncidenciaPrivateControlador {
         }
     }
 
+    //Ruta con la cual eliminamos una incidencia
     @DeleteMapping("/eliminarIncidencia")
     public ResponseEntity<?> eliminarIncidencia(@RequestBody IncidenciaPrivateDTOCRUD incidenciaPrivateDTOCRUD) {
         try {

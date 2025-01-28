@@ -14,6 +14,7 @@ import com.main.comunicacion.privadas.servicios.RegionPrivateService;
 
 //Gestion de peticiones de la api interna de regiones
 @RestController
+
 @RequestMapping("/privateRegions")
 public class RegionPrivateControlador {
     @Autowired

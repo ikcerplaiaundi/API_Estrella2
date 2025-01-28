@@ -20,6 +20,7 @@ public class TipoIncidenciaPrivateService {
         this.incidenciaRepositorio = incidenciaRepositorio;
     }
 
+    //Servicio con el cual obtendremos todos los tipos de incidencias
     public List<TipoIncidenciaPrivateDTO> obtenerTiposIncidencias() {
         List<TipoIncidencia> provincias = incidenciaRepositorio.findAll();
         return provincias.stream()

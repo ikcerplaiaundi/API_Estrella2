@@ -16,6 +16,7 @@ public class CiudadPrivateService {
 
     private final CiudadRepositorio ciudadRepositorio;
 
+    //Servicio con el cual obtendremos todas las ciudades
     public CiudadPrivateService(CiudadRepositorio ciudadRepositorio) {
         this.ciudadRepositorio = ciudadRepositorio;
     }

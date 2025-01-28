@@ -18,6 +18,7 @@ public class UsuarioService {
     @Autowired
     private RolRepositorio rolRepository;
 
+    //Servicio con el cual podremos actualizar un usuario
     public Usuario actualizarUsuario(int id, String nombre, String correo, String contraseña, int rolId) {
 
         Usuario usuario = usuarioRepository.findById(id)
@@ -43,6 +44,7 @@ public class UsuarioService {
         return usuarioRepository.save(usuario);
     }
     
+    //Servicio con el cual podremos eliminar un usuario
     public void eliminarUsuario(long id){
         usuarioRepository.deleteById(id);
     }

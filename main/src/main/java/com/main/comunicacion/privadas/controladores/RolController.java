@@ -11,12 +11,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.main.modelo.entidades.Rol;
 import com.main.modelo.repositorios.RolRepositorio;
 @RestController
+//Gestion de peticiones de la api interna de roles
 @RequestMapping("/roles")
 public class RolController {
 
     @Autowired
     private RolRepositorio rolRepositorio;
 
+    //Ruta con la cual obtenemos todos lo roles
     @GetMapping
     public ResponseEntity<List<Rol>> obtenerRoles() {
         List<Rol> roles = rolRepositorio.findAll();

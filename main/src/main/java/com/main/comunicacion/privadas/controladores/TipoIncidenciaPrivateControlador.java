@@ -23,6 +23,7 @@ public class TipoIncidenciaPrivateControlador {
         this.tipoIncidenciaPrivateService = tipoIncidenciaPrivateService;
     }
 
+    //Ruta con la cual optenemos todos los tipo de incidencia
     @GetMapping("/tiposIncidencias")
     public ResponseEntity<List<TipoIncidenciaPrivateDTO>> obtenerProvincias() {
         List<TipoIncidenciaPrivateDTO> tiposIncidencia = tipoIncidenciaPrivateService.obtenerTiposIncidencias();

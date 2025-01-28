@@ -16,7 +16,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
-
+//DTO de region de la api interna
 public class RegionPrivateDTO {
 
     @Id

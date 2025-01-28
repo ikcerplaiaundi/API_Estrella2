@@ -24,6 +24,7 @@ public class IncidenciaPrivateMapper {
     public static TipoIncidenciaRepositorio tipoIncidenciaRepositorio;
     public static ProvinciaRepositorio provinciaRepositorio;
 
+    //Construtor del mapeador
     @Autowired
     public IncidenciaPrivateMapper(CiudadRepositorio ciudadRepositorio,
             RegionRepository regionRepositorio,

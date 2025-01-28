@@ -23,6 +23,7 @@ public class LoginController {
     @Autowired
     private LoginServicio loginServicio;
 
+    ////Ruta con la cual nos loguemos con un usuario
     @PostMapping(path="/login")
 
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
@@ -51,6 +52,7 @@ public class LoginController {
     }
 
 
+    //Ruta con la cual nos loguemos con un usuario en android
     @PostMapping(path="/loginAndroid")
 
     public ResponseEntity<?> loginAndroid(@RequestBody LoginRequestAndroid loginRequest) {
@@ -80,6 +82,7 @@ public class LoginController {
     }
 }
 
+//Contrutor de la peticion login
 @Data
 class LoginRequest {
     private String nombre;
@@ -90,7 +93,7 @@ class LoginRequest {
         return "LoginRequest{nombre='" + nombre + "', contraseña='" + contraseña + "'}";
     }
 }
-
+//Construrtor de la respuesta login
 class LoginResponse {
     private String rol;
 
@@ -108,7 +111,7 @@ class LoginResponse {
 
     
 }
-
+//Contrutor de la peticion login android
 @Data
 class LoginRequestAndroid {
     private String nombre;
@@ -119,7 +122,7 @@ class LoginRequestAndroid {
         return "LoginRequestAndroid{nombre='" + nombre + "', contraseña='" + contraseña + "'}";
     }
 }
-
+//Contrutor de la respuesta login android
 class LoginResponseAndroid {
     private String rol;
     private long id;

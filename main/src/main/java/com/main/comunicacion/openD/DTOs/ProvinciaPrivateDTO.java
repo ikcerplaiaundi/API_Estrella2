@@ -15,7 +15,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-//Entida provincia
+//DTO de provincia de la api interna
 @Data
 public class ProvinciaPrivateDTO {
     @Id

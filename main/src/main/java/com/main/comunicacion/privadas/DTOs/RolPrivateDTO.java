@@ -1,5 +1,6 @@
 package com.main.comunicacion.privadas.DTOs;
 
+//DTO de rol de la api interna
 public class RolPrivateDTO {
     long id;
     String nombre;

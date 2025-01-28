@@ -18,6 +18,7 @@ public class LoginServicio {
     @Autowired
     private UsuarioRepositorio usuarioRepositorio;
 
+    //Servicio con el cual logueremos a un usuario
     public Usuario login(String nombre, String contraseña) {
         Optional<Usuario> usuario = usuarioRepositorio.findByNombre(nombre);
         if (usuario.isPresent() && usuario.get().getContraseña().equals(hashearContraseña(contraseña))) {

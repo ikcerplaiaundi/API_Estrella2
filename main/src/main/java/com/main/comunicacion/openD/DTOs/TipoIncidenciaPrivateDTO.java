@@ -17,7 +17,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
+//DTO de tipo de incidencia de la api interna
 public class TipoIncidenciaPrivateDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

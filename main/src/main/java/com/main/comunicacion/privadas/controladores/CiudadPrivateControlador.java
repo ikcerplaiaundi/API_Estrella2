@@ -23,6 +23,7 @@ public class CiudadPrivateControlador {
         this.ciudadPrivateService = ciudadPrivateService;
     }
 
+    //Ruta con la optenemos todas las ciudades
     @GetMapping("/ciudades")
     public ResponseEntity<List<CiudadPrivateDTO>> obtenerCiudades() {
         List<CiudadPrivateDTO> ciudades = ciudadPrivateService.obtenerCiudades();

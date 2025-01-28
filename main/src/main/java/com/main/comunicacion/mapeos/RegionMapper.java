@@ -9,6 +9,7 @@ import com.main.modelo.entidades.Region;
 @Component
 public class RegionMapper {
 
+    //Mapea de regionDTO a region
     public Region toEntity(RegionDTO dto) {
         if (dto == null) {
             return null;

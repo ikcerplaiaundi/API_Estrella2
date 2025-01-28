@@ -27,6 +27,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
+//Gestion de peticiones de la api interna de usuario
 @RestController
 public class UsuarioPrivateController {
 
@@ -36,6 +37,7 @@ public class UsuarioPrivateController {
     @Autowired
     private UsuarioService usuarioService;
 
+    //Ruta con la cual obtenemos todos los usuarios
     @GetMapping("/usuarios")
     public ResponseEntity<List<UsuarioDTO>> obtenerUsuarios() {
         List<Usuario> usuarios = usuarioRepositorio.findAll();
@@ -50,6 +52,7 @@ public class UsuarioPrivateController {
         return ResponseEntity.ok(usuariosDTO);
     }
 
+    //Ruta con la cual obtenemos un usuario concreto
     @GetMapping("/usuarios/{id}")
     public ResponseEntity<UsuarioDTO> obtenerUsuario(@PathVariable Long id) {
         Optional<Usuario> usuarioOpt = usuarioRepositorio.findById(id);
@@ -69,6 +72,7 @@ public class UsuarioPrivateController {
         return ResponseEntity.ok(usuarioDTO);
     }
 
+    //Ruta con la cual actualizamos un usuario
     @PutMapping("/usuarios/{id}")
     public ResponseEntity<UsuarioDTO> actualizarUsuario(@PathVariable Long id, @RequestBody UsuarioDTO usuarioDTO) {
         Optional<Usuario> usuario_nuevo = usuarioRepositorio.findById(id);
@@ -94,6 +98,7 @@ public class UsuarioPrivateController {
         return ResponseEntity.ok(updatedUsuarioDTO);
     }
 
+    //Ruta con la cual eliminamos un usuri
     @DeleteMapping("/usuarios/{id}")
     public ResponseEntity<String> eliminarUsuario(@PathVariable Long id) {
         try {

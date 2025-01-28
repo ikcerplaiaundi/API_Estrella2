@@ -10,7 +10,7 @@ import com.main.modelo.entidades.Incidencia;
 public class IncidenciaMap {
     
 
-    
+    //Mapeo de incidencia DTO a incidencia
     public static Incidencia toEntity(IncidenciaDTO incidenciaDTO) {
         
         Incidencia incidencia = new Incidencia();

@@ -2,7 +2,7 @@ package com.main.comunicacion.privadas.DTOs;
 
 import com.main.modelo.entidades.Rol;
 
-//DTO de uduario de la api interna
+//DTO de usuario de la api interna
 public class UsuarioDTO {
     private long id;
     private String nombre;

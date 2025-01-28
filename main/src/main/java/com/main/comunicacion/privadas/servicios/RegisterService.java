@@ -11,6 +11,7 @@ import com.main.modelo.entidades.Usuario;
 import com.main.modelo.repositorios.RolRepositorio;
 import com.main.modelo.repositorios.UsuarioRepositorio;
 
+//Servicios que ofrecen todas las solicitudes de registro a la api interna
 @Service
 public class RegisterService {
 
@@ -20,6 +21,7 @@ public class RegisterService {
     @Autowired
     private RolRepositorio rolRepositorio;
 
+    //Servicio con el cual registraremos a un usuario
     public Usuario registrarUsuario(String nombre, String email, String contraseña) {
         validarUsuarioUnico(nombre, email);
         Rol adminRol = obtenerOCrearRol("administrador");
@@ -28,6 +30,7 @@ public class RegisterService {
         return usuarioRepository.save(nuevoUsuario);
     }
 
+    //Servicio con el cual registraremos a un usuario en android
     public Usuario registrarUsuarioAndroid(String nombre, String email, String contraseña) {
         validarUsuarioUnico(nombre, email);
         Rol usuarioRol = obtenerOCrearRol("usuario");
@@ -36,6 +39,7 @@ public class RegisterService {
         return usuarioRepository.save(nuevoUsuario);
     }
 
+    //Servicio con el cual validaremos a un usuario
     private void validarUsuarioUnico(String nombre, String email) {
         if (usuarioRepository.existsByCorreo(email)) {
             throw new RuntimeException("El correo ya está registrado");
@@ -45,11 +49,13 @@ public class RegisterService {
         }
     }
 
+    //Servicio con el cual obtenedremos un rol
     private Rol obtenerOCrearRol(String nombreRol) {
         return rolRepositorio.findByName(nombreRol)
                 .orElseGet(() -> rolRepositorio.save(new Rol(nombreRol)));
     }
 
+    //Servicio con el cual crearemos un nuevo usuario
     private Usuario crearNuevoUsuario(String nombre, String email, String contraseña, Rol rol) {
         Usuario nuevoUsuario = new Usuario();
         nuevoUsuario.setNombre(nombre);
@@ -59,6 +65,7 @@ public class RegisterService {
         return nuevoUsuario;
     }
 
+    //Funcion con la que podremos hasear contrseñas
     private String hashearContraseña(String contraseña) {
         return DigestUtils.md5DigestAsHex(contraseña.getBytes(StandardCharsets.UTF_8));
     }

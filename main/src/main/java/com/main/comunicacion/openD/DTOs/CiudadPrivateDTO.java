@@ -17,7 +17,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-//Entida ciudad
+//DTO de ciudad de la api interna
 @Data
 public class CiudadPrivateDTO {
 

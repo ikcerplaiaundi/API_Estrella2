@@ -22,6 +22,7 @@ public class ProvinciaPrivateService {
         this.provinciaRepositorio = provinciaRepositorio;
     }
 
+      //Servicio con el cual obtendremos todas las provincias
     public List<ProvinciaPrivateDTO> obtenerProvincias() {
         List<Provincia> provincias = provinciaRepositorio.findAll();
         return provincias.stream()
@@ -29,6 +30,7 @@ public class ProvinciaPrivateService {
                 .collect(Collectors.toList());
     }
 
+    //Servicio con el cual obtendremos una provincia
     public List<ProvinciaPrivateDTO> obtenerProvincia(Long id) {
         return provinciaRepositorio.findById(id).stream()
                 .map(ProvinciaPrivateMapper::toProvinciaDTO)

@@ -54,6 +54,7 @@ public class IncidenciaService {
     public RestTemplate restTemplate;
     @Autowired
     public RegionRepository regionRepository;
+    //Gestiona la peticion de incidencias del mes
     public void peticionIncidenciasDeLaAPIMes() {
 
         String baseUrl = "https://api.euskadi.eus/traffic/v1.0/incidences/byMonth/" + ano + "/" + mes

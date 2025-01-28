@@ -10,6 +10,7 @@ import com.main.modelo.entidades.Ciudad;
 @Component
 public class CiudadPrivateMapper {
 
+    //Mapeador ciudad solicitud usuario interna
     public static CiudadPrivateDTO toCiudadDTO(Ciudad ciudad) {
         if (ciudad == null) {
             return null;

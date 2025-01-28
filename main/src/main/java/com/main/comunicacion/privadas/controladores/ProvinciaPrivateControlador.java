@@ -26,6 +26,7 @@ public class ProvinciaPrivateControlador {
         this.provinciaPrivateService = provinciaPrivateService;
     }
 
+    //Ruta con la cual obtenemos todas las provincias
     @GetMapping("/provincias")
     public ResponseEntity<List<ProvinciaPrivateDTO>> obtenerProvincias() {
         List<ProvinciaPrivateDTO> provincias = provinciaPrivateService.obtenerProvincias();
@@ -35,6 +36,7 @@ public class ProvinciaPrivateControlador {
         return ResponseEntity.ok(provincias);
     }
 
+    //Ruta con la cual obtenemos una provincia concreta
     @PostMapping("/filtrosProvincias/provincia")
     public ResponseEntity<?> filtroIncidenciaCiudad(@RequestParam Long id) {
         List<ProvinciaPrivateDTO> provincias = provinciaPrivateService.obtenerProvincia(id);

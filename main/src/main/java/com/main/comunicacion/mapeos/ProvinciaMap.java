@@ -10,6 +10,7 @@ import com.main.modelo.entidades.Provincia;
 @Component
 public class ProvinciaMap {
 
+    //Mapea de provinciaDTO a la entidad
     public static Provincia toEntity(ProvinciaDTO provinciaDTO) {
         Provincia provincia = new Provincia();
 

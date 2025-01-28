@@ -21,6 +21,7 @@ public class RegionPrivateMapper {
         );
     }
 
+    //Mapea de region a regionDTO
     public static RegionPrivateDTO toRegionOnlyDTO(Region region) {
         return new RegionPrivateDTO(
                 region.getId(),

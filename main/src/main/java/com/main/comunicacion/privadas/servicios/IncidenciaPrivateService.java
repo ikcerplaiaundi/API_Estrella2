@@ -37,7 +37,7 @@ public class IncidenciaPrivateService {
     @Autowired
     private RegionRepository regionRepositorio;
 
-    
+    //Servicio con el cual obtendremos todas la incidencias
     public List<IncidenciaPrivateDTO> obtenerIncidencias() {
         List<Incidencia> incidencias = incidenciaRepositorio.findAll();
         return incidencias.stream()
@@ -45,29 +45,34 @@ public class IncidenciaPrivateService {
                 .collect(Collectors.toList());
     }
 
+    //Servicio con el cual obtendremos todas las incidencias de una ciudad
     public List<IncidenciaPrivateDTO> obtenerIncidenciasCiudad(Long idCiudad) {
         return incidenciaRepositorio.findByCiudad_Id(idCiudad).stream()
                 .map(IncidenciaPrivateMapper::toIncidenciaDTO)
                 .collect(Collectors.toList());
     }
 
+    //Servicio con el cual obtendremos todas las incidencias de una provincia
     public List<IncidenciaPrivateDTO> obtenerIncidenciasProvincia(Long idProvincia) {
         return incidenciaRepositorio.findByProvinciaId(idProvincia).stream()
                 .map(IncidenciaPrivateMapper::toIncidenciaDTO)
                 .collect(Collectors.toList());
     }
 
+    //Servicio con el cual obtendremos todas las incidencias de una region
     public List<IncidenciaPrivateDTO> obtenerIncidenciasRegion(Long idRegion) {
         return incidenciaRepositorio.findByRegion_Id(idRegion).stream()
                 .map(IncidenciaPrivateMapper::toIncidenciaDTO)
                 .collect(Collectors.toList());
     }
 
+    //Servicio con el cual obtendremos todas las incidencias de una tipo de incidencia
     public List<IncidenciaPrivateDTO> obtenerIncidenciasTipoIncidencia(Long idIncidencia) {
         return incidenciaRepositorio.findByTipoIncidencia_Id(idIncidencia).stream()
                 .map(IncidenciaPrivateMapper::toIncidenciaDTO)
                 .collect(Collectors.toList());
     }
+    //Servicio con el cual crearemos una incidencia
     public String crearIncidencia(IncidenciaPrivateDTOCRUD incidenciaPrivateDTO) {
 
         Incidencia incidencia = IncidenciaPrivateMapper.toEntityCRUD(incidenciaPrivateDTO);
@@ -92,6 +97,7 @@ public class IncidenciaPrivateService {
     
     }
 
+    //Servicio con el cual actualizaremos una incidencia
     public String actualizarIncidencia(IncidenciaPrivateDTOCRUD incidenciaPrivateDTO) {
 
         // Comprueba si la incidencia existe
@@ -138,6 +144,7 @@ public class IncidenciaPrivateService {
         }
     }
 
+    //Servicio con el cual eliminaremos una incidencia
     public String eliminarIncidencia(IncidenciaPrivateDTOCRUD incidenciaPrivateDTO) {
 
         // Comprueba si la incidencia existe

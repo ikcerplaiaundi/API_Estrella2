@@ -17,6 +17,7 @@ public class RegisterController {
     @Autowired
     private RegisterService registerService;
 
+    //Ruta con la cual registramos a un usuario
     @PostMapping("/registro")
     public ResponseEntity<?> registrar(@RequestBody RegisterRequest registerRequest) {
         try {
@@ -31,6 +32,7 @@ public class RegisterController {
         
     }
 
+    //Ruta con la cual registramos a un usuario en android
     @PostMapping("/registroAndroid")
     public ResponseEntity<?> registrarAndroid(@RequestBody RegisterRequest registerRequest) {
         try {
@@ -46,7 +48,7 @@ public class RegisterController {
     }
 }
 
-
+//Contrutor de de peticion register
 class RegisterRequest {
     private String nombre;
     private String correo;
@@ -65,6 +67,7 @@ class RegisterRequest {
     
 }
 
+//Constuctor de respuesta register
 class RegisterResponse {
     private String mensaje;
 

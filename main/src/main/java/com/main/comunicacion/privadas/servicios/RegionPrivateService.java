@@ -32,6 +32,7 @@ public class RegionPrivateService {
                 .collect(Collectors.toList());
     }
 
+    //Obtenedremos esclusivamente las regiones
     public List<RegionPrivateDTO> obtenerSoloRegiones() {
         List<Region> regiones = regionRepositorio.findAll(); 
         return regiones.stream()
