@@ -40,23 +40,41 @@ public class UsuarioPrivateController {
     public ResponseEntity<List<UsuarioDTO>> obtenerUsuarios() {
         List<Usuario> usuarios = usuarioRepositorio.findAll();
         List<UsuarioDTO> usuariosDTO = usuarios.stream()
-            .map(usuario -> new UsuarioDTO(
+                .map(usuario -> new UsuarioDTO(
+                        usuario.getId(),
+                        usuario.getNombre(),
+                        usuario.getCorreo(),
+                        usuario.getContraseña(),
+                        new RolPrivateDTO(usuario.getRol().getId(), usuario.getRol().getName())))
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(usuariosDTO);
+    }
+
+    @GetMapping("/usuarios/{id}")
+    public ResponseEntity<UsuarioDTO> obtenerUsuario(@PathVariable Long id) {
+        Optional<Usuario> usuarioOpt = usuarioRepositorio.findById(id);
+
+        if (!usuarioOpt.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        Usuario usuario = usuarioOpt.get();
+        UsuarioDTO usuarioDTO = new UsuarioDTO(
                 usuario.getId(),
                 usuario.getNombre(),
                 usuario.getCorreo(),
                 usuario.getContraseña(),
-                new RolPrivateDTO(usuario.getRol().getId(), usuario.getRol().getName())
-            ))
-            .collect(Collectors.toList());
-        return ResponseEntity.ok(usuariosDTO);
+                new RolPrivateDTO(usuario.getRol().getId(), usuario.getRol().getName()));
+
+        return ResponseEntity.ok(usuarioDTO);
     }
 
     @PutMapping("/usuarios/{id}")
     public ResponseEntity<UsuarioDTO> actualizarUsuario(@PathVariable Long id, @RequestBody UsuarioDTO usuarioDTO) {
         Optional<Usuario> usuario_nuevo = usuarioRepositorio.findById(id);
-        
+
         if (usuario_nuevo.isEmpty()) {
-            return ResponseEntity.notFound().build(); 
+            return ResponseEntity.notFound().build();
         }
 
         Usuario usuario = usuario_nuevo.get();
@@ -64,18 +82,16 @@ public class UsuarioPrivateController {
         usuario.setCorreo(usuarioDTO.getCorreo());
         usuario.setContraseña(usuarioDTO.getContraseña());
 
-
         Usuario usuario_updated = usuarioRepositorio.save(usuario);
 
         UsuarioDTO updatedUsuarioDTO = new UsuarioDTO(
-            usuario_updated.getId(),
-            usuario_updated.getNombre(),
-            usuario_updated.getCorreo(),
-            usuario_updated.getContraseña(),
-            new RolPrivateDTO(usuario_updated.getRol().getId(),usuario_updated.getRol().getName())
-            );
+                usuario_updated.getId(),
+                usuario_updated.getNombre(),
+                usuario_updated.getCorreo(),
+                usuario_updated.getContraseña(),
+                new RolPrivateDTO(usuario_updated.getRol().getId(), usuario_updated.getRol().getName()));
 
-        return ResponseEntity.ok(updatedUsuarioDTO); 
+        return ResponseEntity.ok(updatedUsuarioDTO);
     }
 
     @DeleteMapping("/usuarios/{id}")
