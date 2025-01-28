@@ -13,18 +13,18 @@ import com.main.modelo.entidades.Camera;
 import com.main.modelo.repositorios.CameraRepository;
 
 //Enpintoins de camaras con opendata
-@RestController
+// @RestController
 //Lista todas la camaras
-@RequestMapping("/cameras")
-public class CameraController {
+// @RequestMapping("/cameras")
+// public class CameraController {
 
-    @Autowired
-    private CameraRepository cameraRepository;
+//     @Autowired
+//     private CameraRepository cameraRepository;
 
-    @GetMapping
-    public ResponseEntity<List<Camera>> getAllCameras() {
-        List<Camera> cameras = cameraRepository.findAll();
-        return ResponseEntity.ok(cameras);
+//     @GetMapping
+//     public ResponseEntity<List<Camera>> getAllCameras() {
+//         List<Camera> cameras = cameraRepository.findAll();
+//         return ResponseEntity.ok(cameras);
         
-    }
-}
+//     }
+// }

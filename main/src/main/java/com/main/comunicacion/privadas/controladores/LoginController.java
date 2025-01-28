@@ -1,8 +1,5 @@
 package com.main.comunicacion.privadas.controladores;
 
-import java.nio.charset.StandardCharsets;
-
-import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,9 +10,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.main.comunicacion.privadas.servicios.LoginServicio;
 import com.main.modelo.entidades.Usuario;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.Data;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 
-//Gestion de peticiones de la api interna de login
 @RestController
 @RequestMapping(path="")
 public class LoginController {
@@ -23,19 +24,44 @@ public class LoginController {
     @Autowired
     private LoginServicio loginServicio;
 
-    ////Ruta con la cual nos loguemos con un usuario
+    /**
+     * Inicia sesión con un nombre de usuario y contraseña.
+     *
+     * @param loginRequest Detalles de la solicitud de inicio de sesión.
+     * @return Respuesta con el rol del usuario si el inicio de sesión es exitoso.
+     */
+    @Operation(
+        summary = "Inicio de sesión",
+        description = "Inicia sesión con el nombre de usuario y contraseña proporcionados. Devuelve el rol del usuario si el inicio de sesión es exitoso.",
+        responses = {
+            @ApiResponse(
+                responseCode = "200", 
+                description = "Inicio de sesión exitoso",
+                content = @Content(mediaType = "application/json", schema = @Schema(implementation = LoginResponse.class))
+            ),
+            @ApiResponse(
+                responseCode = "400", 
+                description = "Faltan datos de usuario o contraseña", 
+                content = @Content(mediaType = "application/json")
+            ),
+            @ApiResponse(
+                responseCode = "401", 
+                description = "Usuario o contraseña incorrectos", 
+                content = @Content(mediaType = "application/json")
+            ),
+            @ApiResponse(
+                responseCode = "500", 
+                description = "Error interno del servidor", 
+                content = @Content(mediaType = "application/json")
+            )
+        }
+    )
     @PostMapping(path="/login")
-
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
-        System.out.println("login"+loginRequest);
         try {
             if (loginRequest.getNombre() == null || loginRequest.getContraseña() == null) {
                 return ResponseEntity.status(400).body("El nombre de usuario y la contraseña son requeridos.");
             }
-
-            System.out.println("Solicitud recibida: " + loginRequest);
-            System.out.println("Nombre: " + loginRequest.getNombre());
-            System.out.println("Nombre: " + loginRequest.getContraseña());
 
             Usuario usuario = loginServicio.login(loginRequest.getNombre(), loginRequest.getContraseña());
 
@@ -51,27 +77,51 @@ public class LoginController {
         }
     }
 
-
-    //Ruta con la cual nos loguemos con un usuario en android
+    /**
+     * Inicia sesión para usuarios de la aplicación Android.
+     *
+     * @param loginRequest Detalles de la solicitud de inicio de sesión desde la aplicación Android.
+     * @return Respuesta con el rol y el ID del usuario si el inicio de sesión es exitoso.
+     */
+    @Operation(
+        summary = "Inicio de sesión en Android",
+        description = "Inicia sesión en la aplicación Android con el nombre de usuario y contraseña proporcionados. Devuelve el rol y el ID del usuario si el inicio de sesión es exitoso.",
+        responses = {
+            @ApiResponse(
+                responseCode = "200", 
+                description = "Inicio de sesión exitoso en Android",
+                content = @Content(mediaType = "application/json", schema = @Schema(implementation = LoginResponseAndroid.class))
+            ),
+            @ApiResponse(
+                responseCode = "400", 
+                description = "Faltan datos de usuario o contraseña", 
+                content = @Content(mediaType = "application/json")
+            ),
+            @ApiResponse(
+                responseCode = "401", 
+                description = "Usuario o contraseña incorrectos", 
+                content = @Content(mediaType = "application/json")
+            ),
+            @ApiResponse(
+                responseCode = "500", 
+                description = "Error interno del servidor", 
+                content = @Content(mediaType = "application/json")
+            )
+        }
+    )
     @PostMapping(path="/loginAndroid")
-
     public ResponseEntity<?> loginAndroid(@RequestBody LoginRequestAndroid loginRequest) {
-        System.out.println("login"+loginRequest);
         try {
             if (loginRequest.getNombre() == null || loginRequest.getContraseña() == null) {
                 return ResponseEntity.status(400).body("El nombre de usuario y la contraseña son requeridos.");
             }
-
-            System.out.println("Solicitud recibida: " + loginRequest);
-            System.out.println("Nombre: " + loginRequest.getNombre());
-            System.out.println("Nombre: " + loginRequest.getContraseña());
 
             Usuario usuario = loginServicio.login(loginRequest.getNombre(), loginRequest.getContraseña());
 
             if (usuario != null) {
                 String rolNombre = usuario.getRol() != null ? usuario.getRol().getName() : "Sin rol";
                 long idUser = usuario.getId();
-                LoginResponseAndroid loginResponse = new LoginResponseAndroid(rolNombre,idUser);
+                LoginResponseAndroid loginResponse = new LoginResponseAndroid(rolNombre, idUser);
                 return ResponseEntity.ok(loginResponse);
             }
 
@@ -82,7 +132,7 @@ public class LoginController {
     }
 }
 
-//Contrutor de la peticion login
+// Constructor de la solicitud de login
 @Data
 class LoginRequest {
     private String nombre;
@@ -93,7 +143,8 @@ class LoginRequest {
         return "LoginRequest{nombre='" + nombre + "', contraseña='" + contraseña + "'}";
     }
 }
-//Construrtor de la respuesta login
+
+// Constructor de la respuesta del login
 class LoginResponse {
     private String rol;
 
@@ -108,10 +159,9 @@ class LoginResponse {
     public void setRol(String rol) {
         this.rol = rol;
     }
-
-    
 }
-//Contrutor de la peticion login android
+
+// Constructor de la solicitud de login Android
 @Data
 class LoginRequestAndroid {
     private String nombre;
@@ -122,12 +172,13 @@ class LoginRequestAndroid {
         return "LoginRequestAndroid{nombre='" + nombre + "', contraseña='" + contraseña + "'}";
     }
 }
-//Contrutor de la respuesta login android
+
+// Constructor de la respuesta del login Android
 class LoginResponseAndroid {
     private String rol;
     private long id;
 
-    public LoginResponseAndroid(String rol,long id) {
+    public LoginResponseAndroid(String rol, long id) {
         this.rol = rol;
         this.id = id;
     }
@@ -140,7 +191,6 @@ class LoginResponseAndroid {
         this.rol = rol;
     }
 
-
     public Long getId() {
         return id;
     }
@@ -148,7 +198,4 @@ class LoginResponseAndroid {
     public void setId(Long id) {
         this.id = id;
     }
-
-    
 }
-
