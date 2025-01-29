@@ -1,6 +1,15 @@
 package com.main.comunicacion.privadas.servicios;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Properties;
+
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,6 +43,10 @@ public class RegisterService {
     public Usuario registrarUsuarioAndroid(String nombre, String email, String contraseña) {
         validarUsuarioUnico(nombre, email);
         Rol usuarioRol = obtenerOCrearRol("usuario");
+
+        enviarEmail(email);
+
+
         
         Usuario nuevoUsuario = crearNuevoUsuario(nombre, email, hashearContraseña(contraseña), usuarioRol);
         return usuarioRepository.save(nuevoUsuario);
@@ -65,8 +78,50 @@ public class RegisterService {
         return nuevoUsuario;
     }
 
-    //Funcion con la que podremos hasear contrseñas
+    //Funcion con la que podremos hasear contraseñas
     private String hashearContraseña(String contraseña) {
         return DigestUtils.md5DigestAsHex(contraseña.getBytes(StandardCharsets.UTF_8));
     }
+
+
+    //Funcion para enviar email
+    private void enviarEmail(String emailEnvio){
+        System.out.println("emailEnvio "+ emailEnvio);
+         //Configuramos el correo y la contraseña
+        final String password = "fjob zeja nnap uybc";
+        final String toEmail = "codetechsoporte@gmail.com";
+
+        System.out.println("Iniciamos TLSEmail");
+        Properties props = new Properties();
+        //Configuramos todos los parámetros de corre
+        props.put("mail.smtp.host", "smtp.gmail.com"); 
+        props.put("mail.smtp.port", "587"); 
+        props.put("mail.smtp.auth", "true"); 
+        props.put("mail.smtp.starttls.enable", "true"); 
+        
+        Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+
+                return new PasswordAuthentication(toEmail, password);
+
+            }
+        });
+
+        try {
+            //Envio destinatario
+            MimeMessage message = new MimeMessage(session);
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(emailEnvio, true));
+            //Cuerpo mensaje 
+            message.setSubject("Bienvenido a Estrellados");
+            message.setText("Gracias Por registrarte en nuestra App");
+            System.out.println("enviando...");
+            Transport.send(message);
+            System.out.println("Mensaje enviado de forma exitosa....");
+
+        } catch (MessagingException me) {
+            System.out.println("Exception: " + me);
+
+        }
+    }
+    
 }
